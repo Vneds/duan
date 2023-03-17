@@ -70,9 +70,9 @@
                 $user=$_POST['user'];
                 $pass=$_POST['pass'];
                 
-                $servername = "localhost:3307";
+                $servername = "localhost";
                 $username = "root";
-                $password = "";
+                $password = "123456";
 
                 try {
                 $conn = new PDO("mysql:host=$servername;dbname=duan1", $username, $password);
