@@ -211,8 +211,8 @@
 
         </form>
         <b>CHỨC NĂNG CHÍNH:</b><Br>
-        <button class="nv btn add-new" type="button" data-toggle="tooltip" data-placement="top"
-            title="Thêm Sản Phẩm" onclick=""><i class="fas fa-user-plus"></i> </button>
+        <a href="them1.php">     <button class="nv btn add-new" type="button" data-toggle="tooltip" data-placement="top"
+            title="Thêm Sản Phẩm" onclick=""><i class="fas fa-user-plus"></i> </button></a>
         <button class="nv" type="button" onclick="sortTable()" data-toggle="tooltip" data-placement="top"
             title="Lọc Dữ Liệu"><i class="fa fa-filter" aria-hidden="true"></i></button>
         <button class="nv xuat" data-toggle="tooltip" data-placement="top" title="Xuất File"><i
@@ -233,7 +233,8 @@
                     <th>Hình Ảnh</th>
                     <th>Giá</th>
                     <th>Đánh Giá Sản Phẩm</th>
-                    <th width="15%">Phân Loại</th>
+                    <!-- <th width="15%">Phân Loại</th> -->
+                    <th>Hành động</th>
                 </tr>
             </thead>
             <tbody>
@@ -249,6 +250,10 @@
                         <td><img width="100px" height="100px" src=<?php echo $image_path?> alt=""></td>
                         <td><?php echo $product['product_price'] ?></td>
                         <td><?php echo $product['des'] ?></td>
+                        <td>
+                            <a href="./edit_product.php?id=<?php echo $product['id']?>"><button>Sửa</button></a>
+                            <a href="./delete_product.php?id=<?php echo $product['id']?>"><button>Xóa</button></a>
+                        </td>
                     </tr>
                <?php }?>
             </tbody>
@@ -360,17 +365,18 @@
             $(".add-new").click(function () {
                 $(this).attr("disabled", "disabled");
                 var index = $("table tbody tr:last-child").index();
-                var row = '<tr>' +
+                var row = 
+                    fr
+                    '<tr>' +
                     '<td><input type="text" class="form-control" name="" id="" placeholder="Nhập ID"></td>' +
                     '<td><input type="text" class="form-control" name="" id="" placeholder="Nhập Tên Sản Phẩm"></td>' +
                     '<td><input type="file"  name="" id="" value=""></td>' +
                     '<td><input type="text" class="form-control" name="" id="" value="" placeholder="Nhập Giá"></td>' +
                     '<td><input type="text" class="form-control" name="" id="" value="" placeholder="Đánh Giá Sản Phẩm"></td>' +
                     '<td><input type="text" class="form-control" name="" id="" value="" placeholder="Loại Sản Phẩm"></td>' +
+                    
                     '</tr>';
-                $("table").append(row);
-                $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
-                $('[data-toggle="tooltip"]').tooltip();
+                
             });
             $(document).on("click", ".add", function () {
                 var empty = false;
