@@ -252,7 +252,7 @@
                         <td><?php echo $product['des'] ?></td>
                         <td>
                             <a href="./edit_product.php?id=<?php echo $product['id']?>"><button>Sửa</button></a>
-                            <a href="./edit_product.php"><button>Xóa</button></a>
+                            <a href="./delete_product.php?id=<?php echo $product['id']?>"><button>Xóa</button></a>
                         </td>
                     </tr>
                <?php }?>
