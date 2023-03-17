@@ -1,22 +1,6 @@
-<?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-
-    try {
-    $conn = new PDO("mysql:host=$servername;dbname=database2", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //echo "Connected successfully";
-    $stmt = $conn->prepare("SELECT id, name, image, price FROM dienthoai");
-    $stmt->execute();   
-    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    $kq=$stmt->fetchAll();
-    } catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-    }
+<?php 
+    include './connect_db.php';
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -97,6 +81,7 @@
                 this.pages = Math.ceil(records / itemsPerPage);
                 this.inited = true;
             }
+
             this.showPageNav = function (pagerName, positionId) {
                 if (!this.inited) {
                     alert("not inited");
@@ -252,8 +237,20 @@
                 </tr>
             </thead>
             <tbody>
-                
-               
+                <?php 
+                    include './connect_db.php';
+                    $product_list = $conn->query('SELECT * FROM product')->fetchAll();  
+                    foreach($product_list as $product){
+                    $image_path = "img/shop/" . $product['image_path'];
+                ?>
+                    <tr>
+                        <td><?php echo $product['id'] ?></td>
+                        <td><?php echo $product['product_name'] ?></td>
+                        <td><img width="100px" height="100px" src=<?php echo $image_path?> alt=""></td>
+                        <td><?php echo $product['product_price'] ?></td>
+                        <td><?php echo $product['des'] ?></td>
+                    </tr>
+               <?php }?>
             </tbody>
         </table>
         <div id="pageNavPosition" class="text-right"></div>
