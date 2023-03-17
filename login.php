@@ -70,12 +70,12 @@
                 $user=$_POST['user'];
                 $pass=$_POST['pass'];
                 
-                $servername = "localhost";
+                $servername = "localhost:3307";
                 $username = "root";
                 $password = "";
 
                 try {
-                $conn = new PDO("mysql:host=$servername;dbname=duanbanhang", $username, $password);
+                $conn = new PDO("mysql:host=$servername;dbname=duan1", $username, $password);
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $stmt = $conn->prepare("SELECT * FROM user WHERE user_name ='".$user."' AND pass_word ='".$pass."'" );
                 $stmt->execute();

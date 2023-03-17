@@ -1,3 +1,6 @@
+<?php 
+    include './connect_db.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -106,91 +109,23 @@
                         </div>
 
                         <ul class="products__warpper">
-                            <li class="products__item">
-                                <a href="./detail.html">
-                                    <img src="img/shop/Rectangle 174.svg" alt="" class="products__item-img">
-                                    <span class="products__item-name">Runner red galbraith</span>
-                                    <span class="products__item-price">22$ <b>16$</b></span>
-                                </a>
-                            </li>
-                            <li class="products__item">
-                                <a href="./detail.html">
-                                    <img src="img/shop/Rectangle 174.svg" alt="" class="products__item-img">
-                                    <span class="products__item-name">Runner red galbraith</span>
-                                    <span class="products__item-price">22$ <b>16$</b></span>
-                                </a>
-                            </li>
-                            <li class="products__item">
-                                <a href="./detail.html">
-                                    <img src="img/shop/Rectangle 174.svg" alt="" class="products__item-img">
-                                    <span class="products__item-name">Runner red galbraith</span>
-                                    <span class="products__item-price">22$ <b>16$</b></span>
-                                </a>
-                            </li>
-                            <li class="products__item">
-                                <a href="./detail.html">
-                                    <img src="img/shop/Rectangle 174.svg" alt="" class="products__item-img">
-                                    <span class="products__item-name">Runner red galbraith</span>
-                                    <span class="products__item-price">22$ <b>16$</b></span>
-                                </a>
-                            </li>
-                            <li class="products__item">
-                                <a href="./detail.html">
-                                    <img src="img/shop/Rectangle 174.svg" alt="" class="products__item-img">
-                                    <span class="products__item-name">Runner red galbraith</span>
-                                    <span class="products__item-price">22$ <b>16$</b></span>
-                                </a>
-                            </li>
-                            <li class="products__item">
-                                <a href="./detail.html">
-                                    <img src="img/shop/Rectangle 174.svg" alt="" class="products__item-img">
-                                    <span class="products__item-name">Runner red galbraith</span>
-                                    <span class="products__item-price">22$ <b>16$</b></span>
-                                </a>
-                            </li>
-                            <li class="products__item">
-                                <a href="./detail.html">
-                                    <img src="img/shop/Rectangle 174.svg" alt="" class="products__item-img">
-                                    <span class="products__item-name">Runner red galbraith</span>
-                                    <span class="products__item-price">22$ <b>16$</b></span>
-                                </a>
-                            </li>
-                            <li class="products__item">
-                                <a href="./detail.html">
-                                    <img src="img/shop/Rectangle 174.svg" alt="" class="products__item-img">
-                                    <span class="products__item-name">Runner red galbraith</span>
-                                    <span class="products__item-price">22$ <b>16$</b></span>
-                                </a>
-                            </li>
-                            <li class="products__item">
-                                <a href="./detail.html">
-                                    <img src="img/shop/Rectangle 174.svg" alt="" class="products__item-img">
-                                    <span class="products__item-name">Runner red galbraith</span>
-                                    <span class="products__item-price">22$ <b>16$</b></span>
-                                </a>
-                            </li>
-                            <li class="products__item">
-                                <a href="./detail.html">
-                                    <img src="img/shop/Rectangle 174.svg" alt="" class="products__item-img">
-                                    <span class="products__item-name">Runner red galbraith</span>
-                                    <span class="products__item-price">22$ <b>16$</b></span>
-                                </a>
-                            </li>
-                            <li class="products__item">
-                                <a href="./detail.html">
-                                    <img src="img/shop/Rectangle 174.svg" alt="" class="products__item-img">
-                                    <span class="products__item-name">Runner red galbraith</span>
-                                    <span class="products__item-price">22$ <b>16$</b></span>
-                                </a>
-                            </li>
-                            <li class="products__item">
-                                <a href="./detail.html">
-                                    <img src="img/shop/Rectangle 174.svg" alt="" class="products__item-img">
-                                    <span class="products__item-name">Runner red galbraith</span>
-                                    <span class="products__item-price">22$ <b>16$</b></span>
-                                </a>
-                            </li>
-                            
+                            <?php 
+                                $product_list = $conn->query('SELECT * FROM product')->fetchAll();
+                                foreach($product_list as $product){
+                                $image_path = "img/shop/" . $product['image_path'];
+                            ?>
+                                <li class="products__item">
+                                    <a href="./detail.html">
+                                        <img src=<?php echo $image_path ?> alt="" class="products__item-img">
+                                        <span class="products__item-name">
+                                            <?php echo $product['product_name'];?>    
+                                        </span>
+                                        <span class="products__item-price">
+                                            <?php echo $product['product_price']?>
+                                        </span>
+                                    </a>
+                                </li>
+                            <?php } ?>
                         </ul>
 
                         <ul class="products__pagenation">
