@@ -233,7 +233,8 @@
                     <th>Hình Ảnh</th>
                     <th>Giá</th>
                     <th>Đánh Giá Sản Phẩm</th>
-                    <th width="15%">Phân Loại</th>
+                    <!-- <th width="15%">Phân Loại</th> -->
+                    <th>Hành động</th>
                 </tr>
             </thead>
             <tbody>
@@ -249,6 +250,10 @@
                         <td><img width="100px" height="100px" src=<?php echo $image_path?> alt=""></td>
                         <td><?php echo $product['product_price'] ?></td>
                         <td><?php echo $product['des'] ?></td>
+                        <td>
+                            <a href="./edit_product.php?id=<?php echo $product['id']?>"><button>Sửa</button></a>
+                            <a href="./edit_product.php"><button>Xóa</button></a>
+                        </td>
                     </tr>
                <?php }?>
             </tbody>
