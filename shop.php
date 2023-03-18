@@ -115,7 +115,7 @@
                                 $image_path = "img/shop/" . $product['image_path'];
                             ?>
                                 <li class="products__item">
-                                    <a href="./detail.html">
+                                    <a href="./detail.php?id=<?php echo $product['id']?>">
                                         <img src=<?php echo $image_path ?> alt="" class="products__item-img">
                                         <span class="products__item-name">
                                             <?php echo $product['product_name'];?>    
