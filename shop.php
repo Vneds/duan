@@ -66,14 +66,13 @@
                         </div>
 
                         <ul class="sidebar__category">
-                            <h2 class="sidebar__heading">PRODUCT CATEGORIES</h2>
-                            <li class="sidebar__category-item"><a href="" class="sidebar__category-link">Accessories</a></li>
-                            <li class="sidebar__category-item"><a href="" class="sidebar__category-link">Bowls</a></li>
-                            <li class="sidebar__category-item"><a href="" class="sidebar__category-link">Dinnerware Sets</a></li>
-                            <li class="sidebar__category-item"><a href="" class="sidebar__category-link">Explore Dinnerware</a></li>
-                            <li class="sidebar__category-item"><a href="" class="sidebar__category-link">Mugs & Cups</a></li>
-                            <li class="sidebar__category-item"><a href="" class="sidebar__category-link">Plates</a></li>
-                            <li class="sidebar__category-item"><a href="" class="sidebar__category-link">Uncategorized</a></li>
+                            <h2 class="sidebar__heading">Danh mục sản phẩm</h2>
+                            <?php 
+                                $catergory_list = $conn->query('SELECT * FROM catergory')->fetchAll();
+                                foreach($catergory_list as $catergory) {
+                            ?>
+                                <li class="sidebar__category-item"><a href="" class="sidebar__category-link"><?php echo $catergory['catergory_name'] ?></a></li>
+                            <?php }?>
                         </ul>
 
                         <ul class="sidebar__tags">
