@@ -211,7 +211,7 @@
 
         </form>
         <b>CHỨC NĂNG CHÍNH:</b><Br>
-        <a href="them1.php">     <button class="nv btn add-new" type="button" data-toggle="tooltip" data-placement="top"
+        <a href="">     <button class="nv btn add-new" type="button" data-toggle="tooltip" data-placement="top"
             title="Thêm Sản Phẩm" onclick=""><i class="fas fa-user-plus"></i> </button></a>
         <button class="nv" type="button" onclick="sortTable()" data-toggle="tooltip" data-placement="top"
             title="Lọc Dữ Liệu"><i class="fa fa-filter" aria-hidden="true"></i></button>
