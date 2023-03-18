@@ -103,6 +103,7 @@
     margin: unset;
     margin-right: 15px;
     width: 100%;
+    height: 615px;
 }
 
 .gallery__item img {
@@ -249,6 +250,8 @@ hr {
 .sale__price b {
     font-weight: 500;
 }
+
+
 
 .description {
     margin: 98px 0 108px 0;
