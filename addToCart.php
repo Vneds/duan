@@ -8,7 +8,6 @@
         $_SESSION['cart'] = [];
     }
     
-
     $image_path = 'img/shop/' . $product['image_path'];
     $card = [
         'product_name' => $product['product_name'],
