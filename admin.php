@@ -187,7 +187,7 @@
                     <li class="active"><a href="index.php" data-toggle="tooltip" data-placement="bottom"
                             title="SẢN PHẨM">SẢN PHẨM</a></li>
                     <li><a href="" data-toggle="tooltip" data-placement="bottom" title="DANH MỤC SẢN PHẨM">DANH MỤC SẢN PHẨM</a></li>
-                    <li><a href="" data-toggle="tooltip" data-placement="bottom" title="ĐƠN HÀNG">ĐƠN HÀNG</a></li>
+                    <li><a href="./admin_bill.php" data-toggle="tooltip" data-placement="bottom" title="ĐƠN HÀNG">ĐƠN HÀNG</a></li>
                     <li><a href="" data-toggle="tooltip" data-placement="bottom" title="BÀI VIẾT">BÀI VIẾT</a>
                     </li>
                     <li><a href="#contact" data-toggle="tooltip" data-placement="bottom" title="THỐNG KÊ">THỐNG KÊ</a>
