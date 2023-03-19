@@ -90,6 +90,12 @@
     color: #000;
 }
 
+
+
+.sidebar__category-link:hover {
+    cursor: pointer;
+}
+
 .sidebar__filter-wrapper {
     width: calc(25% - 15px);
 }

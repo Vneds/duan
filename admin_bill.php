@@ -198,9 +198,6 @@
             header("location:admin");
         }
     ?>
-    <script>
-        swal("Xin Chào Admin", "Chúc Bạn 1 Ngày Tốt Lành Nhé", "");
-    </script>
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -258,6 +255,18 @@
 
             </div>
 
+        </div>
+        <div class="select">
+            <div class="status-list">
+                <input value="all" checked name= "status" type="radio" id="all">
+                <label for="all">Tất cả</label> 
+                <input value="Đang xử lý" name= "status" type="radio" id="waiting">
+                <label for="waiting">Đang xử lý</label> 
+                <input value="Hoàn tất" name= "status" type="radio" id="done">
+                <label for="done">Hoàn tất</label> 
+                <input value="Đã hủy" name= "status" type="radio" id="delete">
+                <label for="delete">Đã hủy</label> 
+            </div>
         </div>
         <table class="table table-bordered" id="myTable">
             <thead>
@@ -478,6 +487,59 @@
         });
     </script>
 
+    <script>
+        let checkBoxes = $('input[name="status"]');
+        let tbody = $('tbody');
+
+        checkBoxes.click(function(){
+            $.ajax({
+                url: 'api/api.php',
+                data: {
+                    action: 'filter_bill_status',
+                    status: $('input[name="status"]:checked').val()
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function(result){
+                    let html = '';
+                    result.forEach(bill => {
+                        let className = change_status_background(bill['status']);
+                        html += `   
+                                <tr>
+                                    <td style="text-align:center">${bill['maDH']}</td>
+                                    <td>${bill['user_name']}</td>
+                                    <td>${bill['address']}</td>
+                                    <td>${bill['phone']}</td>
+                                    <td style="text-align: center;">
+                                        <span class=${className}>${bill['status']}</span>
+                                    </td>
+                                    <td>${bill['total_money']}</td>
+                                    <td>
+                                        <div class="flex">
+                                            <a href="./admin_bill_detail.php?id=${bill['id']}"><button class="btn btn-primary"><i class="fas fa-plus"></i></button></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                `
+                    });
+                    tbody.html(html);
+                }
+            })
+        })
+
+        function change_status_background(status){
+            if (status == 'Đang xử lý') {
+                return "status-xuly";
+            }
+            if (status == 'Hoàn tất') {
+                return "status-done";
+            }
+            if (status == 'Đã hủy') {
+                return "status-cancel";
+            }
+        }
+
+    </script>
 </body>
 
 </html>
