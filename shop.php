@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/shop.css">
     <title>Shop</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 
 <body>
@@ -68,11 +69,23 @@
                         <ul class="sidebar__category">
                             <h2 class="sidebar__heading">Danh mục sản phẩm</h2>
                             <?php 
+                                function get_product_quantity_in_each_catergory($catergory_id){
+                                    global $conn;
+                                    $sql = 'select count(*) as quantity from product WHERE catergory_id =  ' . $catergory_id . ' GROUP BY catergory_id' ;
+                                    $quantity = $conn->query($sql)->fetch();
+                                    return $quantity;
+                                }   
                                 $catergory_list = $conn->query('SELECT * FROM catergory')->fetchAll();
                                 foreach($catergory_list as $catergory) {
+                                    $quantity = get_product_quantity_in_each_catergory($catergory['id']);
                             ?>
-                                <li class="sidebar__category-item"><a href="" class="sidebar__category-link"><?php echo $catergory['catergory_name'] ?></a></li>
-                            <?php }?>
+                                <li class="sidebar__category-item">
+                                    <div class="sidebar__category-link" onclick="filter(this)" value=<?php echo $catergory['id']?> >
+                                        <?php echo $catergory['catergory_name'] ?>
+                                        <?php echo '(' .$quantity[0]. ')'?>
+                                    </div>
+                                </li>
+                            <?php ; }?>
                         </ul>
 
                         <ul class="sidebar__tags">
@@ -114,7 +127,7 @@
                                 $image_path = "img/shop/" . $product['image_path'];
                             ?>
                                 <li class="products__item">
-                                    <a href="./detail.php?id=<?php echo $product['id']?>">
+                                    <a href="./detail.php?id=<?php echo $product['id'] ?>">
                                         <img src=<?php echo $image_path ?> alt="" class="products__item-img">
                                         <span class="products__item-name">
                                             <?php echo $product['product_name'];?>    
@@ -139,7 +152,42 @@
         </div>
     </div>
 
-    
+    <script>
+        
+        let wrapper = $('.products__warpper');
+        function filter(e){
+            $.ajax({
+                url: 'api/api.php',
+                data: {action: 'filter_catergory', catergory_id: e.getAttribute('value')},
+                dataType: 'JSON',
+                type: 'GET',
+                success: function(result){
+                    let html = '';
+                    result.forEach(product => {
+                        let image_path = "img/shop/" + product['image_path'];
+                        html += `
+                                    <li class="products__item">
+                                        <a href="./detail.php?id= ${product['id']}">
+                                            <img src=${image_path} class="products__item-img">
+                                            <span class="products__item-name">
+                                                ${product['product_name']}
+                                            </span>
+                                            <span class="products__item-price">
+                                                ${product['product_price']}
+                                            </span>
+                                        </a>
+                                    </li>
+                                `;    
+                    });
+                    wrapper.html(html);
+                    html = '';
+                }
+            })
+        }
+        $('.sidebar__category-link').click(()=> {
+        })
+    </script>
+
 </body>
 
 </html>
