@@ -25,6 +25,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+    <style>
+        .flex {
+            display: flex;
+            padding: 0;
+        }
+
+    </style>
     <script type="text/javascript">
         //Phân Trang Cho Table
         function Pager(tableName, itemsPerPage) {
@@ -99,7 +107,7 @@
     </script>
 </head>
 
-<body onload="time()">
+<body onload="time()" style="overflow-x: hidden;">
 <?php
         if(isset($_POST['addProduct'])&&($_POST['addProduct'])){
             $target_dir = "uploads/";
@@ -174,14 +182,13 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="active"><a href="index.php" data-toggle="tooltip" data-placement="bottom"
-                            title="TRANG CHỦ">TRANG CHỦ</a></li>
-                    <li><a href="" data-toggle="tooltip" data-placement="bottom" title="ĐIỂM DANH">ĐIỂM DANH</a></li>
-                    <li><a href="" data-toggle="tooltip" data-placement="bottom" title="TIỀN LƯƠNG">TIỀN LƯƠNG</a></li>
-                    <li><a href="" data-toggle="tooltip" data-placement="bottom" title="LỊCH CÔNG TÁC">LỊCH CÔNG TÁC</a>
+                            title="SẢN PHẨM">SẢN PHẨM</a></li>
+                    <li><a href="" data-toggle="tooltip" data-placement="bottom" title="DANH MỤC SẢN PHẨM">DANH MỤC SẢN PHẨM</a></li>
+                    <li><a href="./admin_bill.php" data-toggle="tooltip" data-placement="bottom" title="ĐƠN HÀNG">ĐƠN HÀNG</a></li>
+                    <li><a href="" data-toggle="tooltip" data-placement="bottom" title="BÀI VIẾT">BÀI VIẾT</a>
                     </li>
-                    <li><a href="#contact" data-toggle="tooltip" data-placement="bottom" title="BÁO CÁO">BÁO CÁO</a>
+                    <li><a href="#contact" data-toggle="tooltip" data-placement="bottom" title="THỐNG KÊ">THỐNG KÊ</a>
                     </li>
-                    <li><a href="#tour" data-toggle="tooltip" data-placement="bottom" title="SỰ KIỆN">SỰ KIỆN</a></li>
                     <li>
                         <a href="#" data-toggle="tooltip" data-placement="bottom" title="TÀI KHOẢN"><b>Tài Khoản</b>
                             <span class="caret"></span>
@@ -208,8 +215,8 @@
 
         </form>
         <b>CHỨC NĂNG CHÍNH:</b><Br>
-        <a href="">     <button class="nv btn add-new" type="button" data-toggle="tooltip" data-placement="top"
-            title="Thêm Sản Phẩm" onclick=""><i class="fas fa-user-plus"></i> </button></a>
+        <a href=""><button class="nv btn add-new" type="button" data-toggle="tooltip" data-placement="top"
+            title="Thêm Sản Phẩm" onclick=""><i class="fas fa-plus"></i></button></a>
         <button class="nv" type="button" onclick="sortTable()" data-toggle="tooltip" data-placement="top"
             title="Lọc Dữ Liệu"><i class="fa fa-filter" aria-hidden="true"></i></button>
         <button class="nv xuat" data-toggle="tooltip" data-placement="top" title="Xuất File"><i
@@ -225,10 +232,10 @@
         <table class="table table-bordered" id="myTable">
             <thead>
                 <tr class="ex">
-                    <th width="15%">ID</th>
-                    <th width="15%">Tên Sản Phẩm</th>
                     <th>Hình Ảnh</th>
+                    <th width="15%">Tên Sản Phẩm</th>
                     <th>Giá</th>
+                    <th>Danh mục sản phẩm</th>
                     <th>Đánh Giá Sản Phẩm</th>
                     <!-- <th width="15%">Phân Loại</th> -->
                     <th>Hành động</th>
@@ -236,20 +243,30 @@
             </thead>
             <tbody>
                 <?php 
+                    function get_catergory_name($catergory_id){
+                        global $conn;
+                        $sql = 'SELECT * FROM catergory WHERE id = ' . $catergory_id;
+                        $catergory =  $conn->query($sql)->fetch();
+                        return $catergory['catergory_name']; 
+                    }
+
                     include './connect_db.php';
                     $product_list = $conn->query('SELECT * FROM product')->fetchAll();  
                     foreach($product_list as $product){
+                    $catergory_name = get_catergory_name($product['catergory_id']);
                     $image_path = "img/shop/" . $product['image_path'];
                 ?>
                     <tr>
-                        <td><?php echo $product['id'] ?></td>
+                        <td style="text-align:center"><img width="100px" height="100px" src=<?php echo $image_path?> alt=""></td>
                         <td><?php echo $product['product_name'] ?></td>
-                        <td><img width="100px" height="100px" src=<?php echo $image_path?> alt=""></td>
                         <td><?php echo $product['product_price'] ?></td>
+                        <td><?php echo $catergory_name ?></td>
                         <td><?php echo $product['des'] ?></td>
                         <td>
-                            <a href="./edit_product.php?id=<?php echo $product['id']?>"><button>Sửa</button></a>
-                            <a href="./delete_product.php?id=<?php echo $product['id']?>"><button>Xóa</button></a>
+                            <div class="flex">
+                                <a href="./edit_product.php?id=<?php echo $product['id']?>"><button class="btn btn-primary"><i class="fas fa-edit"></i></button></a>
+                                <a href="./delete_product.php?id=<?php echo $product['id']?>"><button class="btn btn-danger"><i class="fas fa-trash"></i></button></a>
+                            </div>
                         </td>
                     </tr>
                <?php }?>
@@ -263,17 +280,13 @@
             pager.showPage(1);
         </script>
     </div>
-    <hr class="hr1">
-    <div class="container-fluid end">
+    <div class="container-fluid end" style="background-color: black; height: 150px;">
         <div class="row text-center">
             <div class="col-lg-12 link">
-                <i class="fab fa-facebook-f"></i>
-                <i class="fab fa-instagram"></i>
-                <i class="fab fa-youtube"></i>
-                <i class="fab fa-google"></i>
-            </div>
-            <div class="col-lg-12">
-                2019 CopyRight Phan mem quan ly <a href="#"></a>
+                <i class="fab fa-facebook-f" style="color: white;"></i>
+                <i class="fab fa-instagram" style="color: white;"></i>
+                <i class="fab fa-youtube" style="color: white;"></i>
+                <i class="fab fa-google" style="color: white;"></i>
             </div>
         </div>
     </div>

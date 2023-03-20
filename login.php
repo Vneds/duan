@@ -48,6 +48,7 @@
                             </span>
                         </div>
                         <div class="wrap-input100 validate-input">
+
                             <input autocomplete="off" class="input100" type="password" required placeholder="Mật khẩu" name="pass">
                             <span toggle="#password-field" class="bx fa-fw bx-hide field-icon click-eye"></span>
                             <span class="focus-input100"></span>

@@ -50,6 +50,7 @@ session_start();
                     ?>
                 </ul>
                 <div class="header__action">
+                    <input type="text">
                     <a href="" class="header__action-item"><img src="img/search_icon.svg" alt=""></a>
                     <a href="" class="header__action-item"><img src="img/icon_user.svg" alt=""></a>
                     <a href="" class="header__action-item"><img src="img/cart_icon.svg" alt=""></a>
