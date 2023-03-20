@@ -39,7 +39,8 @@ session_start();
                     <li class="header__nav-item"><a href="contact.php" class="header__nav-link">CONTACT</a></li>
                     <?php 
                     if(isset($_SESSION['user_name'])){
-                        echo '<li class="header__nav-item"><a class="header__nav-link">'.'Xin chao '.$_SESSION['user_name'].'</a></li>';
+                        
+                        // echo '<li class="header__nav-item"><a class="header__nav-link">'.'Xin chao '.$_SESSION['user_name'].'</a></li>';
                         // echo '<a href="./tranguser.php"><img class="imguser" src="../'.$_SESSION['img'].'"></a>';
                     }
                     else {
