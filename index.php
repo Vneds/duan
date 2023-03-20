@@ -47,8 +47,10 @@ session_start();
                         echo '<li class="header__nav-item"><a href="login.php" class="header__nav-link">ADMIN</a></li>';
                     }
                     ?>
+
                 </ul>
                 <div class="header__action">
+                    <input type="text">
                     <a href="" class="header__action-item"><img src="img/search_icon.svg" alt=""></a>
                     <a href="" class="header__action-item"><img src="img/icon_user.svg" alt=""></a>
                     <a href="" class="header__action-item"><img src="img/cart_icon.svg" alt=""></a>

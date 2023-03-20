@@ -1,16 +1,14 @@
 <?php
     include_once './connect_db.php';
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-       $sql = 'UPDATE product SET product_name = ? , product_price = ? , des = ?  WHERE id = '. $_POST['id'];
-       $stmt = $conn->prepare($sql);
-       $stmt->execute([$_POST['product_name'], $_POST['product_price'],$_POST['des']]);
-       header('Location: ./admin.php');
-       die();
+        $sql = "INSERT INTO product (product_name , product_price , catergory_id,image_path , des) VALUES (?,?,?,?,?)";
+        $stmt = $conn->prepare($sql);
+        $des = "img/shop/". basename($_FILES["img"]['name']);
+        $file = $_FILES["img"]["name"];
+        move_uploaded_file($file, $des);
+        $stmt ->execute([$_POST['product_name'],$_POST['product_price'],$_POST['catergory_id'], $_FILES["img"]['name'] , $_POST['des']]);
+        header ('location: admin.php');
     }
-    $stmt = $conn->prepare('SELECT * from product WHERE id = ?');
-    $stmt->execute([$_GET['id']]);
-    $product = $stmt->fetch();
-    $image_path = "img/shop/" . $product['image_path'];
 ?>
 <head>
     <meta charset="UTF-8">
@@ -151,16 +149,26 @@
     </div>
 </nav>
 <div class="flex" style="margin: 80px;">
-    <img width="300px" height="300px" src=<?php echo $image_path ?> alt="">
-    <form class="form-group" action="" method="POST">
+    <form class="form-group" action="" method="POST" enctype="multipart/form-data">
         <label for="">Tên sản phẩm</label>
-        <input class="form-control" type="text" value="<?php echo $product['product_name']?>"  name="product_name">
+        <input class="form-control" type="text" name="product_name">
         <label for="">Giá tiền</label>
-        <input class="form-control" type="text" value=<?php echo $product['product_price']?> name="product_price">
+        <input class="form-control" type="text" name="product_price">
         <label for="">Mô tả sản phẩm</label>
-        <textarea class="form-control" name="des" rows="4" cols="50"><?php echo $product['des']?></textarea>
-        <input type="text" value=<?php echo $_GET['id']?> hidden name="id">
-        <button class="btn btn-primary" type="submit">Sửa</button>
+        <textarea class="form-control" name="des" rows="4" cols="50"></textarea>
+        <label for="">Danh mục sản phẩm</label>
+        <select class="form-control" name="catergory_id" id="">
+            <?php 
+                include_once './connect_db.php';
+                $catergory_list = $conn->query('SELECT * FROM catergory ')->fetchAll();
+                foreach ($catergory_list as $catergory){
+            ?>
+                    <option value="<?php echo $catergory['id']?>"><?php echo $catergory['catergory_name']?></option>
+            <?php }?>
+        </select>
+        <label for="">Ảnh sản phẩm</label>
+        <input class="form-control" type="file" name="img"> 
+        <button class="btn btn-primary" type="submit">Thêm</button>
     </form>
 </div>
 <a href="./admin.php">
