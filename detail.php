@@ -216,13 +216,12 @@
         }
 
         const addToCartBtn = $('.add-to-cart');
+        console.log(addToCartBtn);
 
         addToCartBtn.click(()=> {
             let productID = addToCartBtn.attr('id');
             window.location.href = './addToCart.php?id=' + productID + '&quantity=' + Number(value.text());
         })
-
-
     </script>
 
 
