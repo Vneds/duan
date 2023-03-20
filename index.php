@@ -34,6 +34,8 @@
                     <li class="header__nav-item"><a href="" class="header__nav-link">ABOUT</a></li>
                     <li class="header__nav-item"><a href="contact.php" class="header__nav-link">CONTACT</a></li>
                     <li class="header__nav-item"><a href="login.php" class="header__nav-link">ADMIN</a></li>
+                    <li class="header__nav-item"><a href="user_bill.php" class="header__nav-link">user</a></li>
+
 
                 </ul>
                 <div class="header__action">
