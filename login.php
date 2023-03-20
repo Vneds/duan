@@ -76,6 +76,7 @@
             //     $user=$_POST['user'];
             //     $pass=$_POST['pass'];
                 
++
             //     $servername = "localhost:3306";
             //     $username = "root";
             //     $password = "";
