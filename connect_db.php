@@ -1,6 +1,5 @@
 
 <?php
-    $host = 'localhost';
     $dbName = 'duan1';
     $userName = 'root';
     $password = '123456';
@@ -17,10 +16,7 @@
     return $conn;
 
     function connectdb(){
-        $host = 'localhost';
-        $dbName = 'duan1';
-        $userName = 'root';
-        $password = '123456';
+
         try {
             // Kết nối
             $conn = new PDO("mysql:host=$host;dbname=$dbName", $userName, $password);
