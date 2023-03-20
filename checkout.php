@@ -1,5 +1,6 @@
-<?php
-session_start();
+<?php 
+    session_start();
+    include_once './connect_db.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +12,7 @@ session_start();
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/cart.css">
     <title>Trang chủ</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 </head>
 
 <body>
@@ -52,72 +54,60 @@ session_start();
         
         <div class="main">
             <div class="container cart-page">
-                <table class="cart_block">
-                    <tr>
-                        <th class="name__product">Product</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                        <th></th>
-                    </tr>
-                    
-                    <tr>
-                        <?php
-                            $i = 0;
-                            $total_money = 0;
-                            foreach($_SESSION["cart"] as $product){
-                            $product_price = (int)$product['product_price']; 
-                            $total_money += $product_price ;
-                                    
-                        ?>
-                        <td>
-                            <div class="cart__info">
-                            <img src="<?php echo $product['image_path'] ?>">
-                                <div>
-                                    <br>
-                                    <span>
-                                    <?php echo $product['product_name']?>
-                                    </span>
-                                    <br>
-                                    <br>
-                                    <span>
-                                    <?php echo $product['product_price']?>
-                                    </span>
-                                    <br>
-                                    <br>
-                                    <a class="remove" href="">Remove</a>
-                                </div>
-                            </div>
-                        </td>
-    
-                        <td>
-                            <div class="container__quantity">
-                                    <a class="container__quantity-item">-</a>
-                                    <a class="container__quantity-item"> <?php echo $product['quantity']?></a>
-                                    <a class="container__quantity-item">+</a>
-                            </div>
-                        </td>
-                        <td>
-                            <?php echo $product['product_price']?>
-                        </td>
-                        <td>
-                            <a href="delete_cart.php?index=<?php echo $i?>"><img src="img/vector 12.png" alt="" class="shuffle"></a>
-                        </td>
-                    </tr>
-
-                <?php 
-                    $i++;
-                }
-                ?>
-                </table>
+                <div class="cart_block">
+                    <h2>Thanh toán</h2>
+                    <form class="form-control" action="./add_bill.php" method="POST">
+                        <label for="">Tên người đặt</label>
+                        <input type="text" name="user_name" class="user-name" id="" placeholder="Nhập tên người đặt"></td>
+                        <label for="">Emai</label>
+                        <input type="text" name="email" id="" class="email" placeholder="Nhập email"></td>
+                        <label for="">Số điện thoại</label>
+                        <input type="text" name="phone" id="" class="phone" placeholder="Nhập số điện thoại"></td>
+                        <label for="">Địa chỉ</label>
+                        <input type="text" name="address" id="" class="address" placeholder="Nhập địa chỉ"></td>
+                        <button type="submit">Thanh toans</button>
+                    </form>
+                </div>
                 
                 <div class="total__price">
                     <table>
                         <tr>
                             <td id="total_color">Order detail</td>
                         </tr>
+                        <?php 
+                            $total_money = 0;
+                            $product_list = $_SESSION['cart'];
+                            foreach($product_list as $product){
+                                $total_money += $product['product_price'] * $product['quantity'];
+                        ?>
+                        <tr>
+                            <td>
+                                <div class="cart__info">
+                                    <img src=<?php echo $product['image_path']?>>
+                                    <div>
+                                        <br>
+                                        <span>
+                                        <?php echo $product['product_name']?>
+                                        </span>
+                                        <br>
+                                        <br>
+                                        <span>
+                                            Price: <?php echo $product['product_price']?>
+                                        </span>
+                                        <br>
+                                        <br>
+                                        <?php echo $product['quantity']?>
+                                        <a class="remove" href="">Remove</a>
+                                    </div>
+                            </div>
+                        </td>
+                        </tr>
+                        <?php };
+                            $_SESSION['total_money'] = $total_money;
+                        ?>
                         <tr>
                             <td>Order total</td>
-                            <td>$<?php echo $total_money ?></td>
+                            <td> <?php echo $total_money?></td>
                         </tr>
                         <tr>
                             <td>Shipping</td>
@@ -126,11 +116,11 @@ session_start();
                         <hr>
                         <tr>
                             <td>Subtotal</td>
-                            <td>$<?php echo $total_money ?></td>
+                            <td><?php echo $total_money?></td>
                         </tr>
                         <tr>
                             <td>
-                            <a href="checkout.php"><button class="btn">Place Order</button></a>
+                            <button class="btn checkout">Place Order</button>
                             </td>
                         </tr>
                     </table>
@@ -174,6 +164,19 @@ session_start();
                 </div>
             </div>
         </footer>
+
+        <script>
+            // let userName = $('.user-name');
+            // let phone = $('.phone');
+            // let email = $('.email');
+            // let address = $('.address');
+            // $('.checkout').click(()=>{
+            //     console.log(address.val());
+            //     $.post('./add_bill.php', {user_name: userName.val(), phone: phone.val(), email: email.val(), address: address.val()}, ()=>{
+            //         // window.location.href = 'index.php';
+            //     })
+            // })
+        </script>
 </body>
 
 </html>
