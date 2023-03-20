@@ -17,7 +17,5 @@
     ];
     
     array_push($_SESSION['cart'], $card);
-
     print_r($_SESSION['cart']);
-
 ?>

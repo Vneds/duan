@@ -171,9 +171,6 @@
             header("location:admin");
         }
     ?>
-    <script>
-        swal("Xin Chào Admin", "Chúc Bạn 1 Ngày Tốt Lành Nhé", "");
-    </script>
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
