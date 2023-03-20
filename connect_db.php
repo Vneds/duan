@@ -33,10 +33,9 @@
 
     function getuser($user,$pass){
         $conn = connectdb();
-        $stmt = $conn->prepare("SELECT * FROM user WHERE user_name = '".$user."' AND pass_word = '".$pass."' " );
-        $stmt->execute();
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $kq = $stmt->fetchAll();
+        $stmt = $conn->prepare("SELECT * FROM user WHERE user_name = ? AND pass_word =  ? " );
+        $stmt->execute([$user, $pass]);
+        $kq = $stmt->fetch();
         return $kq;
       }
 ?>
