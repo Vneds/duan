@@ -6,7 +6,7 @@
         $des = "img/shop/". basename($_FILES["img"]['name']);
         $file = $_FILES["img"]["name"];
         move_uploaded_file($file, $des);
-        $stmt ->execute([$_POST['product_name'],$_POST['product_price'],$_POST['catergory_id'],$des , $_POST['des']]);
+        $stmt ->execute([$_POST['product_name'],$_POST['product_price'],$_POST['catergory_id'], $_FILES["img"]['name'] , $_POST['des']]);
         header ('location: admin.php');
     }
 ?>
