@@ -1,3 +1,4 @@
+
 <?php
     $host = 'localhost:3307';
     $dbName = 'duan1';
