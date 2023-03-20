@@ -1,5 +1,6 @@
 <?php
     session_start();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,22 +34,21 @@
                     <img src="images/team.jpg" alt="IMG">
                 </div>
                 <!--=====TIÊU ĐỀ======-->
-                <form class="login100-form validate-form" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+                <form class="login100-form validate-form" action="./php_login.php" enctype="multipart/form-data" method="post">
                     <span class="login100-form-title">
                         <b>ĐĂNG NHẬP</b>
                     </span>
                     <!--=====FORM INPUT TÀI KHOẢN VÀ PASSWORD======-->
-                    <form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+                    <form action="./php_login.php" enctype="multipart/form-data" method="post">
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" type="text" placeholder="Tên đăng nhập" name="user">
+                            <input class="input100" type="text" required placeholder="Tên đăng nhập" name="user">
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class='bx bx-user'></i>
                             </span>
                         </div>
                         <div class="wrap-input100 validate-input">
-                            <input autocomplete="off" class="input100" type="text" placeholder="Mật khẩu"
-                                name="pass">
+                            <input autocomplete="off" class="input100" type="password" required placeholder="Mật khẩu" name="pass">
                             <span toggle="#password-field" class="bx fa-fw bx-hide field-icon click-eye"></span>
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
@@ -59,42 +59,47 @@
                         <div class="container-login100-form-btn">
                         <input type="submit" name="login" value="Đăng nhập">
                         </div>
-                        <div class="text-right p-t-12">
+                        <div class="text-right p-t-12"> 
+                            <a class="txt2" href="./signup.php">
+                               Đăng ký
+                            </a>
+                            |
                             <a class="txt2" href="/forgot.html">
                                 Bạn quên mật khẩu?
                             </a>
                         </div>
+                        
                     </form>
                     <?php
-            if(isset($_POST["login"])&&($_POST["login"])){
-                $user=$_POST['user'];
-                $pass=$_POST['pass'];
+            // if(isset($_POST["login"])&&($_POST["login"])){
+            //     $user=$_POST['user'];
+            //     $pass=$_POST['pass'];
                 
-                $servername = "localhost:3307";
-                $username = "root";
-                $password = "";
+            //     $servername = "localhost:3306";
+            //     $username = "root";
+            //     $password = "";
 
-                try {
-                $conn = new PDO("mysql:host=$servername;dbname=duan1", $username, $password);
-                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $stmt = $conn->prepare("SELECT * FROM user WHERE user_name ='".$user."' AND pass_word ='".$pass."'" );
-                $stmt->execute();
-                $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                $kq=$stmt->fetchAll();
-                if(count($kq)==0){
-                    echo "Sai thông tin đăng nhập";
-                }else {
-                    $_SESSION["user_name"]=$user;
-                    $_SESSION["pass_word"]=$pass;
+            //     try {
+            //     $conn = new PDO("mysql:host=$servername;dbname=duan1", $username, $password);
+            //     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            //     $stmt = $conn->prepare("SELECT * FROM user WHERE user_name ='".$user."' AND pass_word ='".$pass."'" );
+            //     $stmt->execute();
+            //     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            //     $kq=$stmt->fetchAll();
+            //     if(count($kq)==0){
+            //         echo "Sai thông tin đăng nhập";
+            //     }else {
+            //         $_SESSION["user_name"]=$user;
+            //         $_SESSION["pass_word"]=$pass;
 
-                    header('location: admin.php');
-                }            
+            //         header('location: admin.php');
+            //     }            
 
-                } catch(PDOException $e) {
-                echo "Connection failed: " . $e->getMessage();
-                }
+            //     } catch(PDOException $e) {
+            //     echo "Connection failed: " . $e->getMessage();
+            //     }
 
-            }
+            // }
         ?> 
                     
                     
@@ -108,7 +113,7 @@
     <script src="vendor/bootstrap/js/popper.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="vendor/select2/select2.min.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         function myFunction() {
             var x = document.getElementById("myInput");
             if (x.type === "password") {
@@ -126,8 +131,8 @@
                 input.attr("type", "password");
             }
         });
-    </script>
-    
+    </script> -->
+    <!-- action="< ?php echo $_SERVER['PHP_SELF'];?>" -->
 </body>
 
 </html>

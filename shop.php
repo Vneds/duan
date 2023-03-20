@@ -18,7 +18,8 @@
         <header class="header">
             <div class="grid">
                 <div class="header__logo">
-                    <img src="img/Group 294.svg" alt="" class="img">
+                <a href="./index.php"><img src="img/Group 294.svg" alt="" class="img"></a>
+                    <!-- <img src="img/Group 294.svg" alt="" class="img"> -->
                 </div>
                 <ul class="header__nav">
                     <li class="header__nav-item"><a href="index.php" class="header__nav-link">HOME <svg width="7" height="6"
