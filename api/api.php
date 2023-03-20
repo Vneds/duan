@@ -1,5 +1,5 @@
 <?php 
-    include_once '../connect_db.php';
+    include_once '../model/connect_db.php';
     $action = $_GET['action'];
     switch($action){
         case 'filter_catergory':
