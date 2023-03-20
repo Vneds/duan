@@ -81,6 +81,10 @@ table {
     display: flex;
     flex-wrap: wrap;
 }
+.shuffle{
+    width: 15px;
+    height: 15px;
+}
 
 th {
     text-align: left;

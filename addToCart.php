@@ -13,9 +13,12 @@
         'product_name' => $product['product_name'],
         'product_price' => $product['product_price'],
         'image_path' => $image_path,
-        'quantity' => $_GET['quantity']
+        'quantity' => $_GET['quantity'],
+        'product_id' => $product['product_id']
     ];
     
     array_push($_SESSION['cart'], $card);
-    print_r($_SESSION['cart']);
+
+    header ('location: cart.php');
+
 ?>

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,26 +57,37 @@
                         <th class="name__product">Product</th>
                         <th>Quantity</th>
                         <th>Total</th>
+                        <th></th>
                     </tr>
                     
                     <tr>
-                        <td><div class="cart__info">
-                            <img src="img/shop/Rectangle 174.svg">
-                            <div>
-                                <br>
-                                <span>
-                                Runner red galbraith
-                                </span>
-                                <br>
-                                <br>
-                                <span>
-                                    Price: $16
-                                </span>
-                                <br>
-                                <br>
-                                <a class="remove" href="">Remove</a>
+                        <?php
+                            $i = 0;
+                            $total_money = 0;
+                            foreach($_SESSION["cart"] as $product){
+                            $product_price = (int)$product['product_price']; 
+                            $total_money += $product_price ;
+                                    
+                        ?>
+                        <td>
+                            <div class="cart__info">
+                            <img src="<?php echo $product['image_path'] ?>">
+                                <div>
+                                    <br>
+                                    <span>
+                                    <?php echo $product['product_name']?>
+                                    </span>
+                                    <br>
+                                    <br>
+                                    <span>
+                                    <?php echo $product['product_price']?>
+                                    </span>
+                                    <br>
+                                    <br>
+                                    <a class="remove" href="">Remove</a>
+                                </div>
                             </div>
-                        </div></td>
+                        </td>
     
                         <td>
                             <div class="container__quantity">
@@ -83,40 +97,17 @@
                             </div>
                         </td>
                         <td>
-                            $16
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><div class="cart__info">
-                            <img src="img/shop/Rectangle 174.svg">
-                            <div>
-                                <br>
-                                <span>
-                                Runner red galbraith
-                                </span>
-                                <br>
-                                <br>
-                                <span>
-                                    Price: $16
-                                </span>
-                                <br>
-                                <br>
-                                <a class="remove" href="">Remove</a>
-                            </div>
-                        </div></td>
-    
-                        <td>
-                            <div class="container__quantity">
-                                    <a class="container__quantity-item">-</a>
-                                    <a class="container__quantity-item">1</a>
-                                    <a class="container__quantity-item">+</a>
-                            </div>
+                            <?php echo $product['product_price']?>
                         </td>
                         <td>
-                            $16
+                            <a href="delete_cart.php?index=<?php echo $i?>"><img src="img/vector 12.png" alt="" class="shuffle"></a>
                         </td>
                     </tr>
-                    
+
+                <?php 
+                    $i++;
+                }
+                ?>
                 </table>
                 
                 <div class="total__price">
@@ -126,7 +117,7 @@
                         </tr>
                         <tr>
                             <td>Order total</td>
-                            <td>$16</td>
+                            <td>$<?php echo $total_money ?></td>
                         </tr>
                         <tr>
                             <td>Shipping</td>
@@ -135,7 +126,7 @@
                         <hr>
                         <tr>
                             <td>Subtotal</td>
-                            <td>$16</td>
+                            <td>$<?php echo $total_money ?></td>
                         </tr>
                         <tr>
                             <td>
