@@ -19,4 +19,5 @@
     
     array_push($_SESSION['cart'], $card);
     header ('location: cart.php');
+
 ?>
