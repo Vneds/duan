@@ -108,7 +108,7 @@
                                 <a class="infor__quantity-item increase">+</a>
                             </div>
 
-                            <button class="btn add-to-cart" id=<?php echo $product['id']?>>Thêm vào giỏ</button>
+                            <a href="addToCart.php?id=<?php echo $product['id']?>"><button class="btn add-to-cart">Thêm vào giỏ</button></a>
                         </div>
 
                         <hr>
