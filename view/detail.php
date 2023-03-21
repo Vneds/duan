@@ -74,7 +74,7 @@
                                 <a class="infor__quantity-item increase">+</a>
                             </div>
 
-                            <a href="addToCart.php?id=<?php echo $product['id']?>"><button class="btn add-to-cart">Thêm vào giỏ</button></a>
+                           <button class="btn add-to-cart" id=<?php echo $product['id']?>>Thêm vào giỏ</button>
                         </div>
 
                         <hr>
@@ -182,11 +182,10 @@
         }
 
         const addToCartBtn = $('.add-to-cart');
-        console.log(addToCartBtn);
 
         addToCartBtn.click(()=> {
             let productID = addToCartBtn.attr('id');
-            window.location.href = './addToCart.php?id=' + productID + '&quantity=' + Number(value.text());
+            window.location.href = 'index.php?page=cart_add&id=' + productID + '&quantity=' + Number(value.text());
         })
     </script>
 
