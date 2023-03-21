@@ -223,8 +223,10 @@
                     class="fas fa-folder-plus"></i> Thêm tình trạng</a>
               </div>
             </div>
+
           <form class="row" method="POST" enctype="multipart/form-data" action="
           ">
+
               <div class="form-group col-md-3">
                 <label class="control-label">Tên sản phẩm</label>
                 <input class="form-control" type="text" name="product_name">
