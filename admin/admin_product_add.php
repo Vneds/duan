@@ -1,3 +1,15 @@
+<?php
+    include_once 'model/connect_db.php';
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+      $sql = "INSERT INTO product (product_name , catergory_id,product_price, des, image_path ) VALUES (?,?,?,?,?)";
+      $stmt = $conn->prepare($sql);
+      $des = "view/img/shop/". basename($_FILES["img"]['name']);
+      $file = $_FILES["img"]["name"];
+      move_uploaded_file($file, $des);
+      $stmt ->execute([$_POST['product_name'],$_POST['catergory_id'], $_POST['product_price'], $_POST['des'], $_FILES["img"]['name']]);
+      header ('location: ./index?page=admin_product');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -211,58 +223,40 @@
                     class="fas fa-folder-plus"></i> Thêm tình trạng</a>
               </div>
             </div>
-          <form class="row" method="POST" enctype="multipart/form-data" action="./index.php?page=admin_add_product">
-              <div class="form-group col-md-3">
-                <label class="control-label">Mã sản phẩm </label>
-                <input class="form-control" type="number" placeholder="">
-              </div>
+          <form class="row" method="POST" enctype="multipart/form-data" action="
+          ">
               <div class="form-group col-md-3">
                 <label class="control-label">Tên sản phẩm</label>
                 <input class="form-control" type="text" name="product_name">
               </div>
 
 
-              <div class="form-group  col-md-3">
+              <!-- <div class="form-group  col-md-3">
                 <label class="control-label">Số lượng</label>
                 <input class="form-control" type="number">
-              </div>
-              <div class="form-group col-md-3 ">
+              </div> -->
+              <!-- <div class="form-group col-md-3 ">
                 <label for="exampleSelect1" class="control-label">Tình trạng</label>
                 <select class="form-control" id="exampleSelect1">
                   <option>-- Chọn tình trạng --</option>
                   <option>Còn hàng</option>
                   <option>Hết hàng</option>
                 </select>
-              </div>
+              </div> -->
               <div class="form-group col-md-3">
                 <label for="exampleSelect1" class="control-label">Danh mục</label>
                 <select class="form-control" id="exampleSelect1" name="catergory_id">
                 <?php 
-                $catergory_list = get_catergory_list();
-                foreach ($catergory_list as $catergory){
-                ?>
-                  <option>-- Chọn danh mục --</option>
-                  <option value="<?php echo $catergory['id']?>"><?php echo $catergory['catergory_name']?></option>
+                    $catergory_list = get_catergory_list(); ?>
+                    <option>-- Chọn danh mục --</option>
+                <?php foreach ($catergory_list as $catergory){?>
+                        <option value="<?php echo $catergory['id']?>"><?php echo $catergory['catergory_name']?></option>
                 <?php }?>
-                </select>
-              </div>
-              <div class="form-group col-md-3 ">
-                <label for="exampleSelect1" class="control-label">Nhà cung cấp</label>
-                <select class="form-control" id="exampleSelect1">
-                  <option>-- Chọn nhà cung cấp --</option>
-                  <option>Phong vũ</option>
-                  <option>Thế giới di động</option>
-                  <option>FPT</option>
-                  <option>Võ Trường</option>
                 </select>
               </div>
               <div class="form-group col-md-3">
                 <label class="control-label">Giá bán</label>
                 <input class="form-control" type="text" name="product_price">
-              </div>
-              <div class="form-group col-md-3">
-                <label class="control-label">Giá vốn</label>
-                <input class="form-control" type="text">
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Ảnh sản phẩm</label>
@@ -284,9 +278,8 @@
                 <textarea class="form-control" name="des" id="mota"></textarea>
                 <script>CKEDITOR.replace('mota');</script>
               </div>
-
+              <button class="btn btn-save" type="submit">Lưu lại</button>
             </div>
-            <a href="./index.php?page=admin_add_product"><button class="btn btn-save" type="button">Lưu lại</button></a>
             <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
             </div>
           </form> 
@@ -352,19 +345,19 @@ MODAL
               <label class="control-label">Danh mục sản phẩm hiện đang có</label>
               <ul style="padding-left: 20px;">
                 <li>Bàn ăn</li>
-              <li>Bàn thông minh</li>
-              <li>Tủ</li>
-              <li>Ghế gỗ</li>
-              <li>Ghế sắt</li>
-              <li>Giường người lớn</li>
-              <li>Giường trẻ em</li>
-              <li>Bàn trang điểm</li>
-              <li>Giá đỡ</li>
+                <li>Bàn thông minh</li>
+                <li>Tủ</li>
+                <li>Ghế gỗ</li>
+                <li>Ghế sắt</li>
+                <li>Giường người lớn</li>
+                <li>Giường trẻ em</li>
+                <li>Bàn trang điểm</li>
+                <li>Giá đỡ</li>
               </ul>
             </div>
           </div>
           <BR>
-          <button class="btn btn-save" type="button">Lưu lại</button>
+          <a href="index?page=admin_add_product"><button class="btn btn-save" type="button">Lưu lại</button></a>
           <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
           <BR>
         </div>
@@ -424,7 +417,6 @@ MODAL
   <script>
     const inpFile = document.getElementById("inpFile");
     const loadFile = document.getElementById("loadFile");
-    const previewContainer = document.getElementById("imagePreview");
     const previewContainer = document.getElementById("imagePreview");
     const previewImage = previewContainer.querySelector(".image-preview__image");
     const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
