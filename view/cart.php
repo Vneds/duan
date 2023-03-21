@@ -60,7 +60,7 @@ session_start();
                         <td>
                             <div class="container__quantity">
                                     <a class="container__quantity-item">-</a>
-                                    <a class="container__quantity-item">1</a>
+                                    <a class="container__quantity-item"> <?php echo $product['quantity']?></a>
                                     <a class="container__quantity-item">+</a>
                             </div>
                         </td>
@@ -98,7 +98,11 @@ session_start();
                         </tr>
                         <tr>
                             <td>
+<<<<<<< HEAD:cart.php
+                            <a href="checkout.php"><button class="btn">Place Order</button></a>
+=======
                             <a href="index.php?page=checkout"><button class="btn">Place Order</button></a>
+>>>>>>> 055e2e2ca109c4e34487ce78e621e4e761e458ec:view/cart.php
                             </td>
                         </tr>
                     </table>
