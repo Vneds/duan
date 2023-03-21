@@ -1,5 +1,6 @@
 <?php
     include_once 'model/connect_db.php';
+    echo $_POST['product_name'];
     $sql = "INSERT INTO product (product_name , catergory_id,product_price, des, image_path ) VALUES (?,?,?,?,?)";
     $stmt = $conn->prepare($sql);
     $des = "img/shop/". basename($_FILES["img"]['name']);
