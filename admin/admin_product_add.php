@@ -1,3 +1,15 @@
+<?php
+    include_once 'model/connect_db.php';
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $sql = "INSERT INTO product (product_name , catergory_id,product_price, des, image_path ) VALUES (?,?,?,?,?)";
+    $stmt = $conn->prepare($sql);
+    $des = "img/shop/". basename($_FILES["img"]['name']);
+    $file = $_FILES["img"]["name"];
+    move_uploaded_file($file, $des);
+    $stmt ->execute([$_POST['product_name'],$_POST['catergory_id'], $_POST['product_price'], $_POST['des']], $_FILES["img"]['name']);
+    header ('location: ./index?page=admin_product');
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -211,7 +223,7 @@
                     class="fas fa-folder-plus"></i> Thêm tình trạng</a>
               </div>
             </div>
-          <form class="row" method="POST" enctype="multipart/form-data" action="./index.php?page=admin_add_product">
+          <form class="row" method="POST" enctype="multipart/form-data" action="">
               <div class="form-group col-md-3">
                 <label class="control-label">Mã sản phẩm </label>
                 <input class="form-control" type="number" placeholder="">
@@ -286,7 +298,7 @@
               </div>
 
             </div>
-            <a href="./index.php?page=admin_add_product"><button class="btn btn-save" type="button">Lưu lại</button></a>
+            <a href=""><button class="btn btn-save" type="button">Lưu lại</button></a>
             <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
             </div>
           </form> 
