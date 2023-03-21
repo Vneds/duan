@@ -124,13 +124,12 @@
                 dataType: 'JSON',
                 type: 'GET',
                 success: function(result){
-                    console.log(result);
                     let html = '';
                     result.forEach(product => {
                         let image_path = "view/img/shop/" + product['image_path'];
                         html += `
                                     <li class="products__item">
-                                        <a href="./detail.php?id= ${product['id']}">
+                                        <a href="index.php?page=detail&id= ${product['id']}">
                                             <img src=${image_path} class="products__item-img">
                                             <span class="products__item-name">
                                                 ${product['product_name']}

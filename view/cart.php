@@ -8,45 +8,14 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="view/css/base.css">
+    <link rel="stylesheet" href="view/css/cart.css">
     <title>Trang chủ</title>
 </head>
 
 <body>
     <div class="app">
-        <header class="header">
-            <div class="grid">
-                <div class="header__logo">
-                    <img src="img/Group 294.svg" alt="" class="img">
-                </div>
-                <ul class="header__nav">
-                    <li class="header__nav-item"><a href="" class="header__nav-link">HOME<svg width="7" height="6"
-                                viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M0.8225 0.619141L3.5 3.5624L6.1775 0.619141L7 1.52525L3.5 5.38105L0 1.52525L0.8225 0.619141Z"
-                                    fill="#303030" />
-                            </svg></a></li>
-                    <li class="header__nav-item"><a href="forgot.php" class="header__nav-link">BLOG <svg width="7" height="6"
-                                viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M0.8225 0.619141L3.5 3.5624L6.1775 0.619141L7 1.52525L3.5 5.38105L0 1.52525L0.8225 0.619141Z"
-                                    fill="#303030" />
-                            </svg></a></li>
-                    <li class="header__nav-item"><a href="shop.php" class="header__nav-link">SHOP</a></li>
-                    <li class="header__nav-item"><a href="" class="header__nav-link">ABOUT</a></li>
-                    <li class="header__nav-item"><a href="contact.php" class="header__nav-link">CONTACT</a></li>
-                    <li class="header__nav-item"><a href="login.php" class="header__nav-link">ADMIN</a></li>
-
-                </ul>
-                <div class="header__action">
-                    <a href="" class="header__action-item"><img src="img/search_icon.svg" alt=""></a>
-                    <a href="" class="header__action-item"><img src="img/icon_user.svg" alt=""></a>
-                    <a href="" class="header__action-item"><img src="img/cart_icon.svg" alt=""></a>
-                    <a href="" class="header__action-item"><img src="img/hamburger menu.svg" alt=""></a>
-                </div>
-            </div>
-        </header>
+        <?php include_once 'view/components/header.php'?>
 
 
         
@@ -67,7 +36,6 @@ session_start();
                             foreach($_SESSION["cart"] as $product){
                             $product_price = (int)$product['product_price']; 
                             $total_money += $product_price ;
-                                    
                         ?>
                         <td>
                             <div class="cart__info">
@@ -100,7 +68,7 @@ session_start();
                             <?php echo $product['product_price']?>
                         </td>
                         <td>
-                            <a href="delete_cart.php?index=<?php echo $i?>"><img src="img/vector 12.png" alt="" class="shuffle"></a>
+                            <a href="index.php?page=cart_delete&index=<?php echo $i?>"><img src="view/img/vector 12.png" alt="" class="shuffle"></a>
                         </td>
                     </tr>
 
@@ -130,7 +98,11 @@ session_start();
                         </tr>
                         <tr>
                             <td>
+<<<<<<< HEAD:cart.php
                             <a href="checkout.php"><button class="btn">Place Order</button></a>
+=======
+                            <a href="index.php?page=checkout"><button class="btn">Place Order</button></a>
+>>>>>>> 055e2e2ca109c4e34487ce78e621e4e761e458ec:view/cart.php
                             </td>
                         </tr>
                     </table>
