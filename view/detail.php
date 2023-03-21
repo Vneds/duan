@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="view/css/base.css">
+    <link rel="stylesheet" href="view/css/header.css">
+    <link rel="stylesheet" href="view/css/footer.css">
     <link rel="stylesheet" href="view/css/detail.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <title>Detail</title>
@@ -14,10 +16,11 @@
 <body>
     <div class="app">
         <?php include_once 'view/components/header.php'?>;
+        <?php include_once 'view/components/header.php'?>;
         <div class="container">
             <div class="grid">
                 <div class="image__wrapper">
-                    <img src="view/img/shop/Rectangle 2.svg" alt="" class="br">
+                    <img src="view/view/img/shop/Rectangle 2.svg" alt="" class="br">
                     <h2 class="image__title">PRODUCT</h2>
                     <span class="image__breadcrum">Home / Dinner ware / Product</span>
                 </div>
@@ -26,25 +29,27 @@
                 <?php 
                     $product = get_product_with_ID($_GET['id']);
                     $image_path = get_image_path($product['image_path']);
+                    $product = get_product_with_ID($_GET['id']);
+                    $image_path = get_image_path($product['image_path']);
                 ?>
 
                 <div class="spw">
                     <div class="gallery">
-                        <div class="gallery__item gallery__item--huge">
+                        <div class="gallery__item--huge">
                             <img src=<?php echo $image_path ?> alt="">
                         </div>
                         <div class="spw" style="margin: 0 -7px;">
                             <div class="gallery__item">
-                                <img src="img/product/Rectangle 174.svg" alt="">
+                                <img src="<?php echo $image_path ?>" alt="">
                             </div>
                             <div class="gallery__item">
-                                <img src="img/product/Rectangle 174.svg" alt="">
+                                <img src="<?php echo $image_path ?>" alt="">
                             </div>
                             <div class="gallery__item">
-                                <img src="img/product/Rectangle 174.svg" alt="">
+                                <img src="<?php echo $image_path ?>" alt="">
                             </div>
                             <div class="gallery__item">
-                                <img src="img/product/Rectangle 174.svg" alt="">
+                                <img src="<?php echo $image_path ?>" alt="">
                             </div>
                         </div>
                     </div>

@@ -96,6 +96,7 @@
                                         </span>
                                         <br>
                                         <br>
+                                        <?php echo $product['quantity']?>
                                         <a class="remove" href="">Remove</a>
                                     </div>
                             </div>
@@ -115,7 +116,7 @@
                         <hr>
                         <tr>
                             <td>Subtotal</td>
-                            <td>$16</td>
+                            <td><?php echo $total_money?></td>
                         </tr>
                         <tr>
                             <td>
