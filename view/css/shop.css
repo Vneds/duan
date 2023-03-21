@@ -1,52 +1,3 @@
-.header {
-    position: fixed;
-    width: 100%;
-    height: 84px;
-    z-index: 1;
-    background-color: #fff;
-}
-
-.header .grid {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: auto;
-}
-
-.app {
-    display: flex;
-    justify-content: center;
-}
-
-.header__nav-item a {
-    color: #303030;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.header__nav-item svg {
-    stroke: #303030;
-}
-
-.header__nav {
-    display: flex;
-}
-
-.header__nav-item {
-    margin-right: 29px;
-}
-
-.header__logo {
-    padding: 13px 0;
-}
-
-.header__action-item {
-    margin-right: 25px;
-}
-
-.header__action-item:last-of-type {
-    margin-right: unset;
-}
 
 .container {
     width: 100%;
@@ -103,6 +54,7 @@
 .sidebar__range-input {
     margin: 23px 0 25px 0;
     width: 100%;
+    background-color: #F598A4;
 }
 
 .btn {

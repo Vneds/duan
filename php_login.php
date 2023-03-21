@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include './connect_db.php';
+    include './connect_db2.php';
     if((isset($_POST['login'])) && ($_POST['login'])){
         $user = $_POST['user'];
         $pass = $_POST['pass'];
