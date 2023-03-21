@@ -98,11 +98,7 @@ session_start();
                         </tr>
                         <tr>
                             <td>
-<<<<<<< HEAD:cart.php
                             <a href="checkout.php"><button class="btn">Place Order</button></a>
-=======
-                            <a href="index.php?page=checkout"><button class="btn">Place Order</button></a>
->>>>>>> 055e2e2ca109c4e34487ce78e621e4e761e458ec:view/cart.php
                             </td>
                         </tr>
                     </table>
