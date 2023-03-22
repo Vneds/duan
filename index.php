@@ -1,4 +1,6 @@
 <?php 
+    include_once 'model/connect_db.php';
+    
     $page = $_GET['page'];
     switch($page){
         case 'shop':
@@ -33,24 +35,6 @@
             include_once 'view/login.php';
         case 'login_add':
             include_once 'model/login_add.php';
-            break;
-        case 'admin':
-            include_once 'admin/index.php';
-            break;
-        case 'admin_product':
-            include_once 'model/product_model.php';
-            include_once 'model/catergory_model.php';
-            include_once 'admin/admin_product.php';
-            break;
-        case 'admin_product_add':
-            include_once 'model/catergory_model.php';
-            include_once 'admin/admin_product_add.php';
-            break;
-        case 'admin_add_product':
-            include_once 'admin/view/product/add.php';
-            break;
-        case 'admin_bill':
-            include_once 'admin/admin_bill.php';
             break;
         default:
             include_once 'view/index.php';

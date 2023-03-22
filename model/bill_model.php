@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include_once 'model/connect_db.php';
+
     function insert_bill(){
         global $conn;
         $sql = 'INSERT INTO bill(maDH, user_name, address, phone, user_id, total_money) VALUES (?,?,?,?,?,?)';
@@ -38,4 +38,28 @@
      
         return $randomString;
     }
+
+    function get_bill_status($bill_id){
+        global $conn;
+        $sql = 'SELECT * FROM bill WHERE id = ' . $bill_id;
+        $bill =  $conn->query($sql)->fetch();
+        return $bill['status'];
+    }
+
+
+    function change_status_background($status){
+        if ($status == 'Đang xử lý') {
+            return "badge bg-info";
+        }
+        if ($status == 'Hoàn tất') {
+            return "badge bg-success";
+        }
+        if ($status == 'Đã hủy') {
+            return "badge bg-danger";
+        }
+        if ($status == 'Đang giao hàng') {
+            return "badge bg-warning";
+        }
+    }
+
 ?>

@@ -14,7 +14,7 @@
 
         if($role == 1){
             $_SESSION['role'] = $role;
-            header('location: ./index.php?page=admin');
+            header('location: ./admin/index.php?page=index');
         }else  {
             $_SESSION['role'] = $role;
             $_SESSION['iduser'] = $kq['id'];

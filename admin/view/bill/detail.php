@@ -52,14 +52,14 @@
           <span class="app-menu__label">POS Bán Hàng</span></a></li>
       <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="table-data-table.html"><i class='app-menu__icon bx bx-id-card'></i>
+      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i>
           <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-      <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+      <li><a class="app-menu__item" href=""><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
-      <li><a class="app-menu__item active" href="./index.php?page=admin_product"><i
+      <li><a class="app-menu__item" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
-      <li><a class="app-menu__item" href="./index.php?page=admin_bill"><i class='app-menu__icon bx bx-task'></i><span
+      <li><a class="app-menu__item active" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
             class="app-menu__label">Quản lý đơn hàng</span></a></li>
       <li><a class="app-menu__item" href="table-data-banned.html"><i class='app-menu__icon bx bx-run'></i><span
             class="app-menu__label">Quản lý nội bộ
@@ -119,39 +119,85 @@
                             </div>
                           </div>
                         <table class="table table-hover table-bordered" id="sampleTable">
+                          <?php
+                          function get_catergory_name($catergory_id){
+                            global $conn;
+                            $sql = 'SELECT * FROM catergory WHERE id = ' . $catergory_id;
+                            $catergory =  $conn->query($sql)->fetch();
+                            return $catergory['catergory_name']; 
+                          }
+            
+                          function get_product($product_id){
+                            global $conn;
+                            $sql = 'SELECT * FROM product WHERE id = ' . $product_id;
+                            $product =  $conn->query($sql)->fetch();
+                            return $product;
+                          }
+            
+                            $sql = 'SELECT * FROM bill_detail WHERE bill_id = ' . $_GET['id'];
+                            $bill_detail_list = $conn->query($sql)->fetchAll();  
+                            $bill_status = get_bill_status($_GET['id']);
+                          ?>
+                          <div class="flex">
+                            <p>Tình trạng đơn hàng: </p> 
+                            <?php 
+                                $disabled = '';
+                                if ($bill_status == 'Hoàn tất' || $bill_status == 'Đã hủy') {
+                                    $disabled = 'disabled';
+                                }
+                            ?>
+
+                              <form action="./controller/bill_controller.php" method='POST'>
+                                <input type="text" value="<?php echo $_GET['id']?>" name="id" hidden >
+                                <input type="text" value="update" name="action" hidden >
+                                <select name="status" class="select" id=<?php echo $_GET['id']?> <?php echo $disabled?>>
+                                    <option value=<?php echo $bill_status?>><?php echo $bill_status?></option>
+                                    <?php
+                                        $status_list = ['Đang xử lý', 'Hoàn tất', 'Đã hủy'];
+                                          for ($i = 0 ; $i < count($status_list) ; $i++) {
+                                            if ($bill_status == $status_list[$i]) {
+                                              continue;
+                                      }
+                                    ?>
+                                    <option value="<?php echo $status_list[$i]?>"><?php echo $status_list[$i]?></option>
+                                    <?php }?>
+                                </select>
+                                <button  type="submit" class="btn btn-primary update-bill" <?php echo $disabled?>>Cập nhật đơn hàng</button>
+                              </form>
+                          </div>
                             <thead>
                                 <tr>
                                     <th width="10"><input type="checkbox" id="all"></th>
                                     <th>Mã sản phẩm</th>
                                     <th>Tên sản phẩm</th>
                                     <th>Ảnh</th>
-                                    <th>Số lượng</th>
-                                    <th>Tình trạng</th>
+                                    <th>Danh mục sản phẩm</th>
+                                    <th>Số lượng mua</th>
                                     <th>Giá tiền</th>
-                                    <th>Danh mục</th>
-                                    <th>Chức năng</th>
+                                    <th>Tổng tiền</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                    $product_list = get_product_list();
-                                    foreach($product_list as $product){
-                                    $catergory_name = get_catergory_name($product['catergory_id']);
-                                    $image_path = get_image_path($product['image_path']);
-                                ?>                                                      
+                                 <?php 
+                                    foreach($bill_detail_list as $bill_detail){
+                                        $product = get_product($bill_detail['product_id']);
+                                        $catergory_name = get_catergory_name($product['catergory_id']);
+                                        $image_path = get_image_path($product['image_path']);
+                                        $total_money = $product['product_price'] * $bill_detail['quantity'];
+                                  ?>                                                    
                                 <tr>
                                     <td width="10"><input type="checkbox" name="check1" value="1"></td>
                                     <td>83216006</td>
                                     <td><?php echo $product['product_name']?></td>
-                                    <td><img src="<?php echo $image_path ?>" alt="" width="100px;"></td>
-                                    <td>60</td>
-                                     <td><span class="badge bg-success">Còn hàng</span></td>
+                                    <td><img src="../<?php echo $image_path ?>" alt="" width="100px;"></td>
+                                    <td><?php echo $catergory_name?></td>
+                                     <td><span class=""><?php echo $bill_detail['quantity'] ?></span></td>
                                     <td><?php echo $product['product_price']?> $</td>
-                                    <td><?php echo $catergory_name ?></td>
+                                    <td><?php echo $total_money?></td>
                                     <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
                                             onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
                                         </button>
-                                        <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                                        <button class="btn btn-primary btn-sm edit" type="button" title="Cập nhật" id="show-emp" data-toggle="modal"
                       data-target="#ModalUP"><i class="fas fa-edit"></i></button>
                                    
                                     </td>
@@ -324,6 +370,15 @@ MODAL
             e.stopImmediatePropagation();
         });
     </script>
+
+    
+<!-- <script>
+
+    $('.update-bill').click(()=>{
+        $.post('controller/bill_controller.php', {id: $('.select').attr('id') , status:$('.select').val(), action: 'update' });
+        window.location.href = './index.php?page=bill&action=list';
+    });
+</script> -->
 </body>
 
 </html>
