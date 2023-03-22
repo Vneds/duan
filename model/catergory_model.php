@@ -1,5 +1,5 @@
 <?php 
-    include_once 'model/connect_db.php';
+
     function get_catergory_list(){
         global $conn;
         $catergory_list = $conn->query('SELECT * FROM catergory')->fetchAll();
@@ -19,4 +19,6 @@
         $catergory =  $conn->query($sql)->fetch();
         return $catergory['catergory_name']; 
     }
+
+
 ?>

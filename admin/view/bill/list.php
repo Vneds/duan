@@ -50,16 +50,16 @@
     <ul class="app-menu">
       <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
           <span class="app-menu__label">POS Bán Hàng</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=admin"><i class='app-menu__icon bx bx-tachometer'></i><span
+      <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="table-data-table.html"><i class='app-menu__icon bx bx-id-card'></i>
+      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i>
           <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-      <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
+      <li><a class="app-menu__item" href=""><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
-      <li><a class="app-menu__item" href="./index.php?page=admin_product"><i
+      <li><a class="app-menu__item" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
-      <li><a class="app-menu__item active" href="./index.php?page=admin_bill"><i class='app-menu__icon bx bx-task'></i><span
+      <li><a class="app-menu__item active" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
             class="app-menu__label">Quản lý đơn hàng</span></a></li>
       <li><a class="app-menu__item" href="table-data-banned.html"><i class='app-menu__icon bx bx-run'></i><span
             class="app-menu__label">Quản lý nội bộ
@@ -119,6 +119,18 @@
                 </div>
               </div>
               <table class="table table-hover table-bordered" id="sampleTable">
+              <div class="select">
+                <div class="status-list">
+                    <input value="all" checked name= "status" type="radio" id="all">
+                    <label for="all">Tất cả</label> 
+                    <input value="Đang xử lý" name= "status" type="radio" id="waiting">
+                    <label for="waiting">Đang xử lý</label> 
+                    <input value="Hoàn tất" name= "status" type="radio" id="done">
+                    <label for="done">Hoàn tất</label> 
+                    <input value="Đã hủy" name= "status" type="radio" id="delete">
+                    <label for="delete">Đã hủy</label> 
+                </div>
+              </div>
                 <thead>
                   <tr>
                     <th width="10"><input type="checkbox" id="all"></th>
@@ -132,72 +144,25 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <?php
+                      $bill_list = $conn->query('SELECT * FROM bill')->fetchAll();  
+                      foreach($bill_list as $bill){
+                      $class_name = change_status_background($bill['status']);
+                  ?>
                   <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
                     <td>MD0837</td>
-                    <td>Triệu Thanh Phú</td>
-                    <td>Ghế làm việc Zuno, Bàn ăn gỗ Theresa</td>
-                    <td>2</td>
-                    <td>9.400.000 đ</td>
-                    <td><span class="badge bg-success">Hoàn thành</span></td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
+                    <td><?php echo $bill['user_name'] ?></td>
+                    <td><?php echo $bill['address'] ?></td>
+                    <td><?php echo $bill['phone'] ?></td>
+                    <td><?php echo $bill['total_money'] ?> đ</td>
+                    <td><span class="<?php echo $class_name ?>"><?php echo $bill['status']?></span></td>
+                    <td>
+                      <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
+                      <a href="./index.php?page=bill&action=detail&id=<?php echo $bill['id'] ?>"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></a>
+                    </td>
                   </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>MĐ8265</td>
-                    <td>Nguyễn Thị Ngọc Cẩm</td>
-                    <td>Ghế ăn gỗ Lucy màu trắng</td>
-                    <td>1</td>
-                    <td>3.800.000 đ</td>                 
-                    <td><span class="badge bg-success">Hoàn thành</span></td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>MT9835</td>
-                    <td>Đặng Hoàng Phúc</td>
-                    <td>Giường ngủ Jimmy, Bàn ăn mở rộng cao cấp Dolas, Ghế làm việc Zuno</td>
-                    <td>3 </td>
-                    <td>40.650.000 đ</td>
-                    <td><span class="badge bg-success">Hoàn thành</span></td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>ER3835</td>
-                    <td>Nguyễn Thị Mỹ Yến</td>
-                    <td>Bàn ăn mở rộng Gepa</td>
-                    <td>1 </td>
-                    <td>16.770.000 đ</td>
-                    <td><span class="badge bg-info">Chờ thanh toán</span></td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>AL3947</td>
-                    <td>Phạm Thị Ngọc</td>
-                    <td>Bàn ăn Vitali mặt đá, Ghế ăn gỗ Lucy màu trắng</td>
-                    <td>2 </td>
-                    <td>19.770.000 đ</td>
-                    <td><span class="badge bg-warning">Đang giao hàng</span></td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>QY8723</td>
-                    <td>Ngô Thái An</td>
-                    <td>Giường ngủ Kara 1.6x2m</td>
-                    <td>1 </td>
-                    <td>14.500.000 đ</td>
-                    <td><span class="badge bg-danger">Đã hủy</span></td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                  </tr>
+                  <?php }?>
                 </tbody>
               </table>
             </div>
@@ -333,6 +298,61 @@
       $("#ModalUP").modal({ backdrop: false, keyboard: false })
     });
   </script>
+
+<script>
+        let checkBoxes = $('input[name="status"]');
+        let tbody = $('tbody');
+
+        checkBoxes.click(function(){
+            $.ajax({
+                url: '../api/api.php',
+                data: {
+                    action: 'filter_bill_status',
+                    status: $('input[name="status"]:checked').val()
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function(result){
+                    let html = '';
+                    result.forEach(bill => {
+                        let className = change_status_background(bill['status']);
+                        html += `   
+                        <tr>
+                          <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                            <td>MD0837</td>
+                            <td>${bill['user_name']}</td>
+                            <td>${bill['address']}</td>
+                            <td>${bill['phone']}</td>
+                            <td>${bill['total_money']} đ</td>
+                            <td><span class="${className}">${bill['status']}</span></td>
+                          <td>
+                            <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
+                            <a href="./index.php?page=bill&action=detail&id=${bill['id']}."><button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></a>
+                          </td>
+                        </tr>
+                                `
+                    });
+                    tbody.html(html);
+                }
+            })
+        })
+
+        function change_status_background(status){
+        if (status == 'Đang xử lý') {
+            return "badge bg-info";
+        }
+        if (status == 'Hoàn tất') {
+            return "badge bg-success";
+        }
+        if (status == 'Đã hủy') {
+            return "badge bg-danger";
+        }
+        if (status == 'Đang giao hàng') {
+            return "badge bg-warning";
+        }
+    }
+
+    </script>
 </body>
 
 </html>

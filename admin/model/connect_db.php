@@ -1,10 +1,8 @@
-
 <?php
-
     $host = 'localhost';
     $dbName = 'duan1';
     $userName = 'root';
-    $password = '123';
+    $password = '123456';
 
     try {
         // Kết nối

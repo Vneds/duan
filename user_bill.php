@@ -146,7 +146,6 @@
                         if ($status == 'Đang giao hàng') {
                             return "badge bg-warning";
                         }
-
                     } 
                     include './connect_db.php';
                     function get_user($id){

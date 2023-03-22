@@ -52,11 +52,11 @@
           <span class="app-menu__label">POS Bán Hàng</span></a></li>
       <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i>
+      <li><a class="app-menu__item active" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i>
           <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+      <li><a class="app-menu__item" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
-      <li><a class="app-menu__item active" href="./index.php?page=product&action=list"><i
+      <li><a class="app-menu__item" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
       <li><a class="app-menu__item" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
@@ -78,7 +78,7 @@
     <main class="app-content">
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb side">
-                <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
+                <li class="breadcrumb-item active"><a href="#"><b>Danh sách khách hàng</b></a></li>
             </ul>
             <div id="clock"></div>
         </div>
@@ -122,42 +122,45 @@
                             <thead>
                                 <tr>
                                     <th width="10"><input type="checkbox" id="all"></th>
-                                    <th>Mã sản phẩm</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Ảnh</th>
-                                    <th>Số lượng</th>
-                                    <th>Tình trạng</th>
-                                    <th>Giá tiền</th>
-                                    <th>Danh mục</th>
+                                    <th>id</th>
+                                    <th>Tên người dùng</th>
+                                    <!-- <th>Ảnh</th> -->
+                                    <th>Email</th>
+                                    <th>Vai trò</th>
                                     <th>Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                    $product_list = get_product_list();
-                                    foreach($product_list as $product){
-                                    $catergory_name = get_catergory_name($product['catergory_id']);
-                                    $image_path = get_image_path($product['image_path']);
+                                    foreach($user_list as $user){
                                 ?>                                                      
                                 <tr>
                                     <td width="10"><input type="checkbox" name="check1" value="1"></td>
                                     <td>83216006</td>
-                                    <td><?php echo $product['product_name']?></td>
-                                    <td><img src="<?php echo $image_path ?>" alt="" width="100px;"></td>
-                                    <td>60</td>
-                                     <td><span class="badge bg-success">Còn hàng</span></td>
-                                    <td><?php echo $product['product_price']?> $</td>
-                                    <td><?php echo $catergory_name?></td>
+                                    <td><?php echo $user['user_name']?></td>
+                                    <td><?php echo $user['email']?></td>
                                     <td>
-                                      <form action="./controller/product_controller.php" method="POST"> 
-                                        <input type="text" value="<?php echo $product['id']?>" name="id" hidden>
+                                      <?php
+                                      if($user['role'] == 1){
+                                        echo ("admin");
+                                    }
+                                    else {
+                                        echo "user";
+                                    }
+                                    ?></td> 
+                                    
+                                    </td>
+                                    <!-- <td><img src="" alt="" width="100px;"></td> -->
+                                    <td>
+                                      <form action="./controller/user_controller.php" method="POST"> 
+                                        <input type="text" value="<?php echo $user['id']?>" name="id" hidden>
                                         <input type="text" value="delete" name="action"hidden>
                                         <button class="btn btn-primary btn-sm trash" type="submit" title="Xóa"
                                                  onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
                                              </button>
                                         </form>
-                                        <a href="./index.php?page=product&action=edit&id=<?php echo $product['id']?>"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                      data-target="#ModalUP"><i class="fas fa-edit"></i></button></a>
+                                        <a href="./index.php?page=user&action=edit&id=<?php echo $user['id']?>"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                                        data-target="#ModalUP"><i class="fas fa-edit"></i></button></a>
                                    
                                     </td>
                                 </tr>
