@@ -8,10 +8,6 @@
         print_r($kq);
         $role = $kq['role'];
 
-        if (!$kq){
-            header('location: ./login.php');
-        }
-
         if($role == 1){
             $_SESSION['role'] = $role;
             header('location: ./admin.php');
@@ -22,6 +18,9 @@
             $_SESSION['email'] = $kq['email'];
             // $_SESSION['img']=$kq[0]['img'];
             header('location: ./index.php');
+        }
+        if (!$kq){
+            header('location: ./login.php');
         }
     }
 ?>

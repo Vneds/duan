@@ -22,8 +22,8 @@
             <li class="header__nav-item"><a href="./index.php?page=contact" class="header__nav-link">CONTACT</a></li>
             <?php 
             if(isset($_SESSION['user_name'])){
-                echo '<li style="color: #F598A4;font-weight: 600;font-size: 14px;" 
-                class="header__nav-item ">'.'Xin chao '.$_SESSION['user_name'].'</li>';
+                echo '<li style="color: #F598A4;text-transform:uppercase;font-weight: 600;font-size: 14px;" 
+                class="header__nav-item ">'.'XIN CHÀO '.$_SESSION['user_name'].'</li>';
                 // echo '<a href="./tranguser.php"><img class="imguser" src="../'.$_SESSION['img'].'"></a>';
             }
             else {
