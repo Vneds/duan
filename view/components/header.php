@@ -27,7 +27,7 @@
                 // echo '<a href="./tranguser.php"><img class="imguser" src="../'.$_SESSION['img'].'"></a>';
             }
             else {
-                echo '<li class="header__nav-item"><a href="login.php" class="header__nav-link">ADMIN</a></li>';
+                echo '<li class="header__nav-item"><a href="./index.php?page=login" class="header__nav-link">ADMIN</a></li>';
             }
             ?>
 

@@ -93,7 +93,7 @@
                                     <a href="index.php?page=detail&id=<?php echo $product['id'] ?>">
                                         <img src=<?php echo $image_path ?> alt="" class="products__item-img">
                                         <span class="products__item-name">
-                                            <?php echo $product['product_name'];?>    
+                                            <?php echo $product['product_name']?>    
                                         </span>
                                         <span class="products__item-price">
                                             <?php echo $product['product_price']?>
