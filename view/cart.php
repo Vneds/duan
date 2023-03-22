@@ -10,6 +10,8 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="view/css/base.css">
     <link rel="stylesheet" href="view/css/cart.css">
+    <link rel="stylesheet" href="view/css/header.css">
+    <link rel="stylesheet" href="view/css/footer.css">
     <title>Trang chủ</title>
 </head>
 
@@ -17,13 +19,15 @@ session_start();
     <div class="app">
         <?php include_once 'view/components/header.php'?>
 
-
-        
         <div class="main">
+        <div class="tittle_cart">
+            <p>Giỏ Hàng</p>
+        </div>           
             <div class="container cart-page">
                 <table class="cart_block">
                     <tr>
                         <th class="name__product">Product</th>
+                        <th>Price</th>
                         <th>Quantity</th>
                         <th>Total</th>
                         <th></th>
@@ -39,7 +43,7 @@ session_start();
                         ?>
                         <td>
                             <div class="cart__info">
-                            <img src="<?php echo $product['image_path'] ?>">
+                            <img class="img_cart" src="<?php echo $product['image_path'] ?>">
                                 <div>
                                     <br>
                                     <span>
@@ -56,7 +60,11 @@ session_start();
                                 </div>
                             </div>
                         </td>
-    
+                         
+                        <td>
+                            <?php echo $product['product_price']?>
+                        </td>
+
                         <td>
                             <div class="container__quantity">
                                     <a class="container__quantity-item">-</a>
@@ -91,15 +99,22 @@ session_start();
                             <td>Shipping</td>
                             <td>$0</td>
                         </tr>
-                        <hr>
+                        <td><hr class="hr"></td>
                         <tr>
+                            
                             <td>Subtotal</td>
                             <td>$<?php echo $total_money ?></td>
+                            
                         </tr>
                         <tr>
                             <td>
-                            <a href="checkout.php"><button class="btn">Place Order</button></a>
+
+                            <a href="checkout.php"><button class="btn"><p class="text_button">Đặt Hàng</p> </button></a><br><br>
+                        
+                            <a href="index.php?page=checkout"><button class="btn"><p class="text_button">Đặt Hàng</p></button></a>
+
                             </td>
+                            
                         </tr>
                     </table>
                 </div>
@@ -108,40 +123,7 @@ session_start();
         
         
     </div>
-    <footer class="footer">
-            <div class="grid">
-                <div class="article_YC">
-                    <img src="img/Group 294.svg" alt="" class="img">
-                    <br> <br>
-                    <span class="">Lorem ipsum dolor sit amet, <br> consec tetur a elit. Inutark <br>ullamcorper leo, ege euismod <br>orci natoquepen etma.</span>
-                    <a href="">
-                        <i class="fa-brands fa-cc-visa"></i>
-                    </a> 
-                    <a href="">
-
-                    <i class="fa-brands fa-cc-mastercard"></i>
-                    </a>
-                </div>
-                <div class="article_YC">
-                    <h3>QUICK LINKS</h3> <br>
-                    <span>About us</span> <br> <br>
-                    <span>What we do</span> <br> <br>
-                    <span>Contact us</span> <br> <br>
-                    <span>FAQ page</span> <br> <br>
-                </div>
-                <div class="article_YC">
-                    <h3>FIND A STORE</h3> <br>
-                    <span>Hemlock, Brooklyn, NY 11208</span> <br> <br>
-                    <span>5 Bridge, Brooklyn, NY 11201</span> <br> <br>
-                    <span>+101329621999</span> <br> <br>
-                    <span>+1088472194</span>
-
-                </div>
-                <div class="article_YC">
-                    <img src="img/Group 322.png" alt="">
-                </div>
-            </div>
-        </footer>
+    <?php include_once 'view/components/footer.php'?>;
 </body>
 
 </html>
