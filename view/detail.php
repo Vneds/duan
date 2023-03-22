@@ -16,11 +16,10 @@
 <body>
     <div class="app">
         <?php include_once 'view/components/header.php'?>;
-        <?php include_once 'view/components/header.php'?>;
         <div class="container">
             <div class="grid">
                 <div class="image__wrapper">
-                    <img src="view/view/img/shop/Rectangle 2.svg" alt="" class="br">
+                    <img src="view/img/shop/Rectangle 2.svg" alt="" class="br">
                     <h2 class="image__title">PRODUCT</h2>
                     <span class="image__breadcrum">Home / Dinner ware / Product</span>
                 </div>
@@ -92,11 +91,11 @@
                         <hr>
 
                         <div class="infor__share">
-                            <img src="img/detail/Vector.svg" class="infor__share-item"></img>|
-                            <img src="img/detail/Vector-1.svg" class="infor__share-item"></img>|
-                            <img src="img/detail/Vector-2.svg" class="infor__share-item"></img>|
-                            <img src="img/detail/Vector-3.svg" class="infor__share-item"></img>|
-                            <img src="img/detail/Vector-4.svg" class="infor__share-item"></img>|
+                            <img src="view/img/detail/Vector.svg" class="infor__share-item"></img>|
+                            <img src="view/img/detail/Vector-1.svg" class="infor__share-item"></img>|
+                            <img src="view/img/detail/Vector-2.svg" class="infor__share-item"></img>|
+                            <img src="view/img/detail/Vector-3.svg" class="infor__share-item"></img>|
+                            <img src="view/img/detail/Vector-4.svg" class="infor__share-item"></img>|
                         </div>
 
                         <hr>
