@@ -36,7 +36,7 @@
             <input type="text">
             <a href="" class="header__action-item"><img src="view/img/search_icon.svg" alt=""></a>
             <a href="" class="header__action-item"><img src="view/img/icon_user.svg" alt=""></a>
-            <a href="" class="header__action-item"><img src="view/img/cart_icon.svg" alt=""></a>
+            <a href="./index.php?page=cart" class="header__action-item"><img src="view/img/cart_icon.svg" alt=""></a>
             <a href="" class="header__action-item"><img src="view/img/hamburger menu.svg" alt=""></a>
         </div>
     </div>

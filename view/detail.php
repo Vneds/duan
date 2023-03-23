@@ -109,8 +109,8 @@
                 </div>
 
                 <div class="description">
-                    <a href="" class="description__nav">DESCRIPTION</a>
-                    <a href="" class="description__nav">REVIEW (0)</a>
+                    <a href="" class="description__nav">MÔ TẢ</a>
+                    <a href="" class="description__nav">BÌNH LUẬN</a>
                     <hr>
                     <div class="spw">
                         <div class="description__column">
