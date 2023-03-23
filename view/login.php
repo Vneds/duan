@@ -1,5 +1,26 @@
 <?php
     session_start();
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $user = $_POST['user'];
+        $pass = $_POST['pass'];
+        $kq = getuser($user,$pass);
+        $role = $kq['role'];
+        if($role == 1){
+            $_SESSION['role'] = $role;
+            header('location: ./admin/index.php?page=index');
+        }else {
+            $_SESSION['role'] = $role;
+            $_SESSION['iduser'] = $kq['id'];
+            $_SESSION['user_name'] = $kq['user_name'];
+            $_SESSION['email'] = $kq['email'];
+            header('location: ./index.php?page=index');
+            // $_SESSION['img']=$kq[0]['img'];
+        }
+        if (!$kq){
+            header('location: ./index.php?page=login');
+        }
+        die();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,15 +51,15 @@
         <div class="container-login100">
             <div class="wrap-login100">
                 <div class="login100-pic js-tilt" data-tilt>
-                    <img src="images/team.jpg" alt="IMG">
+                    <img src="view/img/shop/team.jpg" alt="IMG">
                 </div>
                 <!--=====TIÊU ĐỀ======-->
-                <form class="login100-form validate-form" action="./index.php?page=login_add" enctype="multipart/form-data" method="post">
+                <form class="login100-form validate-form" action="" enctype="multipart/form-data" method="post">
                     <span class="login100-form-title">
                         <b>ĐĂNG NHẬP</b>
                     </span>
                     <!--=====FORM INPUT TÀI KHOẢN VÀ PASSWORD======-->
-                    <form action="./php_login.php" enctype="multipart/form-data" method="post">
+                    <form action="" enctype="multipart/form-data" method="post">
                         <div class="wrap-input100 validate-input">
                             <input class="input100" type="text" required placeholder="Tên đăng nhập" name="user">
                             <span class="focus-input100"></span>
@@ -47,7 +68,6 @@
                             </span>
                         </div>
                         <div class="wrap-input100 validate-input">
-
                             <input autocomplete="off" class="input100" type="password" required placeholder="Mật khẩu" name="pass">
                             <span toggle="#password-field" class="bx fa-fw bx-hide field-icon click-eye"></span>
                             <span class="focus-input100"></span>
@@ -57,14 +77,14 @@
                         </div>
 
                         <div class="container-login100-form-btn">
-                        <a href="./index.php?page=login_add" style="width: 100%"><input type="submit" name="login" value="Đăng nhập"></a>
+                            <input type="submit" name="login" value="Đăng nhập">
                         </div>
                         <div class="text-right p-t-12"> 
-                            <a class="txt2" href="./signup.php">
+                            <a class="txt2" href="./index.php?page=signup">
                                Đăng ký
                             </a>
                             |
-                            <a class="txt2" href="/forgot.html">
+                            <a class="txt2" href="./index.php?page=forgot">
                                 Bạn quên mật khẩu?
                             </a>
                         </div>

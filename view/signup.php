@@ -1,6 +1,11 @@
 <?php
     session_start();
-
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $sql = "INSERT INTO user (user_name, pass_word, email) VALUES (?,?,?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$_POST['user'],$_POST['pass'], $_POST['email']]);
+        header('location: ./index.php?page=login');
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,8 +19,8 @@
     <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
     <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
     <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-    <link rel="stylesheet" type="text/css" href="css/util.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="view/css/util.css">
+    <link rel="stylesheet" type="text/css" href="view/css/main.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
@@ -31,15 +36,15 @@
         <div class="container-login100">
             <div class="wrap-login100">
                 <div class="login100-pic js-tilt" data-tilt>
-                    <img src="images/team.jpg" alt="IMG">
+                    <img src="view/img/shop/team.jpg" alt="IMG">
                 </div>
                 <!--=====TIÊU ĐỀ======-->
-                <form action="./php_signup.php" class="login100-form validate-form" enctype="multipart/form-data" method="post">
+                <form action="" class="login100-form validate-form" enctype="multipart/form-data" method="post">
                     <span class="login100-form-title">
                         <b>ĐĂNG KÝ</b>
                     </span>
                     <!--=====FORM INPUT TÀI KHOẢN VÀ PASSWORD======-->
-                    <form enctype="multipart/form-data" method="post">
+                    <form enctype="multipart/form-data" method="post" action="">
                         <div class="wrap-input100 validate-input">
                             <input class="input100" type="text" required placeholder="Tên đăng nhập" name="user">
                             <span class="focus-input100"></span>
@@ -67,7 +72,7 @@
                         <input type="submit" name="signup" value="Đăng ký">
                         </div>
                         <div class="text-right p-t-12">
-                            <a class="txt2" href="./login.php">
+                            <a class="txt2" href="./index.php?page=login">
                                 Đăng nhập
                             </a>
                         </div>

@@ -7,6 +7,8 @@
             break;
         case 'filter_bill_status':
             filter_bill_status($conn, $_GET['status']);
+        case 'search':
+            search($conn, $_GET['key_word']);
         default:
             break;
     }
@@ -29,4 +31,10 @@
         echo json_encode($stmt->fetchAll());
     }
 
+    function search($conn, $key_word){
+        $sql = 'SELECT * FROM product WHERE product_name like %' . $key_word . '%';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll();   
+    }
 ?>

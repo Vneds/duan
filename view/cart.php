@@ -101,20 +101,13 @@ session_start();
                         </tr>
                         <td><hr class="hr"></td>
                         <tr>
-                            
                             <td>Subtotal</td>
                             <td>$<?php echo $total_money ?></td>
-                            
                         </tr>
                         <tr>
                             <td>
-
-                            <a href="checkout.php"><button class="btn"><p class="text_button">Đặt Hàng</p> </button></a><br><br>
-                        
-                            <a href="index.php?page=checkout"><button class="btn"><p class="text_button">Đặt Hàng</p></button></a>
-
+                                <a href="index.php?page=checkout"><button class="btn"><p class="text_button">Đặt Hàng</p></button></a>
                             </td>
-                            
                         </tr>
                     </table>
                 </div>
