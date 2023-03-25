@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-<?php 
-    $host = 'localhost:3306';
-=======
 
 <?php
-
-    $host = 'localhost';
->>>>>>> 388020e0aa19604bcb94b78a7a26ae8a68e1e07b
+    $host= 'localhost';
     $dbName = 'duan1';
     $userName = 'root';
     $password = '123';
@@ -22,4 +16,11 @@
     }
     return $conn;
 
+    function getuser($user,$pass){
+        global $conn;
+        $stmt = $conn->prepare("SELECT * FROM user WHERE user_name = ? AND pass_word =  ? " );
+        $stmt->execute([$user, $pass]);
+        $kq = $stmt->fetch();
+        return $kq;
+      }
 ?>

@@ -1,6 +1,3 @@
-<?php 
-    include './connect_db.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -190,7 +187,7 @@
                     <li><a href="./admin_bill.php" data-toggle="tooltip" data-placement="bottom" title="ĐƠN HÀNG">ĐƠN HÀNG</a></li>
                     <li><a href="" data-toggle="tooltip" data-placement="bottom" title="BÀI VIẾT">BÀI VIẾT</a>
                     </li>
-                    <li><a href="#contact" data-toggle="tooltip" data-placement="bottom" title="THỐNG KÊ">THỐNG KÊ</a>
+                    <li><a href="user_bill.php?id=<?php echo $_user['id']?>" data-toggle="tooltip" data-placement="bottom" title="THỐNG KÊ">THỐNG KÊ</a>
                     </li>
                     <li>
                         <a href="#" data-toggle="tooltip" data-placement="bottom" title="TÀI KHOẢN"><b>Tài Khoản</b>
@@ -218,7 +215,7 @@
 
         </form>
         <b>CHỨC NĂNG CHÍNH:</b><Br>
-        <a href=""><button class="nv btn add-new" type="button" data-toggle="tooltip" data-placement="top"
+        <a href="./admin_add_product.php"><button class="nv btn add-new" type="button" data-toggle="tooltip" data-placement="top"
             title="Thêm Sản Phẩm" onclick=""><i class="fas fa-plus"></i></button></a>
         <button class="nv" type="button" onclick="sortTable()" data-toggle="tooltip" data-placement="top"
             title="Lọc Dữ Liệu"><i class="fa fa-filter" aria-hidden="true"></i></button>

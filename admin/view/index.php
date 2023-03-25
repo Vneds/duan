@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href="view/css/admin.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <!-- or -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -49,16 +49,16 @@
     <ul class="app-menu">
       <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
           <span class="app-menu__label">POS Bán Hàng</span></a></li>
-      <li><a class="app-menu__item active" href="index.html"><i class='app-menu__icon bx bx-tachometer'></i><span
+      <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="table-data-banned.html"><i class='app-menu__icon bx bx-id-card'></i> <span
-            class="app-menu__label">Quản lý nhân viên</span></a></li>
-      <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
+      <li><a class="app-menu__item " href="table-data-table.html"><i class='app-menu__icon bx bx-id-card'></i>
+          <span class="app-menu__label">Quản lý nhân viên</span></a></li>
+      <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
-      <li><a class="app-menu__item" href="table-data-product.html"><i
+      <li><a class="app-menu__item active" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
-      <li><a class="app-menu__item" href="table-data-oder.html"><i class='app-menu__icon bx bx-task'></i><span
+      <li><a class="app-menu__item" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
             class="app-menu__label">Quản lý đơn hàng</span></a></li>
       <li><a class="app-menu__item" href="table-data-banned.html"><i class='app-menu__icon bx bx-run'></i><span
             class="app-menu__label">Quản lý nội bộ

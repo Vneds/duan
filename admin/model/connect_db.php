@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-<?php 
-    $host = 'localhost:3306';
-=======
-
 <?php
-
     $host = 'localhost';
->>>>>>> 388020e0aa19604bcb94b78a7a26ae8a68e1e07b
     $dbName = 'duan1';
     $userName = 'root';
-    $password = '123';
+    $password = '123456';
 
     try {
         // Kết nối
