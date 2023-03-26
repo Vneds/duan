@@ -11,6 +11,8 @@
         case 'user':
             include_once 'controller/user_controller.php';
             break;
+        case 'chart':
+            include_once 'controller/chart_controller.php';
         default:
             include_once 'view/index.php';
             break;

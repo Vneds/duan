@@ -215,7 +215,45 @@ hr {
     font-weight: 500;
 }
 
+.flex {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
 
+.description__header {
+    display: flex;
+}
+
+.user-comment-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.user-comment-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.comment-content {
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.send-comment {
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 20px;
+    width: 200px;
+    background-color: #F598A4;
+}
+
+.send-comment:hover {
+    cursor: pointer;
+}
 
 .description {
     margin: 98px 0 108px 0;
@@ -230,6 +268,10 @@ hr {
     font-size: 16px;
     font-weight: 500;
     color: #000;
+}
+
+.description__nav:hover {
+    cursor: pointer;
 }
 
 .description .spw {

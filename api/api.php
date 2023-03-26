@@ -1,6 +1,12 @@
 <?php 
     include_once '../model/connect_db.php';
-    $action = $_GET['action'];
+    if (isset($_GET['action'])){
+        $action = $_GET['action'];
+    }
+    if (isset($_POST['action'])){
+        $action = $_POST['action'];
+    }
+
     switch($action){
         case 'filter_catergory':
             filter_catergory($conn, $_GET['catergory_id']);
@@ -10,6 +16,12 @@
             break;
         case 'search':
             search($conn, $_GET['key_word']);
+            break;
+        case 'show_comment':
+            show_comment($conn , $_GET['productID']);
+            break;
+        case 'send_comment':
+            send_comment($conn);
         default:
             break;
     }
@@ -38,5 +50,20 @@
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         echo json_encode($stmt->fetchAll());
+    }
+
+    function show_comment($conn, $product_id){
+        $sql = 'SELECT * FROM comment_product WHERE product_id = ?';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$product_id]);
+        echo json_encode($stmt->fetchAll());
+    }
+
+    function send_comment($conn){
+        $sql = 'INSERT INTO comment_product(content , user_id , product_id ) VALUES (?,?,?) ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$_POST['content'], 5, $_POST['product_id']]);
+
+        show_comment($conn , $_POST['product_id']);
     }
 ?>

@@ -18,8 +18,6 @@
         }
     }
 
-
-
     //POST thực hiện insert, update, detele
     if (isset($_POST['action'])){
         // include_once '../model/product_model.php';
