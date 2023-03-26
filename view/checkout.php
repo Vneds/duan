@@ -47,6 +47,7 @@
                 <label for="">Phường/Xã</label><br>
                 <input type="text" name="address" id="" class="email"></td>
             </div>
+            <button type="submit">Thanh toán</button>
         </div>
             
             <div class="checkout_2">

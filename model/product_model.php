@@ -1,5 +1,4 @@
 <?php 
-    include_once 'model/connect_db.php';
     
     function get_product_list($limit = null){
         global $conn;

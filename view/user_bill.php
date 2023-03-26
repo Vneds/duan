@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="view/css/admin.css">
+  <link rel="stylesheet" type="text/css" href="admin/view/css/admin.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <!-- or -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -31,13 +31,13 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+      <li><a class="app-nav__item" href="./index.php?page=index"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
     </ul>
   </header>
   <!-- Sidebar menu-->
-  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+  <!-- <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
     <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/hay.jpg" width="50px"
         alt="User Image">
@@ -50,21 +50,21 @@
     <ul class="app-menu">
       <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
           <span class="app-menu__label">POS Bán Hàng</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=admin"><i class='app-menu__icon bx bx-tachometer'></i><span
-            class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="table-data-table.html"><i class='app-menu__icon bx bx-id-card'></i>
-          <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-      <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
-            class="app-menu__label">Quản lý khách hàng</span></a></li>
-      <li><a class="app-menu__item" href="./index.php?page=admin_product"><i
+      < <li><a class="app-menu__item " href="index.html"><i class='app-menu__icon bx bx-tachometer'></i><span
+            class="app-menu__label">Bảng điều khiển</span></a></li> -->
+      <!-- <li><a class="app-menu__item " href="table-data-table.html"><i class='app-menu__icon bx bx-id-card'></i>
+          <span class="app-menu__label">Cài đặt tài khoản</span></a></li> -->
+      <!-- <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý khách hàng</span></a></li> -->
+      <!-- <li><a class="app-menu__item" href="table-data-product.html"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
-      </li>
-      <li><a class="app-menu__item active" href="./index.php?page=admin_bill"><i class='app-menu__icon bx bx-task'></i><span
-            class="app-menu__label">Quản lý đơn hàng</span></a></li>
-      <li><a class="app-menu__item" href="table-data-banned.html"><i class='app-menu__icon bx bx-run'></i><span
+      </li> -->
+      <!-- <li><a class="app-menu__item active" href="table-data-oder.html"><i class='app-menu__icon bx bx-task'></i><span
+            class="app-menu__label">Đơn hàng</span></a></li> -->
+      <!-- <li><a class="app-menu__item" href="table-data-banned.html"><i class='app-menu__icon bx bx-run'></i><span
             class="app-menu__label">Quản lý nội bộ
-          </span></a></li>
-      <li><a class="app-menu__item" href="table-data-money.html"><i class='app-menu__icon bx bx-dollar'></i><span
+          </span></a></li> -->
+      <!-- <li><a class="app-menu__item" href="table-data-money.html"><i class='app-menu__icon bx bx-dollar'></i><span
             class="app-menu__label">Bảng kê lương</span></a></li>
       <li><a class="app-menu__item" href="quan-ly-bao-cao.html"><i
             class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Báo cáo doanh thu</span></a>
@@ -72,13 +72,13 @@
       <li><a class="app-menu__item" href="page-calendar.html"><i class='app-menu__icon bx bx-calendar-check'></i><span
             class="app-menu__label">Lịch công tác </span></a></li>
       <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Cài
-            đặt hệ thống</span></a></li>
+            đặt hệ thống</span></a></li> --> 
     </ul>
   </aside>
     <main class="app-content">
       <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-          <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
+          <li class="breadcrumb-item active"><a href="#"><b>Lịch sử đơn hàng</b></a></li>
         </ul>
         <div id="clock"></div>
       </div>
@@ -86,7 +86,7 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-              <div class="row element-button">
+              <!-- <div class="row element-button">
                 <div class="col-sm-2">
   
                   <a class="btn btn-add btn-sm" href="form-add-don-hang.html" title="Thêm"><i class="fas fa-plus"></i>
@@ -117,87 +117,56 @@
                   <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
                       class="fas fa-trash-alt"></i> Xóa tất cả </a>
                 </div>
-              </div>
+              </div> -->
               <table class="table table-hover table-bordered" id="sampleTable">
                 <thead>
                   <tr>
                     <th width="10"><input type="checkbox" id="all"></th>
                     <th>ID đơn hàng</th>
-                    <th>Khách hàng</th>
-                    <th>Đơn hàng</th>
-                    <th>Số lượng</th>
+                    <th>Người nhận</th>
+                    <th>Địa chỉ</th>
+                    <th>Số điện thoại</th>
                     <th>Tổng tiền</th>
                     <th>Tình trạng</th>
                     <th>Tính năng</th>
                   </tr>
                 </thead>
                 <tbody>
+                    <?php
+                    function change_status_background($status){
+                        if ($status == 'Đang xử lí') {
+                            return "badge bg-info";
+                        }
+                        if ($status == 'Hoàn tất') {
+                            return "badge bg-success";
+                        }
+                        if ($status == 'Đã hủy') {
+                            return "badge bg-danger";
+                        }
+                        if ($status == 'Đang giao hàng') {
+                            return "badge bg-warning";
+                        }
+                    } 
+                    $sql = 'SELECT * FROM bill WHERE user_id = ' . $_GET['id'];
+                    $bill_list = $conn->query($sql)->fetchAll(); 
+
+                    // $bill_list = $conn->query('SELECT * FROM bill WHERE user_id' . $_GET['1'])->fetchAll();  
+                    foreach($bill_list as $bill){
+                        $class_name = change_status_background($bill['status']);
+                    ?>
+                    
                   <tr>
                     <td width="10"><input type="checkbox" name="check1" value="1"></td>
                     <td>MD0837</td>
-                    <td>Triệu Thanh Phú</td>
-                    <td>Ghế làm việc Zuno, Bàn ăn gỗ Theresa</td>
-                    <td>2</td>
-                    <td>9.400.000 đ</td>
-                    <td><span class="badge bg-success">Hoàn thành</span></td>
+                    <td><?php echo $bill['user_name'] ?></td>
+                    <td><?php echo $bill['address'] ?></td>
+                    <td><?php echo $bill['phone'] ?></td>
+                    <td><?php echo $bill['total_money'] ?> đ</td>
+                    <td><span class="<?php echo $class_name ?>"><?php echo $bill['status'] ?></span></td>
                     <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
                       <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
                   </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>MĐ8265</td>
-                    <td>Nguyễn Thị Ngọc Cẩm</td>
-                    <td>Ghế ăn gỗ Lucy màu trắng</td>
-                    <td>1</td>
-                    <td>3.800.000 đ</td>                 
-                    <td><span class="badge bg-success">Hoàn thành</span></td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>MT9835</td>
-                    <td>Đặng Hoàng Phúc</td>
-                    <td>Giường ngủ Jimmy, Bàn ăn mở rộng cao cấp Dolas, Ghế làm việc Zuno</td>
-                    <td>3 </td>
-                    <td>40.650.000 đ</td>
-                    <td><span class="badge bg-success">Hoàn thành</span></td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>ER3835</td>
-                    <td>Nguyễn Thị Mỹ Yến</td>
-                    <td>Bàn ăn mở rộng Gepa</td>
-                    <td>1 </td>
-                    <td>16.770.000 đ</td>
-                    <td><span class="badge bg-info">Chờ thanh toán</span></td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>AL3947</td>
-                    <td>Phạm Thị Ngọc</td>
-                    <td>Bàn ăn Vitali mặt đá, Ghế ăn gỗ Lucy màu trắng</td>
-                    <td>2 </td>
-                    <td>19.770.000 đ</td>
-                    <td><span class="badge bg-warning">Đang giao hàng</span></td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                  </tr>
-                  <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>QY8723</td>
-                    <td>Ngô Thái An</td>
-                    <td>Giường ngủ Kara 1.6x2m</td>
-                    <td>1 </td>
-                    <td>14.500.000 đ</td>
-                    <td><span class="badge bg-danger">Đã hủy</span></td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
-                  </tr>
+                  <?php }?>
                 </tbody>
               </table>
             </div>
@@ -247,18 +216,6 @@
       $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
       e.stopImmediatePropagation();
     });
-
-    //EXCEL
-    // $(document).ready(function () {
-    //   $('#').DataTable({
-
-    //     dom: 'Bfrtip',
-    //     "buttons": [
-    //       'excel'
-    //     ]
-    //   });
-    // });
-
 
     //Thời Gian
     function time() {

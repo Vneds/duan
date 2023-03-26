@@ -14,14 +14,14 @@
 
         if($role == 1){
             $_SESSION['role'] = $role;
-            header('location: ./index.php?page=admin');
+            header('location: ./admin/index.php?page=index');
         }else  {
             $_SESSION['role'] = $role;
             $_SESSION['iduser'] = $kq['id'];
             $_SESSION['user_name'] = $kq['user_name'];
             $_SESSION['email'] = $kq['email'];
-            // $_SESSION['img']=$kq[0]['img'];
-            header('location: ./index.php');
+            $_SESSION['img']=$kq[0]['img'];
+            header('location: ./index.php?page=index');
         }
     }
 ?>

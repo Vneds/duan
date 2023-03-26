@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="css/user_bill.css">
+  <link rel="stylesheet" type="text/css" href="view/css/admin.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
   <!-- or -->
   <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -31,7 +31,7 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="index.php"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+      <li><a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
     </ul>
@@ -50,21 +50,21 @@
     <ul class="app-menu">
       <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
           <span class="app-menu__label">POS Bán Hàng</span></a></li>
-      <!-- <li><a class="app-menu__item " href="index.html"><i class='app-menu__icon bx bx-tachometer'></i><span
-            class="app-menu__label">Bảng điều khiển</span></a></li> -->
-      <li><a class="app-menu__item " href="table-data-table.html"><i class='app-menu__icon bx bx-id-card'></i>
-          <span class="app-menu__label">Cài đặt tài khoản</span></a></li>
-      <!-- <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
-            class="app-menu__label">Quản lý khách hàng</span></a></li> -->
-      <!-- <li><a class="app-menu__item" href="table-data-product.html"><i
+      <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
+            class="app-menu__label">Bảng điều khiển</span></a></li>
+      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i>
+          <span class="app-menu__label">Quản lý nhân viên</span></a></li>
+      <li><a class="app-menu__item" href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý khách hàng</span></a></li>
+      <li><a class="app-menu__item" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
-      </li> -->
-      <li><a class="app-menu__item active" href="table-data-oder.html"><i class='app-menu__icon bx bx-task'></i><span
-            class="app-menu__label">Đơn hàng</span></a></li>
-      <!-- <li><a class="app-menu__item" href="table-data-banned.html"><i class='app-menu__icon bx bx-run'></i><span
+      </li>
+      <li><a class="app-menu__item active" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
+            class="app-menu__label">Quản lý đơn hàng</span></a></li>
+      <li><a class="app-menu__item" href="table-data-banned.html"><i class='app-menu__icon bx bx-run'></i><span
             class="app-menu__label">Quản lý nội bộ
-          </span></a></li> -->
-      <!-- <li><a class="app-menu__item" href="table-data-money.html"><i class='app-menu__icon bx bx-dollar'></i><span
+          </span></a></li>
+      <li><a class="app-menu__item" href="table-data-money.html"><i class='app-menu__icon bx bx-dollar'></i><span
             class="app-menu__label">Bảng kê lương</span></a></li>
       <li><a class="app-menu__item" href="quan-ly-bao-cao.html"><i
             class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Báo cáo doanh thu</span></a>
@@ -72,13 +72,13 @@
       <li><a class="app-menu__item" href="page-calendar.html"><i class='app-menu__icon bx bx-calendar-check'></i><span
             class="app-menu__label">Lịch công tác </span></a></li>
       <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Cài
-            đặt hệ thống</span></a></li> -->
+            đặt hệ thống</span></a></li>
     </ul>
   </aside>
     <main class="app-content">
       <div class="app-title">
         <ul class="app-breadcrumb breadcrumb side">
-          <li class="breadcrumb-item active"><a href="#"><b>Lịch sử đơn hàng</b></a></li>
+          <li class="breadcrumb-item active"><a href="#"><b>Danh sách đơn hàng</b></a></li>
         </ul>
         <div id="clock"></div>
       </div>
@@ -86,7 +86,7 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-              <!-- <div class="row element-button">
+              <div class="row element-button">
                 <div class="col-sm-2">
   
                   <a class="btn btn-add btn-sm" href="form-add-don-hang.html" title="Thêm"><i class="fas fa-plus"></i>
@@ -117,63 +117,50 @@
                   <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
                       class="fas fa-trash-alt"></i> Xóa tất cả </a>
                 </div>
-              </div> -->
+              </div>
               <table class="table table-hover table-bordered" id="sampleTable">
+              <div class="select">
+                <div class="status-list">
+                    <input value="all" checked name= "status" type="radio" id="all">
+                    <label for="all">Tất cả</label> 
+                    <input value="Đang xử lý" name= "status" type="radio" id="waiting">
+                    <label for="waiting">Đang xử lý</label> 
+                    <input value="Hoàn tất" name= "status" type="radio" id="done">
+                    <label for="done">Hoàn tất</label> 
+                    <input value="Đã hủy" name= "status" type="radio" id="delete">
+                    <label for="delete">Đã hủy</label> 
+                </div>
+              </div>
                 <thead>
                   <tr>
                     <th width="10"><input type="checkbox" id="all"></th>
                     <th>ID đơn hàng</th>
-                    <th>Người nhận</th>
-                    <th>Địa chỉ</th>
-                    <th>Số điện thoại</th>
+                    <th>Khách hàng</th>
+                    <th>Đơn hàng</th>
+                    <th>Số lượng</th>
                     <th>Tổng tiền</th>
                     <th>Tình trạng</th>
                     <th>Tính năng</th>
                   </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    function change_status_background($status){
-                        if ($status == 'Đang xử lí') {
-                            return "badge bg-info";
-                        }
-                        if ($status == 'Hoàn tất') {
-                            return "badge bg-success";
-                        }
-                        if ($status == 'Đã hủy') {
-                            return "badge bg-danger";
-                        }
-                        if ($status == 'Đang giao hàng') {
-                            return "badge bg-warning";
-                        }
-
-                    } 
-                    include './connect_db.php';
-                    function get_user($id){
-                        global $conn;
-                        $sql = 'SELECT * FROM user WHERE id = ' . $_user_id;
-                        $catergory =  $conn->query($sql)->fetch();
-                        return $catergory['catergory_name']; 
-                    }
-
-                    $sql = 'SELECT * FROM bill WHERE user_id = ' . $_GET['id'];
-                    $bill_list = $conn->query($sql)->fetchAll(); 
-
-                    // $bill_list = $conn->query('SELECT * FROM bill WHERE user_id' . $_GET['1'])->fetchAll();  
-                    foreach($bill_list as $bill){
-                        $class_name = change_status_background($bill['status']);
-                    ?>
-                    
+                  <?php
+                      $bill_list = $conn->query('SELECT * FROM bill')->fetchAll();  
+                      foreach($bill_list as $bill){
+                      $class_name = change_status_background($bill['status']);
+                  ?>
                   <tr>
-                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
                     <td>MD0837</td>
                     <td><?php echo $bill['user_name'] ?></td>
                     <td><?php echo $bill['address'] ?></td>
                     <td><?php echo $bill['phone'] ?></td>
                     <td><?php echo $bill['total_money'] ?> đ</td>
-                    <td><span class="<?php echo $class_name ?>"><?php echo $bill['status'] ?></span></td>
-                    <td><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></td>
+                    <td><span class="<?php echo $class_name ?>"><?php echo $bill['status']?></span></td>
+                    <td>
+                      <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
+                      <a href="./index.php?page=bill&action=detail&id=<?php echo $bill['id'] ?>"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></a>
+                    </td>
                   </tr>
                   <?php }?>
                 </tbody>
@@ -311,6 +298,61 @@
       $("#ModalUP").modal({ backdrop: false, keyboard: false })
     });
   </script>
+
+<script>
+        let checkBoxes = $('input[name="status"]');
+        let tbody = $('tbody');
+
+        checkBoxes.click(function(){
+            $.ajax({
+                url: '../api/api.php',
+                data: {
+                    action: 'filter_bill_status',
+                    status: $('input[name="status"]:checked').val()
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function(result){
+                    let html = '';
+                    result.forEach(bill => {
+                        let className = change_status_background(bill['status']);
+                        html += `   
+                        <tr>
+                          <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                            <td>MD0837</td>
+                            <td>${bill['user_name']}</td>
+                            <td>${bill['address']}</td>
+                            <td>${bill['phone']}</td>
+                            <td>${bill['total_money']} đ</td>
+                            <td><span class="${className}">${bill['status']}</span></td>
+                          <td>
+                            <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
+                            <a href="./index.php?page=bill&action=detail&id=${bill['id']}."><button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></a>
+                          </td>
+                        </tr>
+                                `
+                    });
+                    tbody.html(html);
+                }
+            })
+        })
+
+        function change_status_background(status){
+        if (status == 'Đang xử lý') {
+            return "badge bg-info";
+        }
+        if (status == 'Hoàn tất') {
+            return "badge bg-success";
+        }
+        if (status == 'Đã hủy') {
+            return "badge bg-danger";
+        }
+        if (status == 'Đang giao hàng') {
+            return "badge bg-warning";
+        }
+    }
+
+    </script>
 </body>
 
 </html>

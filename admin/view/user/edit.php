@@ -1,15 +1,3 @@
-<?php
-    include_once 'model/connect_db.php';
-    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-      $sql = "INSERT INTO product (product_name , catergory_id,product_price, des, image_path ) VALUES (?,?,?,?,?)";
-      $stmt = $conn->prepare($sql);
-      $des = "view/img/shop/". basename($_FILES["img"]['name']);
-      $file = $_FILES["img"]["name"];
-      move_uploaded_file($file, $des);
-      $stmt ->execute([$_POST['product_name'],$_POST['catergory_id'], $_POST['product_price'], $_POST['des'], $_FILES["img"]['name']]);
-      header ('location: ./index?page=admin_product');
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -174,14 +162,14 @@
           <span class="app-menu__label">POS Bán Hàng</span></a></li>
       <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="table-data-table.html"><i class='app-menu__icon bx bx-id-card'></i>
+      <li><a class="app-menu__item active" href="table-data-table.html"><i class='app-menu__icon bx bx-id-card'></i>
           <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-      <li><a class="app-menu__item " href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
+      <li><a class="app-menu__item" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
-      <li><a class="app-menu__item active" href="./index.php?page=admin_product"><i
+      <li><a class="app-menu__item" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
-      <li><a class="app-menu__item" href="./index.php?page=admin_bill"><i class='app-menu__icon bx bx-task'></i><span
+      <li><a class="app-menu__item" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
             class="app-menu__label">Quản lý đơn hàng</span></a></li>
       <li><a class="app-menu__item" href="table-data-banned.html"><i class='app-menu__icon bx bx-run'></i><span
             class="app-menu__label">Quản lý nội bộ
@@ -224,12 +212,12 @@
               </div>
             </div>
 
-          <form class="row" method="POST" enctype="multipart/form-data" action="
-          ">
-
+          <form class="row" method="POST" enctype="multipart/form-data" action="./controller/user_controller.php">
+              <input type="text" name="action" value="edit" hidden>
+              <input type="text" name="id" value="<?php echo $user['id']?>" hidden>
               <div class="form-group col-md-3">
-                <label class="control-label">Tên sản phẩm</label>
-                <input class="form-control" type="text" name="product_name">
+                <label class="control-label">Tên người dùng</label>
+                <input class="form-control" type="text" name="user_name" value="<?php echo $user['user_name']?>">
               </div>
 
 
@@ -246,43 +234,35 @@
                 </select>
               </div> -->
               <div class="form-group col-md-3">
-                <label for="exampleSelect1" class="control-label">Danh mục</label>
-                <select class="form-control" id="exampleSelect1" name="catergory_id">
-                <?php 
-                    $catergory_list = get_catergory_list(); ?>
-                    <option>-- Chọn danh mục --</option>
-                <?php foreach ($catergory_list as $catergory){?>
-                        <option value="<?php echo $catergory['id']?>"><?php echo $catergory['catergory_name']?></option>
-                <?php }?>
-                </select>
+                <label class="control-label">Email</label>
+                <input class="form-control" type="text" name="email" value="<?php echo $user['email']?>">
               </div>
               <div class="form-group col-md-3">
-                <label class="control-label">Giá bán</label>
-                <input class="form-control" type="text" name="product_price">
+                <label for="exampleSelect1" class="control-label">Vai trò</label>
+                <select class="form-control" id="exampleSelect1" name="role">
+                    <option>-- Chọn vai trò --</option>
+                    <option value="1">Admin</option>
+                    <option value="1">User</option>
+                </select>
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Ảnh sản phẩm</label>
                 <div id="myfileupload">
-                  <input type="file" id="uploadfile" name="img" onchange="readURL(this);" />
+                  <img src="../<?php echo $image_path ?>" alt="" style="width:300px">
+                  <input type="file" id="uploadfile" name="img" onchange="readURL(this);" >
                 </div>
                 <div id="thumbbox">
                   <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
-                  <a class="removeimg" href="javascript:"></a>
+                  <a class="removeimg" href="javascript:">value=<?php echo $_GET['id']?></a>
                 </div>
                 <div id="boxchoice">
                   <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
                   <p style="clear:both"></p>
                 </div>
-
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Mô tả sản phẩm</label>
-                <textarea class="form-control" name="des" id="mota"></textarea>
-                <script>CKEDITOR.replace('mota');</script>
               </div>
               <button class="btn btn-save" type="submit">Lưu lại</button>
+              <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
             </div>
-            <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
             </div>
           </form> 
   </main>

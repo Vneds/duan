@@ -1,9 +1,8 @@
-<?php 
-function connectdb(){
-    $host = 'localhost';
+<?php
+    $host = 'localhost:3307';
     $dbName = 'duan1';
     $userName = 'root';
-    $password = '123';
+    $password = '123456';
 
     try {
         // Kết nối
@@ -13,15 +12,7 @@ function connectdb(){
     } 
     catch (PDOException $e) {
         echo "Kết nối thất bại: " . $e->getMessage();
-    }        
+    }
     return $conn;
-}
 
-function getuser($user,$pass){
-    $conn = connectdb();
-    $stmt = $conn->prepare("SELECT * FROM user WHERE user_name = ? AND pass_word =  ? " );
-    $stmt->execute([$user, $pass]);
-    $kq = $stmt->fetch();
-    return $kq;
-  }
 ?>
