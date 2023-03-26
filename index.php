@@ -10,6 +10,7 @@
             break;
         case 'detail':
             include_once 'model/product_model.php';
+            include_once 'model/comment_model.php';
             include_once 'view/detail.php';
             break;
         case 'cart':
