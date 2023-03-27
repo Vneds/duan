@@ -10,6 +10,7 @@
             break;
         case 'detail':
             include_once 'model/product_model.php';
+            include_once 'model/comment_model.php';
             include_once 'view/detail.php';
             break;
         case 'cart':
@@ -42,6 +43,12 @@
             break;
         case 'login_add':
             include_once 'model/login_add.php';
+            break;
+        case 'user':
+            include_once 'view/user.php';
+            break;
+        case 'user_bill':
+            include_once 'view/user_bill.php';
             break;
         default:
             include_once 'view/index.php';

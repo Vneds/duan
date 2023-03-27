@@ -20,8 +20,8 @@
             $_SESSION['iduser'] = $kq['id'];
             $_SESSION['user_name'] = $kq['user_name'];
             $_SESSION['email'] = $kq['email'];
-            // $_SESSION['img']=$kq[0]['img'];
-            header('location: ./index.php');
+            $_SESSION['img']=$kq[0]['img'];
+            header('location: ./index.php?page=index');
         }
     }
 ?>
