@@ -6,7 +6,7 @@
         $sql = 'INSERT INTO bill(maDH, user_name, address, phone, user_id, total_money) VALUES (?,?,?,?,?,?)';
         $stmt = $conn->prepare($sql);
         $maDH = generate_random_string();
-        $stmt->execute([$maDH, $_POST['user_name'], $_POST['address'], $_POST['phone'] , 1, $_SESSION['total_money']]);
+        $stmt->execute([$maDH, $_POST['user_name'], $_POST['address'], $_POST['phone'] , $_SESSION['user']['iduser'], $_SESSION['total_money']]);
     }
 
     function insert_bill_detail(){

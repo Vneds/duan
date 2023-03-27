@@ -28,8 +28,8 @@ session_start();
         ?>
 
         <div class="main">
-            <div class="flex">
-            <img class="user_avatar" src="<?php echo $user['img']?>" alt="">
+            <div class="flex">  
+            <img class="user_avatar" src="view/img/user/<?php echo $user['img']?>" alt="">
             <form class="form" action="" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="userName">Tên người dùng</label>

@@ -4,21 +4,30 @@
         $user = $_POST['user'];
         $pass = $_POST['pass'];
         $kq = getuser($user,$pass);
-        $role = $kq['role'];
-        if($role == 1){
-            $_SESSION['role'] = $role;
-            header('location: ./admin/index.php?page=index');
-        }else {
-            $_SESSION['role'] = $role;
-            $_SESSION['iduser'] = $kq['id'];
-            $_SESSION['user_name'] = $kq['user_name'];
-            $_SESSION['email'] = $kq['email'];
-            header('location: ./index.php?page=index');
-            // $_SESSION['img']=$kq[0]['img'];
-        }
         if (!$kq){
             header('location: ./index.php?page=login');
         }
+
+        $_SESSION['user'] = [
+            'role' => $kq['role'],
+            'iduser' => $kq['id'],
+            'user_name' => $kq['user_name'],
+            'email' => $kq['email']
+        ];
+
+        if( $_SESSION['user']['role'] == 1){
+            header('location: ./admin/index.php?page=index');
+            die();
+        }
+        
+            // $_SESSION['role'] = $role;
+            // $_SESSION['iduser'] = $kq['id'];
+            // $_SESSION['user_name'] = $kq['user_name'];
+            // $_SESSION['email'] = $kq['email'];
+            // $_SESSION['img']=$kq[0]['img'];
+        header('location: ./index.php?page=index');
+
+        
         die();
     }
 ?>

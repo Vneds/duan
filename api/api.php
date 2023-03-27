@@ -1,4 +1,5 @@
 <?php 
+    session_start();
     include_once '../model/connect_db.php';
     if (isset($_GET['action'])){
         $action = $_GET['action'];
@@ -62,7 +63,7 @@
     function send_comment($conn){
         $sql = 'INSERT INTO comment_product(content , user_id , product_id ) VALUES (?,?,?) ';
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$_POST['content'], 5, $_POST['product_id']]);
+        $stmt->execute([$_POST['content'], $_SESSION['user']['iduser'], $_POST['product_id']]);
 
         show_comment($conn , $_POST['product_id']);
     }
