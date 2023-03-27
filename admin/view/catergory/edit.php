@@ -203,8 +203,8 @@
                     class="fas fa-folder-plus"></i> Thêm nhà cung cấp</a>
               </div>
               <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc" href="./index.php?page=catergory&action=list"><i
-                    class="fas fa-folder-plus"></i> Danh mục</a>
+                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
+                    class="fas fa-folder-plus"></i> Thêm danh mục</a>
               </div>
               <div class="col-sm-2">
                 <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addtinhtrang"><i
@@ -212,11 +212,12 @@
               </div>
             </div>
 
-          <form class="row" method="POST" enctype="multipart/form-data"  action="./controller/product_controller.php">
-              <input type="text" name="action" value="add" hidden>
+          <form class="row" method="POST" enctype="multipart/form-data" action="./controller/catergory_controller.php">
+              <input type="text" name="action" value="edit" hidden>
+              <input type="text" name="id" value="<?php echo $catergory['id']?>" hidden>
               <div class="form-group col-md-3">
-                <label class="control-label">Tên sản phẩm</label>
-                <input class="form-control" type="text" name="product_name">
+                <label class="control-label">Tên danh mục</label>
+                <input class="form-control" type="text" name="catergory_name" value="<?php echo $catergory['catergory_name']?>">
               </div>
 
 
@@ -232,40 +233,8 @@
                   <option>Hết hàng</option>
                 </select>
               </div> -->
-              <div class="form-group col-md-3">
-                <label for="exampleSelect1" class="control-label">Danh mục</label>
-                <select class="form-control" id="exampleSelect1" name="catergory_id">
-                <?php 
-                    $catergory_list = get_catergory_list(); ?>
-                    <option>-- Chọn danh mục --</option>
-                <?php foreach ($catergory_list as $catergory){?>
-                        <option value="<?php echo $catergory['id']?>"><?php echo $catergory['catergory_name']?></option>
-                <?php }?>
-                </select>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="control-label">Giá bán</label>
-                <input class="form-control" type="text" name="product_price">
               </div>
               <div class="form-group col-md-12">
-                <label class="control-label">Ảnh sản phẩm</label>
-                <div id="myfileupload">
-                  <input type="file" id="uploadfile" name="img" onchange="readURL(this);" />
-                </div>
-                <div id="thumbbox">
-                  <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
-                  <a class="removeimg" href="javascript:"></a>
-                </div>
-                <div id="boxchoice">
-                  <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                  <p style="clear:both"></p>
-                </div>
-
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Mô tả sản phẩm</label>
-                <textarea class="form-control" name="des" id="mota"></textarea>
-                <script>CKEDITOR.replace('mota');</script>
               </div>
               <button class="btn btn-save" type="submit">Lưu lại</button>
               <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
