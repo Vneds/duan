@@ -5,6 +5,9 @@
         $stmt =  $conn->prepare($sql);
         $stmt->execute([$product_id]);
         $quantity = $stmt->fetch();
+        if (!$quantity){
+            return 0;
+        } 
         return $quantity['quantity'];
     }
 ?>
