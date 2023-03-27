@@ -134,7 +134,7 @@
                 <tbody>
                     <?php
                     function change_status_background($status){
-                        if ($status == 'Đang xử lí') {
+                        if ($status == 'Đang xử lý') {
                             return "badge bg-info";
                         }
                         if ($status == 'Hoàn tất') {

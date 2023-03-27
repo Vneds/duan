@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,7 +58,7 @@
                         <h1 class="infor__title">
                             <?php echo $product['product_name']?>
                         </h1>
-                        <span class="infor__price"><b><?php echo $product['product_price']?>đ</b></span>
+                        <span class="infor__price"><b><?php echo $product['product_price']?></b></span>
                         <p class="infor__paragraph"><?php echo $product['des']?></p>
                         <div class="spw">
                             <span class="infor__status">
@@ -263,7 +266,6 @@
         });
 
         function renderCommentSection(result){
-            console.log(result);
             detailSubContent.html('');
             let html = '';
             if (result.length > 0) {
@@ -272,7 +274,7 @@
                         <div class="flex">
                             <img src='view/img/shop/image_3.jpg' class='user-comment-img' >
                             <div>
-                            <div class='user-comment-name'>Hao</div>
+                            <div class='user-comment-name'>Thinh</div>
                             <div>${comment['content']}</div>
                         </div>
                           `;

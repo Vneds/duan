@@ -29,7 +29,7 @@
         </div> 
             <div class="container cart-page">
             <div class="cart_block form_check">
-        <form class="form-control" action="index.php?page=checkout" method="POST">
+        <form class="form-control" action="index.php?page=checkout" method="POST" style="display: flex;">
             <div class="checkout_1">
             <div class="input_check">
                 <label for="">Tên người mua</label><br>
@@ -47,7 +47,7 @@
                 <label for="">Phường/Xã</label><br>
                 <input type="text" name="address" id="" class="email"></td>
             </div>
-            <button type="submit">Thanh toán</button>
+            
         </div>
             
             <div class="checkout_2">
@@ -69,7 +69,6 @@
             </div>
         </div>
             <!-- <button type="submit">Thanh toans</button> -->
-        </form>
     </div>
                 
                 <div class="total__price">
@@ -123,11 +122,13 @@
                         </tr>
                         <tr>
                             <td>
-                            <button class="btn checkout"><p class="text_button">Đặt Hàng</p></button>
+                            <button type="suvmit" class="btn checkout"><p class="text_button">Đặt Hàng</p></button>
                             </td>
                         </tr>
                     </table>
                 </div>
+                        </form>
+
             </div>
         </div>
     </div>
