@@ -54,7 +54,7 @@
     }
 
     function show_comment($conn, $product_id){
-        $sql = 'SELECT * FROM comment_product WHERE product_id = ?';
+        $sql = 'SELECT * FROM comment_product JOIN user ON comment_product.user_id = user.id  WHERE comment_product.product_id = ?';
         $stmt = $conn->prepare($sql);
         $stmt->execute([$product_id]);
         echo json_encode($stmt->fetchAll());
@@ -64,7 +64,6 @@
         $sql = 'INSERT INTO comment_product(content , user_id , product_id ) VALUES (?,?,?) ';
         $stmt = $conn->prepare($sql);
         $stmt->execute([$_POST['content'], $_SESSION['user']['iduser'], $_POST['product_id']]);
-
         show_comment($conn , $_POST['product_id']);
     }
 ?>
