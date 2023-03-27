@@ -23,6 +23,8 @@
             break;
         case 'send_comment':
             send_comment($conn);
+        case 'modify_quantity':
+            modify_quantity($_GET['quantity'], $_GET['index']);
         default:
             break;
     }
@@ -66,4 +68,11 @@
         $stmt->execute([$_POST['content'], $_SESSION['user']['iduser'], $_POST['product_id']]);
         show_comment($conn , $_POST['product_id']);
     }
+
+    function modify_quantity($quantity, $index){
+        $product = $_SESSION['cart'][$index];
+        $product['quantity'] = $quantity;
+        $_SESSION['cart'][$index] = $product; 
+    }
+
 ?>

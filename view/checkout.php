@@ -78,9 +78,11 @@
                         </tr>
                         <?php 
                             $total_money = 0;
+                            $sum = 0;
                             $product_list = $_SESSION['cart'];
                             foreach($product_list as $product){
                                 $total_money += $product['product_price'] * $product['quantity'];
+                                $sum += $total_money;
                         ?>
                         <tr>
                             <td>
@@ -105,11 +107,11 @@
                         </td>
                         </tr>
                         <?php };
-                            $_SESSION['total_money'] = $total_money;
+                            $_SESSION['total_money'] = $sum;
                         ?>
                         <tr>
                             <td>Order total</td>
-                            <td> <?php echo $total_money?></td>
+                            <td> <?php echo $sum?></td>
                         </tr>
                         <tr>
                             <td>Shipping</td>
@@ -118,7 +120,7 @@
                         <td><hr class="hr"></td>
                         <tr>
                             <td>Subtotal</td>
-                            <td><?php echo $total_money?></td>
+                            <td><?php echo $sum?></td>
                         </tr>
                         <tr>
                             <td>
