@@ -6,6 +6,13 @@
         return $catergory_list;
     }
 
+    function get_catergory_with_ID($catergory_id){
+        global $conn;
+        $stmt = $conn->prepare('SELECT * FROM catergory WHERE id = ? ');
+        $stmt->execute([$catergory_id]);
+        return $stmt->fetch();
+    }
+
     function get_product_quantity_in_each_catergory($catergory_id){
         global $conn;
         $sql = 'select count(*) as quantity from product WHERE catergory_id =  ' . $catergory_id . ' GROUP BY catergory_id' ;
