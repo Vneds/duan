@@ -33,56 +33,61 @@ session_start();
                         <th></th>
                     </tr>
                     
-                    <tr>
-                        <?php
-                            $i = 0;
-                            $total_money = 0;
-                            foreach($_SESSION["cart"] as $product){
-                            $product_price = (int)$product['product_price']; 
-                            $total_money += $product_price ;
-                        ?>
-                        <td>
-                            <div class="cart__info">
-                            <img class="img_cart" src="<?php echo $product['image_path'] ?>">
-                                <div>
-                                    <br>
-                                    <span>
-                                    <?php echo $product['product_name']?>
-                                    </span>
-                                    <br>
-                                    <br>
-                                    <span>
-                                    <?php echo $product['product_price']?>
-                                    </span>
-                                    <br>
-                                    <br>
-                                    <a class="remove" href="">Remove</a>
+                    <?php 
+                        if (count($_SESSION['cart']) == 0){
+                            echo 'Hiện chưa có sản phẩm nào';
+                        } else {
+                    ?>
+                        <tr>
+                            <?php
+                                $i = 0;
+                                $total_money = 0;
+                                foreach($_SESSION["cart"] as $product){
+                                    $product_price = (int)$product['product_price']; 
+                                    $total_money += $product_price * $product['quantity'] ;
+                            ?>
+                            <td>
+                                <div class="cart__info">
+                                <img class="img_cart" src="<?php echo $product['image_path'] ?>">
+                                    <div>
+                                        <br>
+                                        <span>
+                                        <?php echo $product['product_name']?>
+                                        </span>
+                                        <br>
+                                        <br>
+                                        <span>
+                                        <?php echo $product['product_price']?>
+                                        </span>
+                                        <br>
+                                        <br>
+                                        <a class="remove" href="">Remove</a>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                         
-                        <td>
-                            <?php echo $product['product_price']?>
-                        </td>
+                            </td>
+                            
+                            <td>
+                                <?php echo $product['product_price']?>
+                            </td>
 
-                        <td>
-                            <div class="container__quantity">
-                                    <a class="container__quantity-item">-</a>
-                                    <a class="container__quantity-item"> <?php echo $product['quantity']?></a>
-                                    <a class="container__quantity-item">+</a>
-                            </div>
-                        </td>
-                        <td>
-                            <?php echo $product['product_price']?>
-                        </td>
-                        <td>
-                            <a href="index.php?page=cart_delete&index=<?php echo $i?>"><img src="view/img/vector 12.png" alt="" class="shuffle"></a>
-                        </td>
-                    </tr>
+                            <td>
+                                <div class="container__quantity">
+                                        <a class="container__quantity-item">-</a>
+                                        <a class="container__quantity-item"> <?php echo $product['quantity']?></a>
+                                        <a class="container__quantity-item">+</a>
+                                </div>
+                            </td>
+                            <td>
+                                <?php echo $total_money?>
+                            </td>
+                            <td>
+                                <a href="index.php?page=cart_delete&index=<?php echo $i?>"><img src="view/img/vector 12.png" alt="" class="shuffle"></a>
+                            </td>
+                        </tr>
 
                 <?php 
                     $i++;
-                }
+                }}
                 ?>
                 </table>
                 
@@ -93,7 +98,7 @@ session_start();
                         </tr>
                         <tr>
                             <td>Order total</td>
-                            <td>$<?php echo $total_money ?></td>
+                            <td>$<?php echo $total_money ?? 0 ?></td>
                         </tr>
                         <tr>
                             <td>Shipping</td>
@@ -101,20 +106,13 @@ session_start();
                         </tr>
                         <td><hr class="hr"></td>
                         <tr>
-                            
                             <td>Subtotal</td>
-                            <td>$<?php echo $total_money ?></td>
-                            
+                            <td>$<?php echo $total_money ?? 0 ?></td>
                         </tr>
                         <tr>
                             <td>
-
-                            <a href="checkout.php"><button class="btn"><p class="text_button">Đặt Hàng</p> </button></a><br><br>
-                        
-                            <a href="index.php?page=checkout"><button class="btn"><p class="text_button">Đặt Hàng</p></button></a>
-
+                                <a href="index.php?page=checkout"><button class="btn"><p class="text_button">Đặt Hàng</p></button></a>
                             </td>
-                            
                         </tr>
                     </table>
                 </div>

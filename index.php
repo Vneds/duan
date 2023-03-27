@@ -33,6 +33,13 @@
             break;
         case 'login':
             include_once 'view/login.php';
+            break;
+        case 'signup':
+            include_once 'view/signup.php';
+            break;
+        case 'forgot':
+            include_once 'view/forgot.php';
+            break;
         case 'login_add':
             include_once 'model/login_add.php';
             break;

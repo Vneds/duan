@@ -6,6 +6,12 @@
         if (!$_SESSION['cart']) {
             $_SESSION['cart'] = [];
         }
+
+        if (is_exist_in_cart($product['id'])){
+            increase_product_quantity($product['id'], $_GET['quantity']);
+            header('location: index.php?page=cart');
+            return;
+        }
         
         $image_path = 'view/img/shop/' . $product['image_path'];
         $card = [
@@ -19,7 +25,28 @@
         header ('location: index.php?page=cart');
     }
     
-    
+    function increase_product_quantity($product_id, $quantity){
+        foreach($_SESSION['cart'] as $product){
+            if ($product['product_id'] == $product_id){
+                $key = array_search($product, $_SESSION['cart']);
+                $product['quantity'] += $quantity;
+                $_SESSION['cart'][$key] = $product;
+                break;
+            }
+        }
+    }
+
+
+    function is_exist_in_cart($product_id){
+        foreach($_SESSION['cart'] as $product){
+            if ($product['product_id'] == $product_id){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     function remove_product_from_cart(){
         unset($_SESSION["cart"][$_GET["index"]]);
         $_SESSION["cart"]= array_values($_SESSION["cart"]);

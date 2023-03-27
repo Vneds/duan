@@ -137,7 +137,7 @@
                                     $product_list = get_product_list();
                                     foreach($product_list as $product){
                                     $catergory_name = get_catergory_name($product['catergory_id']);
-                                    $image_path = get_image_path($product['image_path']);
+                                    $image_path = '../' . get_image_path($product['image_path']);
                                 ?>                                                      
                                 <tr>
                                     <td width="10"><input type="checkbox" name="check1" value="1"></td>
