@@ -237,6 +237,15 @@ th:last-child {
     margin-bottom: 10px;
 }
 
+.form-control .input_check>select{
+    width: 90%;
+    height: 30px;
+    padding: 5px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .tittle_cart_1 p{
     font-family: 'roboto', Arial, Helvetica, sans-serif;
     text-transform: uppercase;
