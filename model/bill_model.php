@@ -6,7 +6,8 @@
         $sql = 'INSERT INTO bill(maDH, user_name, address, phone, user_id, total_money) VALUES (?,?,?,?,?,?)';
         $stmt = $conn->prepare($sql);
         $maDH = generate_random_string();
-        $stmt->execute([$maDH, $_POST['user_name'], $_POST['address'], $_POST['phone'] , $_SESSION['user']['iduser'], $_SESSION['total_money']]);
+        $address = get_address();
+        $stmt->execute([$maDH, $_POST['user_name'], $address, $_POST['phone'] , $_SESSION['user']['iduser'], $_SESSION['total_money']]);
     }
 
     function insert_bill_detail(){
@@ -62,4 +63,19 @@
         }
     }
 
+    function get_address(){
+        $arr = [];
+        array_push($arr, 
+            get_name_of_address($_POST['ward']), 
+            get_name_of_address($_POST['district']), 
+            get_name_of_address($_POST['province'])
+        );
+        $addresDetail = implode(', ', $arr);
+        return $_POST['street'] . ', ' . $addresDetail;
+    }
+
+    function get_name_of_address($text){
+        $arr = explode('|', $text);
+        return $arr[1];
+    }
 ?>
