@@ -33,7 +33,8 @@
 
         </ul>
         <div class="header__action">
-            <input type="text">
+            <input type="text" class="input">
+            <div class="search__result"></div>
             <a href="" class="header__action-item"><img src="view/img/search_icon.svg" alt=""></a>
             <a href="./index.php?page=login" class="header__action-item"><img src="view/img/icon_user.svg" alt=""></a>
             <a href="./index.php?page=cart" class="header__action-item"><img src="view/img/cart_icon.svg" alt=""></a>
@@ -41,3 +42,34 @@
         </div>
     </div>
 </header>
+
+<script>
+    $('.input').keydown(()=>{
+        $.ajax({
+            url: '../duan/api/api.php',
+            data: {
+                action: 'search',
+                key_word:  $('.input').val()
+            },
+            type: 'GET',
+            dataType: 'json',
+            success: function (result){
+                let html = '';
+                if (result.length == 0 ){
+                    html += '<a class="search__item">Không tìm thấy sản phẩm</a>';
+                    $('.search__result').html(html);
+                    return;
+                }
+                result.forEach(product => {
+                    html += `
+                        <a href="index.php?page=detail&id=${product.id}" class="search__item">
+                            <img src="view/img/shop/${product.image_path}">
+                            ${product.product_name}
+                        </a>
+                        `
+                });
+                $('.search__result').html(html);
+            }
+        })
+    })
+</script>

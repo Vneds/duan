@@ -48,8 +48,7 @@
     }
 
     function search($conn, $key_word){
-        $sql = 'SELECT * FROM product WHERE product_name like %' . $key_word . '%';
-        echo $sql;
+        $sql = "SELECT * FROM product WHERE product_name like '%$key_word %' LIMIT 3";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         echo json_encode($stmt->fetchAll());
