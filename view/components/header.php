@@ -11,7 +11,7 @@
                             d="M0.8225 0.619141L3.5 3.5624L6.1775 0.619141L7 1.52525L3.5 5.38105L0 1.52525L0.8225 0.619141Z"
                             fill="#303030"/>
                     </svg></a></li>
-            <li class="header__nav-item"><a href="" class="header__nav-link">BLOG <svg width="7" height="6"
+            <li class="header__nav-item"><a href="index.php?page=blog" class="header__nav-link">BLOG <svg width="7" height="6"
                         viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M0.8225 0.619141L3.5 3.5624L6.1775 0.619141L7 1.52525L3.5 5.38105L0 1.52525L0.8225 0.619141Z"

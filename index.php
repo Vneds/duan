@@ -50,6 +50,12 @@
         case 'user_bill':
             include_once 'view/user_bill.php';
             break;
+        case 'blog':
+            include_once 'view/blog.php';
+            break;
+         case 'contact':
+            include_once 'view/contact.php';
+            break;
         default:
             include_once 'view/index.php';
             break;
