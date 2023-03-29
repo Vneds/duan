@@ -48,6 +48,7 @@ session_start();
             </form>
             <a href="./index.php?page=user_bill&id=<?php echo $user['id'] ?>"><button class="btn btn-primary" >lịch sử đơn hàng</button></a>
             <a href=""><button class="btn btn-primary" >Đổi mật khẩu</button></a>
+            <a href="./model/log_out.php"><button class="btn btn-primary" >Đăng xuất</button></a>
             </div>
         </div>
         <?php }?>
