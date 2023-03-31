@@ -16,6 +16,7 @@
             break;
         case 'chart':
             include_once 'controller/chart_controller.php';
+            break;
         default:
             include_once 'view/index.php';
             break;
