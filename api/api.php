@@ -25,6 +25,10 @@
             send_comment($conn);
         case 'modify_quantity':
             modify_quantity($_GET['quantity'], $_GET['index']);
+            break;
+        case 'get_chart_data':
+            get_chart_data($conn, $_GET['start'], $_GET['end']);
+            break;
         default:
             break;
     }
@@ -72,6 +76,13 @@
         $product = $_SESSION['cart'][$index];
         $product['quantity'] = $quantity;
         $_SESSION['cart'][$index] = $product; 
+    }
+
+    function get_chart_data($conn, $start_date, $end_date){
+        $sql = "SELECT sum(total_money) as 'sum' , date FROM bill WHERE date BETWEEN ? AND ? GROUP BY date ORDER BY date";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$start_date, $end_date]);
+        echo json_encode($stmt->fetchAll());
     }
 
 ?>
