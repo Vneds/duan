@@ -31,6 +31,7 @@
             include_once 'view/checkout.php';
             break;
         case 'contact':
+            include_once 'view/contact.php';
             break;
         case 'login':
             include_once 'view/login.php';
@@ -53,9 +54,7 @@
         case 'blog':
             include_once 'view/blog.php';
             break;
-         case 'contact':
-            include_once 'view/contact.php';
-            break;
+            
         default:
             include_once 'view/index.php';
             break;

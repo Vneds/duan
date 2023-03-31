@@ -105,7 +105,22 @@ session_start();
                 </div>
             </div>
         </div>
-
+        <div class="grid">
+                <div class="news">
+                    <img src="view/img/Rectangle 178.png" alt="">
+                    <img src="view/img/Rectangle 181.png" alt="">
+                    <div class="news_email">
+                         <div class="news_span">
+                            <h2>NEWSLETTER</h2>
+                            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</span>
+                         </div>
+                         <div class="news_button">
+                            <input type="text" placeholder="ENTER YOUR MAIL" class="btn__mail">
+                            <button>SUBCRIBE</button>
+                         </div>
+                    </div>
+                </div>
+            </div>
         <?php include_once 'view/components/footer.php'?>;
     </div>
 </body>
