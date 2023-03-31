@@ -21,23 +21,55 @@
             <li class="header__nav-item"><a href="" class="header__nav-link">ABOUT</a></li>
             <li class="header__nav-item"><a href="./index.php?page=contact" class="header__nav-link">CONTACT</a></li>
             <?php 
-            if(isset($_SESSION['user_name'])){
+            if(isset($_SESSION['user']['user_name'])){
                 echo '<li style="color: #F598A4;text-transform:uppercase;font-weight: 600;font-size: 14px;" 
-                class="header__nav-item "><a href="./index.php?page=user&id='.$_SESSION['iduser'].'" style="color: #F598A4;">'.'XIN CHÀO '.$_SESSION['user_name'].'</a></li>';
+                class="header__nav-item "><a href="./index.php?page=user&id='.$_SESSION['user']['iduser'].'" style="color: #F598A4;">'.'XIN CHÀO '.$_SESSION['user']['user_name'].'</a></li>';
                 // echo '<a href="./tranguser.php"><img class="imguser" src="../'.$_SESSION['img'].'"></a>';
             }
             else {
-                echo '<li class="header__nav-item"><a href="./index.php?page=login" class="header__nav-link">ADMIN</a></li>';
+                // echo '<li class="header__nav-item"><a href="./index.php?page=login" class="header__nav-link">ADMIN</a></li>';
             }
             ?>
 
         </ul>
         <div class="header__action">
-            <input type="text">
+            <input type="text" class="input">
+            <div class="search__result"></div>
             <a href="" class="header__action-item"><img src="view/img/search_icon.svg" alt=""></a>
-            <a href="./index.php?page=bill&id=1" class="header__action-item"><img src="view/img/icon_user.svg" alt=""></a>
+            <a href="./index.php?page=login" class="header__action-item"><img src="view/img/icon_user.svg" alt=""></a>
             <a href="./index.php?page=cart" class="header__action-item"><img src="view/img/cart_icon.svg" alt=""></a>
             <a href="" class="header__action-item"><img src="view/img/hamburger menu.svg" alt=""></a>
         </div>
     </div>
 </header>
+
+<script>
+    $('.input').keydown(()=>{
+        $.ajax({
+            url: '../duan/api/api.php',
+            data: {
+                action: 'search',
+                key_word:  $('.input').val()
+            },
+            type: 'GET',
+            dataType: 'json',
+            success: function (result){
+                let html = '';
+                if (result.length == 0 ){
+                    html += '<a class="search__item">Không tìm thấy sản phẩm</a>';
+                    $('.search__result').html(html);
+                    return;
+                }
+                result.forEach(product => {
+                    html += `
+                        <a href="index.php?page=detail&id=${product.id}" class="search__item">
+                            <img src="view/img/shop/${product.image_path}">
+                            ${product.product_name}
+                        </a>
+                        `
+                });
+                $('.search__result').html(html);
+            }
+        })
+    })
+</script>

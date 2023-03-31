@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="view/css/shop.css">
     <link rel="stylesheet" href="view/css/header.css">
     <link rel="stylesheet" href="view/css/footer.css">
-    <title>Shop</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <title>Shop</title>
 </head>
 
 <body>

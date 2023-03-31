@@ -203,6 +203,7 @@ th:last-child {
 
 /* Checkout */
 
+
 .form-control .checkout_1{
     width: 350px;
     float: left;
@@ -228,6 +229,15 @@ th:last-child {
 }
 
 .form-control .input_check>input{
+    width: 90%;
+    height: 30px;
+    padding: 5px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.form-control .input_check>select{
     width: 90%;
     height: 30px;
     padding: 5px;

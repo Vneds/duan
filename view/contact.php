@@ -12,7 +12,12 @@ session_start();
     <link rel="stylesheet" href="view/css/contact.css">
     <link rel="stylesheet" href="view/css/header.css">
     <link rel="stylesheet" href="view/css/footer.css">
+
     <title>Liên hệ - Contact</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <title>Trang chủ</title>
+
 </head>
 
 <body>

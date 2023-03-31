@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,7 +58,7 @@
                         <h1 class="infor__title">
                             <?php echo $product['product_name']?>
                         </h1>
-                        <span class="infor__price"><b><?php echo $product['product_price']?>đ</b></span>
+                        <span class="infor__price"><b><?php echo $product['product_price']?></b></span>
                         <p class="infor__paragraph"><?php echo $product['des']?></p>
                         <div class="spw">
                             <span class="infor__status">
@@ -196,6 +199,14 @@
     </script>
 
     <script>
+        const isLogin = <?php 
+            if (isset($_SESSION['user'])){
+                echo json_encode('true');
+            } else {
+                echo json_encode('false');
+            }
+        ?>
+
         const review = $('.review');
         const detailSubContent = $('.detail-sub-content');
         const description = $('.des');
@@ -203,6 +214,11 @@
         
         $(document).on('click', '.send-comment', function(){
             const textArea = $('textarea'); 
+            if (isLogin == 'false') {
+                alert('Vui lòng đăng nhập');
+                return;
+            }
+
             $.ajax({
                 url: './api/api.php',
                 data: {
@@ -246,7 +262,6 @@
         review.click(function(){
             detailSubContent.css('flex-direction', 'column');
             detailSubContent.css('margin-left', '30px');
-            // changeBackGroundButton(reviews);
             $.ajax({
                 url: './api/api.php',
                 data: {
@@ -263,16 +278,15 @@
         });
 
         function renderCommentSection(result){
-            console.log(result);
             detailSubContent.html('');
             let html = '';
             if (result.length > 0) {
                 $.each(result, (index, comment) => {
                     html += `
                         <div class="flex">
-                            <img src='view/img/shop/image_3.jpg' class='user-comment-img' >
+                            <img src='view/img/user/${comment['img']}' class='user-comment-img' >
                             <div>
-                            <div class='user-comment-name'>Hao</div>
+                            <div class='user-comment-name'>${comment['user_name']}</div>
                             <div>${comment['content']}</div>
                         </div>
                           `;
@@ -282,8 +296,10 @@
             } else {
                 html += '<p>Hiện chưa có bình luận nào</p>'
             }
-            html+= `<textarea class="comment-content" placeholder="Nhập bình luận" name="content" rows="3" cols="10">  </textarea>
-                        <button class="add-to-btn send-comment">Gửi bình luận</button>`;
+            html+= `
+            <textarea required class="comment-content" placeholder="Nhập bình luận" name="content" rows="3" cols="10">  </textarea>
+                    <button class="add-to-btn send-comment">Gửi bình luận</button>
+            `;
             detailSubContent.append(html);
         }
 

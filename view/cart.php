@@ -12,6 +12,7 @@ session_start();
     <link rel="stylesheet" href="view/css/cart.css">
     <link rel="stylesheet" href="view/css/header.css">
     <link rel="stylesheet" href="view/css/footer.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <title>Trang chủ</title>
 </head>
 
@@ -42,9 +43,11 @@ session_start();
                             <?php
                                 $i = 0;
                                 $total_money = 0;
+                                $sum = 0;
                                 foreach($_SESSION["cart"] as $product){
-                                    $product_price = (int)$product['product_price']; 
+                                    $product_price = $product['product_price']; 
                                     $total_money += $product_price * $product['quantity'] ;
+                                    $sum += $total_money;
                             ?>
                             <td>
                                 <div class="cart__info">
@@ -72,9 +75,9 @@ session_start();
 
                             <td>
                                 <div class="container__quantity">
-                                        <a class="container__quantity-item">-</a>
-                                        <a class="container__quantity-item"> <?php echo $product['quantity']?></a>
-                                        <a class="container__quantity-item">+</a>
+                                        <a class="container__quantity-item decrease" onclick="decrease($(this))">-</a>
+                                        <a class="container__quantity-item value" id="<?php echo $i; ?>"> <?php echo $product['quantity']?></a>
+                                        <a class="container__quantity-item increase" onclick="increase($(this))">+</a>
                                 </div>
                             </td>
                             <td>
@@ -98,7 +101,7 @@ session_start();
                         </tr>
                         <tr>
                             <td>Order total</td>
-                            <td>$<?php echo $total_money ?? 0 ?></td>
+                            <td>$<?php echo $sum ?? 0 ?></td>
                         </tr>
                         <tr>
                             <td>Shipping</td>
@@ -107,7 +110,7 @@ session_start();
                         <td><hr class="hr"></td>
                         <tr>
                             <td>Subtotal</td>
-                            <td>$<?php echo $total_money ?? 0 ?></td>
+                            <td>$<?php echo $sum?? 0 ?></td>
                         </tr>
                         <tr>
                             <td>
@@ -122,6 +125,60 @@ session_start();
         
     </div>
     <?php include_once 'view/components/footer.php'?>;
+
+    <script>
+        function increase(e){
+            const valueEle = e.siblings('.value');
+            let number = Number(valueEle.text()) + 1;
+            let index = valueEle.attr('id');
+            valueEle.html(number);
+            $.ajax({
+                url: './api/api.php',
+                data: {
+                    action: 'modify_quantity',
+                    quantity: number,
+                    index: index
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function (result){
+                    window.location.reload();
+                }
+            })
+        }
+
+        function decrease(e){
+            const valueEle = e.siblings('.value');
+            let number = Number(valueEle.text()) - 1;
+            let index = valueEle.attr('id');
+            if (isBelowOne(valueEle)){
+                value.html(1)
+                return;
+            }
+            valueEle.html(number);
+            $.ajax({
+                url: './api/api.php',
+                data: {
+                    action: 'modify_quantity',
+                    quantity: number,
+                    index: index
+                },
+                type: 'GET',
+                dataType: 'json',
+                success: function (result){
+                    window.location.reload();
+                }
+            })
+        }
+
+        function isBelowOne(e){
+            if (Number(e.text()) <= 1) {
+                return true;
+            }
+            return false;
+        }
+
+    </script>
 </body>
 
 </html>
