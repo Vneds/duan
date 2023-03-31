@@ -40,10 +40,36 @@
     padding: 13px 0;
 }
 
+.header__action {
+    display: flex;
+}
+
 .header__action-item {
     margin-right: 25px;
 }
 
 .header__action-item:last-of-type {
     margin-right: unset;
+}
+
+.search__result {
+    position: absolute;
+    top: 50px;
+}
+
+.search__item {
+    background-color: white;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search__item:hover {
+    opacity: 0.9;
+}
+
+.search__item img {
+    width: 50px;
+    height: 50px;
 }

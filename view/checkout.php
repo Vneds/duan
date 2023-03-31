@@ -2,6 +2,7 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         insert_bill();
         insert_bill_detail();
+        unset($_SESSION['cart']);
         header('Location: index.php?page=index');
     }
 ?>
@@ -29,25 +30,29 @@
         </div> 
             <div class="container cart-page">
             <div class="cart_block form_check">
-        <form class="form-control" action="index.php?page=checkout" method="POST">
+        <form class="form-control" action="index.php?page=checkout" method="POST" style="display: flex;">
             <div class="checkout_1">
             <div class="input_check">
                 <label for="">Tên người mua</label><br>
-                <input type="text" name="user_name" class="user-name" id=""></td>
+                <input type="text" name="user_name" class="user-name" id="">
             </div>
             <div class="input_check">
                 <label for="">Số điện thoại</label><br>
-                <input type="text" name="phone" id="" class="email"></td>
+                <input type="text" name="phone" id="" class="email">
             </div>
             <div class="input_check">
                 <label for="">Tỉnh/Thành Phố</label><br>
-                <input type="text" name="address" class="user-name" id=""></td>
+                <select type="text" name="province" class="user-name province" id="">
+                    <option value="">Chọn thành phố</option>
+                </select>
             </div>
             <div class="input_check">
                 <label for="">Phường/Xã</label><br>
-                <input type="text" name="address" id="" class="email"></td>
+                <select type="text" name="ward" class="user-name ward" id="">
+                    <option value="">Chọn phường xã</option>
+                </select>
             </div>
-            <button type="submit">Thanh toán</button>
+            
         </div>
             
             <div class="checkout_2">
@@ -57,11 +62,13 @@
             </div>
             <div class="input_check">
                 <label for="">Địa chỉ</label><br>
-                <input type="text" name="address" id="" class="address"></td>
+                <input type="text" name="street" id="" class="address"></td>
             </div>
             <div class="input_check">
                 <label for="">Quận huyện</label><br>
-                <input type="text" name="address" class="user-name" id="" ></td>
+                <select type="text" name="district" class="user-name district" id="">
+                    <option value="">Chọn quận huyện</option>
+                </select>
             </div>
             <div class="input_check">
                 <label for="">Ghi chú</label><br>
@@ -69,7 +76,6 @@
             </div>
         </div>
             <!-- <button type="submit">Thanh toans</button> -->
-        </form>
     </div>
                 
                 <div class="total__price">
@@ -79,9 +85,11 @@
                         </tr>
                         <?php 
                             $total_money = 0;
+                            $sum = 0;
                             $product_list = $_SESSION['cart'];
                             foreach($product_list as $product){
                                 $total_money += $product['product_price'] * $product['quantity'];
+                                $sum += $total_money;
                         ?>
                         <tr>
                             <td>
@@ -106,11 +114,11 @@
                         </td>
                         </tr>
                         <?php };
-                            $_SESSION['total_money'] = $total_money;
+                            $_SESSION['total_money'] = $sum;
                         ?>
                         <tr>
                             <td>Order total</td>
-                            <td> <?php echo $total_money?></td>
+                            <td> <?php echo $sum?></td>
                         </tr>
                         <tr>
                             <td>Shipping</td>
@@ -119,15 +127,17 @@
                         <td><hr class="hr"></td>
                         <tr>
                             <td>Subtotal</td>
-                            <td><?php echo $total_money?></td>
+                            <td><?php echo $sum?></td>
                         </tr>
                         <tr>
                             <td>
-                            <button class="btn checkout"><p class="text_button">Đặt Hàng</p></button>
+                            <button type="suvmit" class="btn checkout"><p class="text_button">Đặt Hàng</p></button>
                             </td>
                         </tr>
                     </table>
                 </div>
+                        </form>
+
             </div>
         </div>
     </div>
@@ -149,18 +159,55 @@
 
     <?php include_once 'view/components/footer.php'?>;
 
-        <script>
-            // let userName = $('.user-name');
-            // let phone = $('.phone');
-            // let email = $('.email');
-            // let address = $('.address');
-            // $('.checkout').click(()=>{
-            //     console.log(address.val());
-            //     $.post('./add_bill.php', {user_name: userName.val(), phone: phone.val(), email: email.val(), address: address.val()}, ()=>{
-            //         // window.location.href = 'index.php';
-            //     })
-            // })
-        </script>
+    <script>
+        let province = $('.province');
+        let district = $('.district');
+        let ward = $('.ward');
+
+        console.log(district);
+        
+        $(document).ready(async function(){
+            let provinceList = await showAllProvince();
+            renderData(province, provinceList);
+            
+            province.change(async function(){
+                let b = await getDistricts(getCode(province.val()));
+                renderData(district, b.districts);
+            })
+
+            district.change(async function(){
+                let b = await getWards(getCode(district.val()));
+                renderData(ward, b.wards);
+            })
+        })
+
+        function renderData(select, array){
+            select.html('');
+            let html = '';
+            $.each(array, (index, item) => {
+                html += `<option value="${item.code}|${item.name}">${item.name}</option>`;
+            })
+            select.append(html);
+        }
+
+        function getCode(text){
+            let arr = text.split("|");
+            return arr[0];
+        }
+
+        function showAllProvince(){
+            return fetch('https://provinces.open-api.vn/api/p/').then(respone => respone.json());
+        }
+
+        function getDistricts(code){
+            return fetch(`https://provinces.open-api.vn/api/p/${code}?depth=2`).then(respone => respone.json());
+        }
+     
+        function getWards(code){
+            return fetch(`https://provinces.open-api.vn/api/d/${code}?depth=2`).then(respone => respone.json());
+        }
+
+    </script>
 </body>
 
 </html>

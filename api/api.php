@@ -1,4 +1,5 @@
 <?php 
+    session_start();
     include_once '../model/connect_db.php';
     if (isset($_GET['action'])){
         $action = $_GET['action'];
@@ -22,6 +23,12 @@
             break;
         case 'send_comment':
             send_comment($conn);
+        case 'modify_quantity':
+            modify_quantity($_GET['quantity'], $_GET['index']);
+            break;
+        case 'get_chart_data':
+            get_chart_data($conn, $_GET['start'], $_GET['end']);
+            break;
         default:
             break;
     }
@@ -45,15 +52,14 @@
     }
 
     function search($conn, $key_word){
-        $sql = 'SELECT * FROM product WHERE product_name like %' . $key_word . '%';
-        echo $sql;
+        $sql = "SELECT * FROM product WHERE product_name like '%$key_word %' LIMIT 3";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         echo json_encode($stmt->fetchAll());
     }
 
     function show_comment($conn, $product_id){
-        $sql = 'SELECT * FROM comment_product WHERE product_id = ?';
+        $sql = 'SELECT * FROM comment_product JOIN user ON comment_product.user_id = user.id  WHERE comment_product.product_id = ?';
         $stmt = $conn->prepare($sql);
         $stmt->execute([$product_id]);
         echo json_encode($stmt->fetchAll());
@@ -62,8 +68,21 @@
     function send_comment($conn){
         $sql = 'INSERT INTO comment_product(content , user_id , product_id ) VALUES (?,?,?) ';
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$_POST['content'], 5, $_POST['product_id']]);
-
+        $stmt->execute([$_POST['content'], $_SESSION['user']['iduser'], $_POST['product_id']]);
         show_comment($conn , $_POST['product_id']);
     }
+
+    function modify_quantity($quantity, $index){
+        $product = $_SESSION['cart'][$index];
+        $product['quantity'] = $quantity;
+        $_SESSION['cart'][$index] = $product; 
+    }
+
+    function get_chart_data($conn, $start_date, $end_date){
+        $sql = "SELECT sum(total_money) as 'sum' , date FROM bill WHERE date BETWEEN ? AND ? GROUP BY date ORDER BY date";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$start_date, $end_date]);
+        echo json_encode($stmt->fetchAll());
+    }
+
 ?>

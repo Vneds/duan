@@ -13,6 +13,7 @@ session_start();
     <link rel="stylesheet" href="view/css/header.css">
     <link rel="stylesheet" href="view/css/footer.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <title>Trang chủ</title>
 </head>
 
@@ -28,8 +29,8 @@ session_start();
         ?>
 
         <div class="main">
-            <div class="flex">
-            <img class="user_avatar" src="<?php echo $user['img']?>" alt="">
+            <div class="flex">  
+            <img class="user_avatar" src="view/img/user/<?php echo $user['img']?>" alt="">
             <form class="form" action="" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="userName">Tên người dùng</label>

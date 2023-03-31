@@ -1,3 +1,33 @@
+<?php 
+  $price_arr = $conn->query("SELECT sum(total_money) as 'sum', date FROM bill GROUP BY date ORDER BY date")->fetchAll();
+  $date_arr = $conn->query('SELECT date FROM bill GROUP BY date ORDER by date')->fetchAll();
+
+
+  $user_count = $conn->query("SELECT count(*) as 'quantity' from user")->fetch();
+  $bill_count = $conn->query("SELECT count(*) as 'quantity' from bill")->fetch();
+  $product_count = $conn->query("SELECT count(*) as 'quantity' from product")->fetch();
+
+  $bill_list = $conn->query('SELECT * FROM bill ORDER BY id DESC LIMIT 4;')->fetchAll();  
+  $user_list = $conn->query('SELECT * FROM user ORDER BY id DESC LIMIT 4')->fetchAll();  
+
+
+  
+  function change_status_background($status){
+    if ($status == 'Đang xử lý') {
+        return "badge bg-info";
+    }
+    if ($status == 'Hoàn tất') {
+        return "badge bg-success";
+    }
+    if ($status == 'Đã hủy') {
+        return "badge bg-danger";
+    }
+    if ($status == 'Đang giao hàng') {
+        return "badge bg-warning";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,7 +47,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
@@ -55,6 +86,10 @@
           <span class="app-menu__label">Quản lý nhân viên</span></a></li>
       <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
+            <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý bài viết</span></a></li>
+            <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý bình luận</span></a></li>
       <li><a class="app-menu__item active" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
@@ -94,7 +129,7 @@
         <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
           <div class="info">
             <h4>Tổng khách hàng</h4>
-            <p><b>56 khách hàng</b></p>
+            <p><b><?php echo $user_count['quantity']?> khách hàng</b></p>
             <p class="info-tong">Tổng số khách hàng được quản lý.</p>
           </div>
         </div>
@@ -104,7 +139,7 @@
             <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
               <div class="info">
                 <h4>Tổng sản phẩm</h4>
-                <p><b>1850 sản phẩm</b></p>
+                <p><b><?php echo $product_count['quantity']?> sản phẩm</b></p>
                 <p class="info-tong">Tổng số sản phẩm được quản lý.</p>
               </div>
             </div>
@@ -114,13 +149,13 @@
             <div class="widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
               <div class="info">
                 <h4>Tổng đơn hàng</h4>
-                <p><b>247 đơn hàng</b></p>
-                <p class="info-tong">Tổng số hóa đơn bán hàng trong tháng.</p>
+                <p><b><?php echo $bill_count['quantity']?> đơn hàng</b></p>
+                <p class="info-tong">Tổng số hóa đơn bán hàng.</p>
               </div>
             </div>
           </div>
            <!-- col-6 -->
-          <div class="col-md-6">
+          <!-- <div class="col-md-6">
             <div class="widget-small danger coloured-icon"><i class='icon bx bxs-error-alt fa-3x'></i>
               <div class="info">
                 <h4>Sắp hết hàng</h4>
@@ -128,11 +163,11 @@
                 <p class="info-tong">Số sản phẩm cảnh báo hết cần nhập thêm.</p>
               </div>
             </div>
-          </div>
+          </div> -->
            <!-- col-12 -->
            <div class="col-md-12">
             <div class="tile">
-                <h3 class="tile-title">Tình trạng đơn hàng</h3>
+                <h3 class="tile-title">Đơn hàng mới nhất</h3>
               <div>
                 <table class="table table-bordered">
                   <thead>
@@ -144,39 +179,19 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>AL3947</td>
-                      <td>Phạm Thị Ngọc</td>
-                      <td>
-                        19.770.000 đ
-                      </td>
-                      <td><span class="badge bg-info">Chờ xử lý</span></td>
-                    </tr>
-                    <tr>
-                      <td>ER3835</td>
-                      <td>Nguyễn Thị Mỹ Yến</td>
-                      <td>
-                        16.770.000 đ	
-                      </td>
-                      <td><span class="badge bg-warning">Đang vận chuyển</span></td>
-                    </tr>
-                    <tr>
-                      <td>MD0837</td>
-                      <td>Triệu Thanh Phú</td>
-                      <td>
-                        9.400.000 đ	
-                      </td>
-                      <td><span class="badge bg-success">Đã hoàn thành</span></td>
-                    </tr>
-                    <tr>
-                      <td>MT9835</td>
-                      <td>Đặng Hoàng Phúc	</td>
-                      <td>
-                        40.650.000 đ	
-                      </td>
-                      <td><span class="badge bg-danger">Đã hủy	</span></td>
-                    </tr>
-                  </tbody>
+                    <?php 
+                      foreach($bill_list as $bill):
+                        $class_name = change_status_background($bill['status']);
+                    ?>
+                        <tr>
+                          <td><?php echo $bill['maDH'] ?></td>
+                          <td><?php echo $bill['user_name'] ?></td>
+                          <td>
+                              <?php echo $bill['total_money'] ?> 
+                          </td>
+                          <td><span class="<?php echo $class_name ?>"><?php echo $bill['status']?></span></td>
+                        </tr>
+                      <?php endforeach;?>
                 </table>
               </div>
               <!-- / div trống-->
@@ -193,35 +208,21 @@
                       <tr>
                         <th>ID</th>
                         <th>Tên khách hàng</th>
-                        <th>Ngày sinh</th>
+                        <th>Email</th>
                         <th>Số điện thoại</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>#183</td>
-                        <td>Hột vịt muối</td>
-                        <td>21/7/1992</td>
-                        <td><span class="tag tag-success">0921387221</span></td>
-                      </tr>
-                      <tr>
-                        <td>#219</td>
-                        <td>Bánh tráng trộn</td>
-                        <td>30/4/1975</td>
-                        <td><span class="tag tag-warning">0912376352</span></td>
-                      </tr>
-                      <tr>
-                        <td>#627</td>
-                        <td>Cút rang bơ</td>
-                        <td>12/3/1999</td>
-                        <td><span class="tag tag-primary">01287326654</span></td>
-                      </tr>
-                      <tr>
-                        <td>#175</td>
-                        <td>Hủ tiếu nam vang</td>
-                        <td>4/12/20000</td>
-                        <td><span class="tag tag-danger">0912376763</span></td>
-                      </tr>
+                      <?php 
+                        foreach($user_list as $user) :
+                      ?>
+                        <tr>
+                          <td><?php echo $user['id'] ?></td>
+                          <td><?php echo $user['user_name'] ?></td>
+                          <td><?php echo $user['email'] ?></td>
+                          <td><span class="tag tag-success">0921387221</span></td>
+                        </tr>
+                      <?php endforeach?>
                     </tbody>
                   </table>
                 </div>
@@ -234,15 +235,9 @@
       <!--END left-->
       <!--Right-->
       <div class="col-md-12 col-lg-6">
+        <input type="date" class="start">
+        <input type="date" class="end">
         <div class="row">
-          <div class="col-md-12">
-            <div class="tile">
-              <h3 class="tile-title">Dữ liệu 6 tháng đầu vào</h3>
-              <div class="embed-responsive embed-responsive-16by9">
-                <canvas class="embed-responsive-item" id="lineChartDemo"></canvas>
-              </div>
-            </div>
-          </div>
           <div class="col-md-12">
             <div class="tile">
               <h3 class="tile-title">Thống kê 6 tháng doanh thu</h3>
@@ -266,49 +261,98 @@
         </b></p>
     </div>
   </main>
-  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="../doc/js/jquery-3.2.1.min.js"></script>
   <!--===============================================================================================-->
-  <script src="js/popper.min.js"></script>
+  <script src="../doc/js/popper.min.js"></script>
   <script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
   <!--===============================================================================================-->
-  <script src="js/bootstrap.min.js"></script>
+  <script src="../doc/js/bootstrap.min.js"></script>
   <!--===============================================================================================-->
-  <script src="js/main.js"></script>
+  <script src="../doc/js/main.js"></script>
   <!--===============================================================================================-->
-  <script src="js/plugins/pace.min.js"></script>
+  <script src="../doc/js/plugins/pace.min.js"></script>
   <!--===============================================================================================-->
-  <script type="text/javascript" src="js/plugins/chart.js"></script>
+  <!-- <script type="text/javascript" src="../doc/js/plugins/chart.js"></script> -->
   <!--===============================================================================================-->
   <script type="text/javascript">
-    var data = {
-      labels: ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6"],
-      datasets: [{
-        label: "Dữ liệu đầu tiên",
-        fillColor: "rgba(255, 213, 59, 0.767), 212, 59)",
-        strokeColor: "rgb(255, 212, 59)",
-        pointColor: "rgb(255, 212, 59)",
-        pointStrokeColor: "rgb(255, 212, 59)",
-        pointHighlightFill: "rgb(255, 212, 59)",
-        pointHighlightStroke: "rgb(255, 212, 59)",
-        data: [20, 59, 90, 51, 56, 100]
-      },
-      {
-        label: "Dữ liệu kế tiếp",
-        fillColor: "rgba(9, 109, 239, 0.651)  ",
-        pointColor: "rgb(9, 109, 239)",
-        strokeColor: "rgb(9, 109, 239)",
-        pointStrokeColor: "rgb(9, 109, 239)",
-        pointHighlightFill: "rgb(9, 109, 239)",
-        pointHighlightStroke: "rgb(9, 109, 239)",
-        data: [48, 48, 49, 39, 86, 10]
-      }
-      ]
-    };
-    var ctxl = $("#lineChartDemo").get(0).getContext("2d");
-    var lineChart = new Chart(ctxl).Line(data);
 
-    var ctxb = $("#barChartDemo").get(0).getContext("2d");
-    var barChart = new Chart(ctxb).Bar(data);
+    let start = '';
+    $('.start').change(()=>{
+      start = $('.start').val();
+    })
+
+    $('.end').change(()=>{
+      console.log($('.end').val());
+      $.ajax({
+        url: '../api/api.php',
+        data: {
+            action: 'get_chart_data',
+            start : start,
+            end: $('.end').val()
+        },
+        type: 'GET',
+        dataType: 'json',
+        success: function (result){
+          myChart.config.data.labels = result.map(bill => bill['date']);
+          myChart.config.data.datasets.data = result.map(bill => bill['sum']);
+          myChart.update();
+        }
+    })
+    })
+
+
+    let priceData = <?php echo json_encode($price_arr) ?>;
+    let price = priceData.map(price => price['sum']);
+    let dateData = <?php echo json_encode($date_arr) ?>;
+    let date = dateData.map(date => date['date']);
+    // var data = {
+    //   labels: date,
+    //   datasets: [{
+    //     label: "Dữ liệu đầu tiên",
+    //     fillColor: "rgba(255, 213, 59, 0.767), 212, 59)",
+    //     strokeColor: "rgb(255, 212, 59)",
+    //     pointColor: "rgb(255, 212, 59)",
+    //     pointStrokeColor: "rgb(255, 212, 59)",
+    //     pointHighlightFill: "rgb(255, 212, 59)",
+    //     pointHighlightStroke: "rgb(255, 212, 59)",
+    //     data: price
+    //   },
+    //   // {
+    //   //   label: "Dữ liệu kế tiếp",
+    //   //   fillColor: "rgba(9, 109, 239, 0.651)  ",
+    //   //   pointColor: "rgb(9, 109, 239)",
+    //   //   strokeColor: "rgb(9, 109, 239)",
+    //   //   pointStrokeColor: "rgb(9, 109, 239)",
+    //   //   pointHighlightFill: "rgb(9, 109, 239)",
+    //   //   pointHighlightStroke: "rgb(9, 109, 239)",
+    //   //   data: [48, 48, 49, 39, 86, 10]
+    //   // }
+    //   ]
+    // };
+    const data = {
+        labels: date,
+        datasets: [{
+          label: 'Doanh thu ngày',
+          data: price,
+          borderWidth: 1
+        }]
+    }
+    const config =  {
+      type: 'bar',
+      data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    };
+
+    const ctx = document.getElementById('barChartDemo');
+    const myChart = new Chart(ctx, config);
+
+
   </script>
   <script type="text/javascript">
     //Thời Gian

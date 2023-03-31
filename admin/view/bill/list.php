@@ -145,7 +145,7 @@
                 </thead>
                 <tbody>
                   <?php
-                      $bill_list = $conn->query('SELECT * FROM bill')->fetchAll();  
+                      $bill_list = $conn->query('SELECT * FROM bill ORDER BY id DESC')->fetchAll();  
                       foreach($bill_list as $bill){
                       $class_name = change_status_background($bill['status']);
                   ?>
