@@ -216,7 +216,7 @@
               <input type="text" name="action" value="add" hidden>
               <div class="form-group col-md-3">
                 <label class="control-label">Tên sản phẩm</label>
-                <input class="form-control" type="text" name="product_name">
+                <input class="form-control" type="text" name="product_name" required>
               </div>
 
 
@@ -237,7 +237,7 @@
                 <select class="form-control" id="exampleSelect1" name="catergory_id">
                 <?php 
                     $catergory_list = get_catergory_list(); ?>
-                    <option>-- Chọn danh mục --</option>
+                    <!-- <option>-- Chọn danh mục --</option> -->
                 <?php foreach ($catergory_list as $catergory){?>
                         <option value="<?php echo $catergory['id']?>"><?php echo $catergory['catergory_name']?></option>
                 <?php }?>
@@ -245,12 +245,12 @@
               </div>
               <div class="form-group col-md-3">
                 <label class="control-label">Giá bán</label>
-                <input class="form-control" type="text" name="product_price">
+                <input class="form-control" type="text" name="product_price" required>
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Ảnh sản phẩm</label>
                 <div id="myfileupload">
-                  <input type="file" id="uploadfile" name="img" onchange="readURL(this);" />
+                  <input type="file" id="uploadfile" name="img" onchange="readURL(this);" required/>
                 </div>
                 <div id="thumbbox">
                   <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
@@ -264,7 +264,7 @@
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Mô tả sản phẩm</label>
-                <textarea class="form-control" name="des" id="mota"></textarea>
+                <textarea class="form-control" name="des" id="mota" required></textarea>
                 <script>CKEDITOR.replace('mota');</script>
               </div>
               <button class="btn btn-save" type="submit">Lưu lại</button>
