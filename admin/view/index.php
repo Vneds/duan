@@ -1,5 +1,5 @@
 <?php 
-  $price_arr = $conn->query("SELECT sum(total_money) as 'sum', date FROM bill GROUP BY date ORDER BY date")->fetchAll();
+  $price_arr = $conn->query("SELECT sum(total_money) as 'sum', date FROM bill WHERE status = 'Hoàn tất' GROUP BY date ORDER BY date")->fetchAll();
   $date_arr = $conn->query('SELECT date FROM bill GROUP BY date ORDER by date')->fetchAll();
 
 
