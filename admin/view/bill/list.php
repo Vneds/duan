@@ -18,7 +18,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-
+  <style>
+    .status-list {
+      display: flex;
+      gap: 10px;
+    }
+  </style>
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
@@ -86,7 +91,8 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-              <div class="row element-button">
+              <h3>Danh sách hóa đơn</h3>
+              <!-- <div class="row element-button">
                 <div class="col-sm-2">
   
                   <a class="btn btn-add btn-sm" href="form-add-don-hang.html" title="Thêm"><i class="fas fa-plus"></i>
@@ -117,18 +123,26 @@
                   <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
                       class="fas fa-trash-alt"></i> Xóa tất cả </a>
                 </div>
-              </div>
+              </div> -->
               <table class="table table-hover table-bordered" id="sampleTable">
               <div class="select">
                 <div class="status-list">
-                    <input value="all" checked name= "status" type="radio" id="all">
-                    <label for="all">Tất cả</label> 
-                    <input value="Đang xử lý" name= "status" type="radio" id="waiting">
-                    <label for="waiting">Đang xử lý</label> 
-                    <input value="Hoàn tất" name= "status" type="radio" id="done">
-                    <label for="done">Hoàn tất</label> 
-                    <input value="Đã hủy" name= "status" type="radio" id="delete">
-                    <label for="delete">Đã hủy</label> 
+                    <div class="status-item">
+                      <input value="all" checked name= "status" type="radio" id="all">
+                      <label for="all">Tất cả</label> 
+                    </div>
+                    <div>
+                      <input value="Đang xử lý" name= "status" type="radio" id="waiting">
+                      <label for="waiting">Đang xử lý</label> 
+                    </div>
+                    <div>
+                      <input value="Hoàn tất" name= "status" type="radio" id="done">
+                      <label for="done">Hoàn tất</label> 
+                    </div>
+                    <div>
+                      <input value="Đã hủy" name= "status" type="radio" id="delete">
+                      <label for="delete">Đã hủy</label> 
+                    </div>
                 </div>
               </div>
                 <thead>
