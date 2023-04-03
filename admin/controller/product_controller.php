@@ -66,4 +66,9 @@
         $stmt->execute([$id]);
         header ('location: ../index.php?page=product&action=list');
     }
+
+    function is_validate(){
+        
+
+    }
 ?>
