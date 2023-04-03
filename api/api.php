@@ -45,7 +45,7 @@
             echo json_encode( $conn->query($sql)->fetchAll());
             return;
         }
-        $sql = 'SELECT * FROM bill WHERE status = ?';
+        $sql = 'SELECT * FROM bill WHERE status = ? ORDER BY id DESC';
         $stmt = $conn->prepare($sql);
         $stmt->execute([$status]);
         echo json_encode($stmt->fetchAll());
