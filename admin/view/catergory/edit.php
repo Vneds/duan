@@ -212,12 +212,12 @@
               </div>
             </div>
 
-          <form class="row" method="POST" enctype="multipart/form-data" action="./controller/product_controller.php">
+          <form class="row" method="POST" enctype="multipart/form-data" action="./controller/catergory_controller.php">
               <input type="text" name="action" value="edit" hidden>
-              <input type="text" name="id" value="<?php echo $product['id']?>" hidden>
+              <input type="text" name="id" value="<?php echo $catergory['id']?>" hidden>
               <div class="form-group col-md-3">
-                <label class="control-label">Tên sản phẩm</label>
-                <input class="form-control" type="text" name="product_name" value="<?php echo $product['product_name']?>">
+                <label class="control-label">Tên danh mục</label>
+                <input class="form-control" type="text" name="catergory_name" value="<?php echo $catergory['catergory_name']?>">
               </div>
 
 
@@ -233,41 +233,8 @@
                   <option>Hết hàng</option>
                 </select>
               </div> -->
-              <div class="form-group col-md-3">
-                <label for="exampleSelect1" class="control-label">Danh mục</label>
-                <select class="form-control" id="exampleSelect1" name="catergory_id">
-                <?php 
-                    $catergory_list = get_catergory_list(); ?>
-                    <option>-- Chọn danh mục --</option>
-                <?php foreach ($catergory_list as $catergory){?>
-                        <option value="<?php echo $catergory['id']?>"><?php echo $catergory['catergory_name']?></option>
-                <?php }?>
-                </select>
-              </div>
-              <div class="form-group col-md-3">
-                <label class="control-label">Giá bán</label>
-                <input class="form-control" type="text" name="product_price" value="<?php echo $product['product_price']?>">
               </div>
               <div class="form-group col-md-12">
-                <label class="control-label">Ảnh sản phẩm</label>
-                <div id="myfileupload">
-                  <img src="../<?php echo $image_path ?>" alt="" style="width:300px">
-                  <input type="file" id="uploadfile" name="img" onchange="readURL(this);" >
-                </div>
-                <div id="thumbbox">
-                  <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
-                  <a class="removeimg" href="javascript:">value=<?php echo $_GET['id']?></a>
-                </div>
-                <div id="boxchoice">
-                  <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
-                  <p style="clear:both"></p>
-                </div>
-
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Mô tả sản phẩm</label>
-                <textarea class="form-control" name="des" id="mota"><?php echo $product['des']?></textarea>
-                <script>CKEDITOR.replace('mota');</script>
               </div>
               <button class="btn btn-save" type="submit">Lưu lại</button>
               <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>

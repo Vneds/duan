@@ -52,11 +52,11 @@
           <span class="app-menu__label">POS Bán Hàng</span></a></li>
       <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item active" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i>
+      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i>
           <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-      <li><a class="app-menu__item" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
-      <li><a class="app-menu__item" href="./index.php?page=product&action=list"><i
+      <li><a class="app-menu__item active" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
       <li><a class="app-menu__item" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
@@ -78,7 +78,7 @@
     <main class="app-content">
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb side">
-                <li class="breadcrumb-item active"><a href="#"><b>Danh sách khách hàng</b></a></li>
+                <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
             </ul>
             <div id="clock"></div>
         </div>
@@ -89,8 +89,8 @@
                         <div class="row element-button">
                             <div class="col-sm-2">
               
-                              <a class="btn btn-add btn-sm" href="./index.php?page=product&action=add" title="Thêm"><i class="fas fa-plus"></i>
-                                Tạo mới sản phẩm</a>
+                              <a class="btn btn-add btn-sm" href="./index.php?page=catergory&action=add" title="Thêm"><i class="fas fa-plus"></i>
+                                Thêm danh mục</a>
                             </div>
                             <div class="col-sm-2">
                               <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
@@ -122,45 +122,30 @@
                             <thead>
                                 <tr>
                                     <th width="10"><input type="checkbox" id="all"></th>
-                                    <th>id</th>
-                                    <th>Tên người dùng</th>
-                                    <!-- <th>Ảnh</th> -->
-                                    <th>Email</th>
-                                    <th>Vai trò</th>
+                                    <th>ID danh mục</th>
+                                    <th>Tên danh mục</th>
                                     <th>Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                    foreach($user_list as $user){
+                                    $catergory_list = $conn->query('SELECT * FROM catergory')->fetchAll(); 
+                                    foreach($catergory_list as $catergory){
                                 ?>                                                      
                                 <tr>
                                     <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                    <td>83216006</td>
-                                    <td><?php echo $user['user_name']?></td>
-                                    <td><?php echo $user['email']?></td>
+                                    <td><?php echo $catergory['id'] ?></td>
+                                    <td><?php echo $catergory['catergory_name'] ?></td>
                                     <td>
-                                      <?php
-                                      if($user['role'] == 1){
-                                        echo ("admin");
-                                    }
-                                    else {
-                                        echo "user";
-                                    }
-                                    ?></td> 
-                                    
-                                    </td>
-                                    <!-- <td><img src="" alt="" width="100px;"></td> -->
-                                    <td>
-                                      <form action="./controller/user_controller.php" method="POST"> 
-                                        <input type="text" value="<?php echo $user['id']?>" name="id" hidden>
+                                      <form action="./controller/catergory_controller.php" method="POST"> 
+                                        <input type="text" value="<?php echo $catergory['id']?>" name="id" hidden>
                                         <input type="text" value="delete" name="action"hidden>
                                         <button class="btn btn-primary btn-sm trash" type="submit" title="Xóa"
                                                  onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
                                              </button>
                                         </form>
-                                        <a href="./index.php?page=user&action=edit&id=<?php echo $user['id']?>"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                                        data-target="#ModalUP"><i class="fas fa-edit"></i></button></a>
+                                        <a href="./index.php?page=catergory&action=edit&id=<?php echo $catergory['id']?>"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                      data-target="#ModalUP"><i class="fas fa-edit"></i></button></a>
                                    
                                     </td>
                                 </tr>

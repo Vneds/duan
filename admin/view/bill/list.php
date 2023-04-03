@@ -42,7 +42,7 @@
     <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/hay.jpg" width="50px"
         alt="User Image">
       <div>
-        <p class="app-sidebar__user-name"><b>Võ Trường</b></p>
+      <p class="app-sidebar__user-name"><b>Admin</b></p>
         <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
       </div>
     </div>
@@ -145,7 +145,7 @@
                 </thead>
                 <tbody>
                   <?php
-                      $bill_list = $conn->query('SELECT * FROM bill')->fetchAll();  
+                      $bill_list = $conn->query('SELECT * FROM bill ORDER BY id DESC')->fetchAll();  
                       foreach($bill_list as $bill){
                       $class_name = change_status_background($bill['status']);
                   ?>

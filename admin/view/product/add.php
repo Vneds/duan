@@ -152,7 +152,7 @@
     <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/hay.jpg" width="50px"
         alt="User Image">
       <div>
-        <p class="app-sidebar__user-name"><b>Võ Trường</b></p>
+      <p class="app-sidebar__user-name"><b>Admin</b></p>
         <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
       </div>
     </div>
@@ -203,8 +203,8 @@
                     class="fas fa-folder-plus"></i> Thêm nhà cung cấp</a>
               </div>
               <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
-                    class="fas fa-folder-plus"></i> Thêm danh mục</a>
+                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc" href="./index.php?page=catergory&action=list"><i
+                    class="fas fa-folder-plus"></i> Danh mục</a>
               </div>
               <div class="col-sm-2">
                 <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addtinhtrang"><i
