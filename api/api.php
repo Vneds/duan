@@ -41,11 +41,11 @@
 
     function filter_bill_status($conn, $status){
         if ($status == 'all') {
-            $sql = 'SELECT * FROM bill';
+            $sql = 'SELECT * FROM bill ORDER BY id DESC';
             echo json_encode( $conn->query($sql)->fetchAll());
             return;
         }
-        $sql = 'SELECT * FROM bill WHERE status = ?';
+        $sql = 'SELECT * FROM bill WHERE status = ? ORDER BY id DESC';
         $stmt = $conn->prepare($sql);
         $stmt->execute([$status]);
         echo json_encode($stmt->fetchAll());
