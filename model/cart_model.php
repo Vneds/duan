@@ -8,7 +8,7 @@
         }
 
         if (is_exist_in_cart($product['id'])){
-            increase_product_quantity($product['id'], $_GET['quantity']);
+            increase_product_quantity($product['id'], $_GET['quantity'], $product['kho_hang']);
             header('location: index.php?page=cart');
             return;
         }
@@ -19,17 +19,22 @@
             'product_price' => $product['product_price'],
             'image_path' => $image_path,
             'quantity' => $_GET['quantity'],
-            'product_id' => $product['id']
+            'product_id' => $product['id'],
+            'stock' => $product['kho_hang'],
         ];
         array_push($_SESSION['cart'], $card);
         header ('location: index.php?page=cart');
     }
     
-    function increase_product_quantity($product_id, $quantity){
+    function increase_product_quantity($product_id, $quantity, $stock){
         foreach($_SESSION['cart'] as $product){
             if ($product['product_id'] == $product_id){
                 $key = array_search($product, $_SESSION['cart']);
-                $product['quantity'] += $quantity;
+                $total_quantity = (int)$quantity  + (int)$stock;
+                if ($total_quantity > $stock) {
+                    $total_quantity = $stock;
+                }
+                $product['quantity'] = $total_quantity;
                 $_SESSION['cart'][$key] = $product;
                 break;
             }

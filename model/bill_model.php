@@ -18,6 +18,7 @@
 
         foreach($_SESSION['cart'] as $product){
             $stmt->execute([$bill_id, $product['product_id'], $product['quantity']]);
+            update_product_stock($product);
         }
     }
 
@@ -25,6 +26,14 @@
         global $conn;
         $id = $conn->query('SELECT id from bill order by id desc')->fetch();
         return $id['id'];
+    }
+
+    function update_product_stock($product){
+        global $conn;
+        $stock = $product['stock']  - $product['quantity'];
+        $sql = 'UPDATE product SET kho_hang = ? WHERE id = ?';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$stock, $product['product_id']]);
     }
 
     
