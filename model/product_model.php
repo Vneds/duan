@@ -3,10 +3,10 @@
     function get_product_list($limit = null){
         global $conn;
         if (!$limit){
-            $product_list = $conn->query('SELECT * FROM product')->fetchAll();
+            $product_list = $conn->query('SELECT * FROM product WHERE kho_hang >= 1')->fetchAll();
             return $product_list;
         }
-        $sql = 'SELECT * FROM product LIMIT ' . $limit;
+        $sql = 'SELECT * FROM product WHERE kho_hang >= 1 LIMIT ' . $limit;
         $product_list = $conn->query($sql)->fetchAll();
         return $product_list;
     }
