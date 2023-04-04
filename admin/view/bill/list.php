@@ -150,9 +150,10 @@
                     <th width="10"><input type="checkbox" id="all"></th>
                     <th>ID đơn hàng</th>
                     <th>Khách hàng</th>
-                    <th>Đơn hàng</th>
+                    <th>Địa chỉ</th>
                     <th>Số lượng</th>
                     <th>Tổng tiền</th>
+                    <th>Ngày mua</th>
                     <th>Tình trạng</th>
                     <th>Tính năng</th>
                   </tr>
@@ -165,11 +166,12 @@
                   ?>
                   <tr>
                   <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>MD0837</td>
+                    <td><?php echo $bill['maDH'] ?></td>
                     <td><?php echo $bill['user_name'] ?></td>
                     <td><?php echo $bill['address'] ?></td>
                     <td><?php echo $bill['phone'] ?></td>
                     <td><?php echo $bill['total_money'] ?> đ</td>
+                    <td><?php echo $bill['date'] ?></td>
                     <td><span class="<?php echo $class_name ?>"><?php echo $bill['status']?></span></td>
                     <td>
                       <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
@@ -333,11 +335,12 @@
                         html += `   
                         <tr>
                           <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td>MD0837</td>
+                            <td>${bill['maDH']}</td>
                             <td>${bill['user_name']}</td>
                             <td>${bill['address']}</td>
                             <td>${bill['phone']}</td>
                             <td>${bill['total_money']} đ</td>
+                            <td>${bill['date']}</td>
                             <td><span class="${className}">${bill['status']}</span></td>
                           <td>
                             <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
