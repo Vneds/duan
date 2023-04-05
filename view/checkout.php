@@ -1,9 +1,49 @@
 <?php
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-        insert_bill();
-        insert_bill_detail();
-        unset($_SESSION['cart']);
-        header('Location: index.php?page=index');
+        $login_error = $phone_error = $district_error = $ward_error = '';
+
+        if (validate_checkout()){
+            insert_bill();
+            insert_bill_detail();
+            unset($_SESSION['cart']);
+            header('Location: index.php?page=index');
+        }
+    }
+
+    function is_login(){
+        if (!empty($_SESSION['user'])){
+            return true;
+        }
+        return false;
+    }
+
+    function validate_checkout(){
+        global $phone_error;
+        global $district_error;
+        global $ward_error;
+        global $login_error;
+        $error = false;
+        if (!is_login()){
+            $login_error = "<script>alert('Vui lòng đăng nhập')</script>";
+            $error = true;
+        }
+        if (strlen($_POST['phone']) < 10) {
+            $phone_error = '<div class="error">Vui lòng nhập đúng số điện thoại</div>';
+            $error = true;
+        }
+        if (empty($_POST['district'])){
+            $district_error = '<div class="error">Vui lòng chọn quận</div>';
+            $error = true;
+        }
+        if (empty($_POST['ward'])){
+            $ward_error = '<div class="error">Vui lòng chọn phường</div>';
+            $error = true;
+        }
+
+        if ($error){
+            return false;
+        }
+        return true;
     }
 ?>
 <!DOCTYPE html>
@@ -22,6 +62,7 @@
 </head>
 
 <body>
+    <?php echo $login_error ?? ''?>
     <div class="app">
         <?php include_once 'view/components/header.php'?>;
         <div class="main">
@@ -34,11 +75,12 @@
             <div class="checkout_1">
             <div class="input_check">
                 <label for="">Tên người mua</label><br>
-                <input type="text" name="user_name" class="user-name" id="">
+                <input type="text" name="user_name" class="user-name" id="" required>
             </div>
             <div class="input_check">
                 <label for="">Số điện thoại</label><br>
-                <input type="text" name="phone" id="" class="email">
+                <input type="text" name="phone" id="" class="email" required>
+                <?php echo $phone_error ?? ''?>
             </div>
             <div class="input_check">
                 <label for="">Tỉnh/Thành Phố</label><br>
@@ -51,6 +93,7 @@
                 <select type="text" name="ward" class="user-name ward" id="">
                     <option value="">Chọn phường xã</option>
                 </select>
+                <?php echo $ward_error ?? ''?>
             </div>
             
         </div>
@@ -58,21 +101,22 @@
             <div class="checkout_2">
             <div class="input_check">
                 <label for="">Email</label><br>
-                <input type="text" name="email" id="" class="phone"></td>
+                <input type="text" name="email" id="" class="phone" required></td>
             </div>
             <div class="input_check">
                 <label for="">Địa chỉ</label><br>
-                <input type="text" name="street" id="" class="address"></td>
+                <input type="text" name="street" id="" class="address" required></td>
             </div>
             <div class="input_check">
                 <label for="">Quận huyện</label><br>
                 <select type="text" name="district" class="user-name district" id="">
                     <option value="">Chọn quận huyện</option>
                 </select>
+                <?php echo $district_error ?? ''?>
             </div>
             <div class="input_check">
                 <label for="">Ghi chú</label><br>
-                <input type="text" name="text" id="" class="email" ></td>
+                <input type="text" name="text" id="" class="email"></td>
             </div>
         </div>
             <!-- <button type="submit">Thanh toans</button> -->
