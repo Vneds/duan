@@ -272,6 +272,7 @@
               <div class="form-group col-md-12">
                 <label class="control-label">Mô tả sản phẩm</label>
                 <textarea class="form-control" name="des" id="mota"><?php echo $product['des']?></textarea>
+                <span class="text-danger"><?php echo $_GET['error_des'] ?? ''?></span>
                 <script>CKEDITOR.replace('mota');</script>
               </div>
               <button class="btn btn-save" type="submit">Lưu lại</button>
