@@ -44,7 +44,7 @@
 </header>
 
 <script>
-    $('.input').keydown(()=>{
+    $('.input').keyup(()=>{
         $.ajax({
             url: '../duan/api/api.php',
             data: {
