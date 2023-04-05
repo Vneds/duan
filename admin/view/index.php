@@ -1,6 +1,6 @@
 <?php 
   $price_arr = $conn->query("SELECT sum(total_money) as 'sum', date FROM bill WHERE status = 'Hoàn tất' GROUP BY date ORDER BY date")->fetchAll();
-  $date_arr = $conn->query('SELECT date FROM bill GROUP BY date ORDER by date')->fetchAll();
+  $date_arr = $conn->query("SELECT date FROM bill WHERE status = 'Hoàn tất' GROUP BY date ORDER by date")->fetchAll();
 
 
   $user_count = $conn->query("SELECT count(*) as 'quantity' from user")->fetch();
@@ -241,7 +241,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="tile">
-              <h3 class="tile-title">Thống kê 6 tháng doanh thu</h3>
+              <h3 class="tile-title">Thống kê doanh thu theo từng ngày</h3>
               <div class="embed-responsive embed-responsive-16by9">
                 <canvas class="embed-responsive-item" id="barChartDemo"></canvas>
               </div>
