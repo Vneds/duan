@@ -108,7 +108,7 @@
                             </thead>
                             <tbody>
                                 <?php 
-                                    $product_list = get_product_list();
+                                    $product_list =  $conn->query('SELECT * FROM product')->fetchAll();
                                     foreach($product_list as $product){
                                     $catergory_name = get_catergory_name($product['catergory_id']);
                                     $image_path = '../' . get_image_path($product['image_path']);
@@ -118,8 +118,14 @@
                                     <td>83216006</td>
                                     <td><?php echo $product['product_name']?></td>
                                     <td><img src="<?php echo $image_path ?>" alt="" width="100px;"></td>
-                                    <td>60</td>
-                                     <td><span class="badge bg-success">Còn hàng</span></td>
+                                    <td><?php echo $product['kho_hang']?></td>
+                                    <td>
+                                      <?php if ($product['kho_hang'] == 0) { ?>
+                                        <span class="badge bg-danger">Hết hàng</span>
+                                      <?php } else {?>
+                                        <span class="badge bg-success">Còn hàng</span>
+                                      <?php }?>
+                                    </td>
                                     <td><?php echo $product['product_price']?> $</td>
                                     <td><?php echo $catergory_name?></td>
                                     <td>
