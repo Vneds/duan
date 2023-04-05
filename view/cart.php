@@ -35,7 +35,7 @@ session_start();
                     </tr>
                     
                     <?php 
-                        if (count($_SESSION['cart']) == 0){
+                        if (empty($_SESSION['cart']) || count($_SESSION['cart']) == 0 ){
                             echo 'Hiện chưa có sản phẩm nào';
                         } else {
                     ?>
