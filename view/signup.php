@@ -3,7 +3,8 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $sql = "INSERT INTO user (user_name, pass_word, email) VALUES (?,?,?)";
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$_POST['user'],$_POST['pass'], $_POST['email']]);
+        $pass = password_hash($_POST['pass'], PASSWORD_BCRYPT);
+        $stmt->execute([$_POST['user'],$pass, $_POST['email']]);
         header('location: ./index.php?page=login');
     }
 ?>
@@ -53,7 +54,7 @@
                             </span>
                         </div>
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" type="email"required placeholder="Email" name="email">
+                            <input class="input100" type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"  placeholder="Email" name="email" required>
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class='bx bx-user'></i>

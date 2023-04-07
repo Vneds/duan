@@ -15,11 +15,14 @@
     }
     return $conn;
 
-    function getuser($user,$pass){
+    function getuser($email,$pass){
         global $conn;
-        $stmt = $conn->prepare("SELECT * FROM user WHERE user_name = ? AND pass_word =  ? " );
-        $stmt->execute([$user, $pass]);
+        $stmt = $conn->prepare("SELECT * FROM user WHERE email = ?" );
+        $stmt->execute([$email]);
         $kq = $stmt->fetch();
-        return $kq;
+        if(password_verify($pass,$kq['pass_word'])){ 
+            return $kq;
+            echo $kq;
+        }
       }
 ?>
