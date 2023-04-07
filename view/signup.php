@@ -3,6 +3,7 @@
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         if (!is_avaible_email($conn)){
             header('location: ./index.php?page=signup&email_error=Email đã tồn tại');
+            die();
         }
         insert_user($conn);
         header('location: ./index.php?page=login');
