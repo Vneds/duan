@@ -6,7 +6,7 @@
         $kq = getuser($email,$pass);
         // if (!$kq){
         //     header('location: ./index.php?page=login');
-        // }
+        // }    
 
         $_SESSION['user'] = [
             'role' => $kq['role'],
