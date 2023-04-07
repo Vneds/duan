@@ -77,3 +77,18 @@
 .error {
     color: red;
 }
+
+.bubble {
+    display: flex;
+    background-color: #F598A4;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    right: 65px;
+    top: 15px;
+    font-weight: bold;
+}
