@@ -19,8 +19,12 @@
             header('location: ./admin/index.php?page=index');
             die();
         }
+
         header('location: ./index.php?page=index');
+
         die();
+        
+       
     }
 ?>
 <!DOCTYPE html>
