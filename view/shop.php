@@ -88,7 +88,6 @@
 
                         <ul class="products__warpper">
                             <?php 
-                            
                             $pro =  isset($_GET['pro']) ? $_GET['pro'] : 1;
                             $offset = ((int)$pro ) * 12;
                                 $product_list =$conn->query("select * from product limit 12 offset " . $offset);
