@@ -12,22 +12,15 @@
             'role' => $kq['role'],
             'iduser' => $kq['id'],
             'user_name' => $kq['user_name'],
-            'email' => $kq['email']
+            'email' => $kq['email'],
+            'img' => $kq['img']
         ];
 
         if( $_SESSION['user']['role'] == 1){
             header('location: ./admin/index.php?page=index');
             die();
         }
-        
-            // $_SESSION['role'] = $role;
-            // $_SESSION['iduser'] = $kq['id'];
-            // $_SESSION['user_name'] = $kq['user_name'];
-            // $_SESSION['email'] = $kq['email'];
-            // $_SESSION['img']=$kq[0]['img'];
         header('location: ./index.php?page=index');
-
-        
         die();
     }
 ?>
