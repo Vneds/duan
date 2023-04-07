@@ -84,13 +84,13 @@ session_start();
                     $image_path = "view/img/shop/" . $product['image_path'];
                     if ($i == 0 ):?>
                         <div class="product__wrapper product__wrapper--huge">
-                            <img src="<?php echo $image_path ?>" alt="" class="product__img" style="height: 308px">
+                            <a href="index.php?page=detail&id=<?php echo $product['id'] ?>"><img src="<?php echo $image_path ?>" alt="" class="product__img" style="height: 308px"></a>
                             <span class="product__name"><?php echo $product['product_name']?></span>
                             <span class="product__price"><?php echo $product['product_price']?></span>
                         </div>
                     <?php endif?>
                     <div class="product__wrapper">
-                    <img src="<?php echo $image_path ?>" alt="" class="product__img" style="height: 308px">
+                    <a href="index.php?page=detail&id=<?php echo $product['id'] ?>"><img src="<?php echo $image_path ?>" alt="" class="product__img" style="height: 308px"></a>
                             <span class="product__name"><?php echo $product['product_name']?></span>
                             <span class="product__price"><?php echo $product['product_price']?></span>
                     </div>
@@ -121,7 +121,7 @@ session_start();
                     $image_path = "view/img/shop/" . $product['image_path'];
                 ?>
                     <div class="product__wrapper">
-                        <img src="<?php echo $image_path ?>" alt="" class="product__img" style="height: 308px">
+                    <a href="index.php?page=detail&id=<?php echo $product['id'] ?>"><img src="<?php echo $image_path ?>" alt="" class="product__img" style="height: 308px"></a>
                         <span class="product__name"><?php echo $product['product_name']?></span>
                         <span class="product__price"><?php echo $product['product_price']?>
                         </div>
