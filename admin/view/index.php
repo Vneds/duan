@@ -8,10 +8,10 @@
   $product_count = $conn->query("SELECT count(*) as 'quantity' from product")->fetch();
 
   $bill_list = $conn->query('SELECT * FROM bill ORDER BY id DESC LIMIT 4;')->fetchAll();  
-  $user_list = $conn->query('SELECT * FROM user ORDER BY id DESC LIMIT 4')->fetchAll();  
-
-
+  $user_list = $conn->query('SELECT * FROM user ORDER BY id DESC LIMIT 4')->fetchAll();
   
+  $product_almost_run_out = $conn->query("SELECT count(*) as 'quantity' FROM product WHERE kho_hang <= 5")->fetch();
+
   function change_status_background($status){
     if ($status == 'Đang xử lý') {
         return "badge bg-info";
@@ -154,15 +154,15 @@
             </div>
           </div>
            <!-- col-6 -->
-          <!-- <div class="col-md-6">
+          <div class="col-md-6">
             <div class="widget-small danger coloured-icon"><i class='icon bx bxs-error-alt fa-3x'></i>
               <div class="info">
                 <h4>Sắp hết hàng</h4>
-                <p><b>4 sản phẩm</b></p>
+                <p><b><?php echo $product_almost_run_out['quantity']?></b></p>
                 <p class="info-tong">Số sản phẩm cảnh báo hết cần nhập thêm.</p>
               </div>
             </div>
-          </div> -->
+          </div>
            <!-- col-12 -->
            <div class="col-md-12">
             <div class="tile">

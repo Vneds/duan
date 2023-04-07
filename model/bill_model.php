@@ -35,7 +35,6 @@
         $stmt = $conn->prepare($sql);
         $stmt->execute([$stock, $product['product_id']]);
     }
-
     
     function generate_random_string(){
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
