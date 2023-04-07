@@ -25,45 +25,14 @@
     font-size: 45px;
     color: #000000;
     opacity: 0.77;
-
 }
 .slider {
     position: relative;
 }
 
-.article {
-    height: 490px;
-    background-position: right center;
-    background-size: 60% 100%;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    flex-wrap:wrap;
-    align-content: space-between;
-}
 
 
-.article__author {
-    padding: 150px 0 27px 0;
-    font-size: 20px;
-    font-weight: 100;
-}
 
-.article__heading {
-    font-size: 24px;
-    font-weight: 700;
-}
-
-.article__subheading {
-    padding: 32px 0 28px 70px;
-    font-size: 14px;
-    font-weight: 100;
-    max-width: 450px;
-}
-
-.article .btn {
-    margin-left: 70px;
-}
 .content {
     position: absolute;
     top: 236px;
@@ -129,12 +98,96 @@
     opacity: 1;
     padding-left: 20px;
 }
-
-.post__item-img{
-    width:791px;
-    height:489px;
-    
+.detail_img img{
+    width:1290px;
+    height:400px;
+    padding:0 0 0 200px;
+    margin-top: -100px;
 }
+.title{
+text-align: center;
+font-family: 'Roboto';
+font-size: 24px;
+font-weight: 700;
 
-
-
+}
+.detail_content{
+    width:1290px;
+  font-family: 'Roboto';
+  font-size: 14px;  
+  line-height: 20px;
+  padding-left:100px;
+  margin-top:20px;
+}
+.related_content{
+  
+    font-family: 'Roboto';
+    font-size: 24px;  
+    line-height: 20px;
+    padding-left:100px;
+    margin-top:20px;
+    font-weight: 700;;
+}
+.related_post{
+    width: 700px;
+    height:258px;
+    display: flex;
+}
+.post_img img{
+width: 580px;
+height:225px;
+padding-left:0px;
+margin-left:-110px;;
+}
+.post{
+    width:450px;
+    height:300px;
+    font-family: 'Roboto';
+  font-size: 14px;  
+  line-height: 20px;
+  padding-left:100px;
+  margin-top:20px;
+}
+.post_comment{
+    width:1290px;
+    height:300px;
+    margin-top: 75px;
+}
+.comment{
+    
+    font-family: 'Roboto';
+    font-size: 24px;  
+    line-height: 20px;
+    padding-left:100px;
+    margin-top:20px;
+    font-weight: 700;;
+}
+.post_comment input{
+    width: 750px;
+    height: 60px;
+    color:#000000;
+    margin-top:20px;
+    margin-left:97px;
+    padding-left :0px;
+    text-align: left;
+}
+.post_comment button{
+    width: 214px;
+    height: 60px;
+    background-color: #000000;
+    margin-left:97px;
+    margin-top:20px;
+    display:block;
+    Font-family: Roboto;
+font-style: Bold;
+font-size: 20px;
+line-height: 23px;
+line-height:100%;
+text-align: center;
+font-weight: 700;
+color: #f5f5f5;
+}
+.post_comment button:hover{
+    background-color: #F598A4;
+    color:#f5f5f5;
+}

@@ -42,14 +42,11 @@ session_start();
             </div>     
          </div>
             <div class="contact_add">
+                <!-- item1 -->
                 <div class="item">
 
                     <div style="padding-top: 48px; padding-left: 180px;" class="add_item">
                         <img src="view/img/Group 401.svg" width ="70px" height="70px"alt="">
-
-                    <div class="add_item">
-                        <img src="./img/Group 401.svg" alt="">
-
                     </div>
                     <h3 class="add_heading">
                         ADDRESS
@@ -64,93 +61,56 @@ session_start();
                         <p>No. 23, St. Louis Street, Melbo, USA and 78, Thanh Xuan, Hanoi</p>
                     </div>
                 </div>
-
+<!-- item2 -->
                 <div class="item2">
 
-                    <div style="padding-top: 48px; padding-left: 185px;" class="add_item">
-                        <img src="view/img/Group 400.svg"  width ="70px" height="70px" alt="">
+<div style="padding-top: 48px; padding-left: 180px;" class="add_item">
+    <img src="view/img/Group 400.svg" width ="70px" height="70px"alt="">
+</div>
+<h3 style="color:#f5f5f5;" class="add_heading">
+    CONTACT US
+</h3>
 
-                    <div class="add_item">
-                        <img src="./img/Group 401.svg" alt="">
-
-                    </div>
-                    <h3 class="add_heading2">
-                        CONTACT US
-                </h3>
-
-                <div style="padding:13px 180px 0px 180px;margin-top:-60px;" class="add_item">
-                <img src="view/img/Line 16 (1).png" width="70px" height="5px" alt="">
-                </div>
-                    <div class="add_subheading2">
-
-                    <div class="add_subheading2">
-                        <p>No. 23, St. Louis Street, Melbo, USA and 78, Thanh Xuan, Hanoi</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="add_item">
-                        <img src="./img/Group 401.svg" alt="">
-                    </div>
-                    <h3 class="add_heading">
-                        EMAIL
-                </h3>
-                    <div class="add_subheading">
-
-                        <p>No. 23, St. Louis Street, Melbo, USA and 78, Thanh Xuan, Hanoi</p>
-                    </div>
-                </div>
+<div style="padding:0px 180px 18px 180px;margin-top:-50px;" class="add_item">
+<img src="view/img/Line 16 (1).png" width="70px" height="5px" alt="">
+</div>
 
 
-                <div class="item">
-                    <div style="padding-top: 48px; padding-left: 180px;" class="add_item">
-                        <img src="view/img/Group 402.svg"  width ="70px" height="70px" alt="">
-                    </div>
-                    <h3 class="add_heading">
-                        EMAIL
-                </h3>
-                <div style="padding:0px 180px 18px 180px;margin-top:-50px;" class="add_item">
-                <img src="view/img/Line 16.png" width="70px" height="5px" alt="">
-                </div>
-                    <div class="add_subheading">
-                        <p>No. 23, St. Louis Street, Melbo, USA and 78, Thanh Xuan, Hanoi</p>
-                    </div>
-                </div>
+<div style="color:#f5f5f5;" class="add_subheading">
+    <p>No. 23, St. Louis Street, Melbo, USA and 78, Thanh Xuan, Hanoi</p>
+</div>
+</div>
+<!-- item3 -->
+<div class="item">
+
+<div style="padding-top: 48px; padding-left: 180px;" class="add_item">
+    <img src="view/img/Group 402.svg" width ="70px" height="70px"alt="">
+</div>
+<h3 class="add_heading">
+    EMAIL
+</h3>
+
+<div style="padding:0px 180px 18px 180px;margin-top:-50px;" class="add_item">
+<img src="view/img/Line 16.png" width="70px" height="5px" alt="">
+</div>
+
+
+<div class="add_subheading">
+    <p>No. 23, St. Louis Street, Melbo, USA and 78, Thanh Xuan, Hanoi</p>
+</div>
+</div>
+
 
             </div>
-        
-           
-            
+
+                
+   
             <div class="git">
             <div class="grid">
             <div class="git-title">
                     <H2>GET IN TOUCH</H2>
             </div>
-            
-            </div>     
-         </div>
-        
-        <div class="in4">
-            <div class="name">
-                <input type="text" placeholder ="Your name">
-            </div>
-            <div class="name">
-                <input type="text" placeholder="Your Email">
-            </div>
-            <div class="name">
-                <input type="text" placeholder="Your Subject">
-            </div>
-
-            </div>
-        
-           
-            
-            <div class="git">
-            <div class="grid">
-            <div class="git-title">
-                    <H2>GET IN TOUCH</H2>
-            </div>
-            <img src="./img/Group 401.svg" alt="" width="200px" height="200px">
+         
             </div>     
          </div>
         
@@ -188,9 +148,7 @@ session_start();
                     </div>
                 </div>
             </div>
-
-        <?php include_once 'view/components/footer.php'?>;           
-       
+        <?php include_once 'view/components/footer.php'?>;
 
         
     </div>

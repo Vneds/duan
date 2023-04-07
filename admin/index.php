@@ -17,6 +17,13 @@
         case 'chart':
             include_once 'controller/chart_controller.php';
             break;
+        case 'post':
+            include_once 'controller/post_controller.php';
+            break;
+        case 'comment':
+            include_once 'controller/comment_controller.php';
+            break;
+
         default:
             include_once 'view/index.php';
             break;

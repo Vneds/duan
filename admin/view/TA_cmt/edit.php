@@ -56,7 +56,10 @@
           <span class="app-menu__label">Quản lý nhân viên</span></a></li>
       <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
-            
+            <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý bài viết</span></a></li>
+            <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý bình luận</span></a></li>
       <li><a class="app-menu__item active" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
@@ -79,7 +82,7 @@
     <main class="app-content">
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb side">
-                <li class="breadcrumb-item active"><a href="#"><b>Danh sách sản phẩm</b></a></li>
+                <li class="breadcrumb-item active"><a href="#"><b>Danh sách bài viết</b></a></li>
             </ul>
             <div id="clock"></div>
         </div>
@@ -90,30 +93,9 @@
                         <div class="row element-button">
                             <div class="col-sm-2">
               
-                              <a class="btn btn-add btn-sm" href="./index.php?page=product&action=add" title="Thêm"><i class="fas fa-plus"></i>
-                                Tạo mới sản phẩm</a>
-                            </div>
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
-                                  class="fas fa-file-upload"></i> Tải từ file</a>
-                            </div>
-              
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
-                                  class="fas fa-print"></i> In dữ liệu</a>
-                            </div>
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i
-                                  class="fas fa-copy"></i> Sao chép</a>
-                            </div>
-              
-                            <div class="col-sm-2">
-                              <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
-                            </div>
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i
-                                  class="fas fa-file-pdf"></i> Xuất PDF</a>
-                            </div>
+                              <a class="btn btn-add btn-sm" href="./index.php?page=post&action=add" title="Thêm"><i class="fas fa-plus"></i>
+                                Tạo mới bài viết</a>
+                           
                             <div class="col-sm-2">
                               <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
                                   class="fas fa-trash-alt"></i> Xóa tất cả </a>
@@ -123,41 +105,35 @@
                             <thead>
                                 <tr>
                                     <th width="10"><input type="checkbox" id="all"></th>
-                                    <th>Mã sản phẩm</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Ảnh</th>
-                                    <th>Số lượng</th>
-                                    <th>Tình trạng</th>
-                                    <th>Giá tiền</th>
-                                    <th>Danh mục</th>
-                                    <th>Chức năng</th>
+                                    <th>Mã bài viết</th>
+                                    <th>Tên bài viết</th>
+                                    <th>Nội dung</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                    $product_list = get_product_list();
-                                    foreach($product_list as $product){
-                                    $catergory_name = get_catergory_name($product['catergory_id']);
-                                    $image_path = '../' . get_image_path($product['image_path']);
+                                    $post_list = get_post_list();
+                                    foreach($post_list as $post){
+                                 
+                                    
                                 ?>                                                      
                                 <tr>
                                     <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                    <td>83216006</td>
-                                    <td><?php echo $product['product_name']?></td>
-                                    <td><img src="<?php echo $image_path ?>" alt="" width="100px;"></td>
-                                    <td>60</td>
-                                     <td><span class="badge bg-success">Còn hàng</span></td>
-                                    <td><?php echo $product['product_price']?> $</td>
-                                    <td><?php echo $catergory_name?></td>
+                                    <td><?php echo $post['id']?></td>
+                                    <td><?php echo $post['title']?></td>
+                                    <td><?php echo $post['content']?></td>
+                                    
+                                   
+                                   
                                     <td>
-                                      <form action="./controller/product_controller.php" method="POST"> 
-                                        <input type="text" value="<?php echo $product['id']?>" name="id" hidden>
+                                      <form action="./controller/post_controller.php" method="POST"> 
+                                        <input type="text" value="<?php echo $post['id']?>" name="id" hidden>
                                         <input type="text" value="delete" name="action"hidden>
                                         <button class="btn btn-primary btn-sm trash" type="submit" title="Xóa"
                                                  onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
                                              </button>
                                         </form>
-                                        <a href="./index.php?page=product&action=edit&id=<?php echo $product['id']?>"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                                        <a href="./index.php?page=post&action=edit<?php echo $post['id']?>"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
                       data-target="#ModalUP"><i class="fas fa-edit"></i></button></a>
                                    
                                     </td>
@@ -171,80 +147,7 @@
         </div>
     </main>
 
-<!--
-  MODAL
--->
-<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-data-keyboard="false">
-<div class="modal-dialog modal-dialog-centered" role="document">
-  <div class="modal-content">
 
-    <div class="modal-body">
-      <div class="row">
-        <div class="form-group  col-md-12">
-          <span class="thong-tin-thanh-toan">
-            <h5>Chỉnh sửa thông tin sản phẩm cơ bản</h5>
-          </span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-6">
-            <label class="control-label">Mã sản phẩm </label>
-            <input class="form-control" type="number" value="71309005">
-          </div>
-        <div class="form-group col-md-6">
-            <label class="control-label">Tên sản phẩm</label>
-          <input class="form-control" type="text" required value="Bàn ăn gỗ Theresa">
-        </div>
-        <div class="form-group  col-md-6">
-            <label class="control-label">Số lượng</label>
-          <input class="form-control" type="number" required value="20">
-        </div>
-        <div class="form-group col-md-6 ">
-            <label for="exampleSelect1" class="control-label">Tình trạng sản phẩm</label>
-            <select class="form-control" id="exampleSelect1">
-              <option>Còn hàng</option>
-              <option>Hết hàng</option>
-              <option>Đang nhập hàng</option>
-            </select>
-          </div>
-          <div class="form-group col-md-6">
-            <label class="control-label">Giá bán</label>
-            <input class="form-control" type="text" value="5.600.000">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="exampleSelect1" class="control-label">Danh mục</label>
-            <select class="form-control" id="exampleSelect1">
-              <option>Bàn ăn</option>
-              <option>Bàn thông minh</option>
-              <option>Tủ</option>
-              <option>Ghế gỗ</option>
-              <option>Ghế sắt</option>
-              <option>Giường người lớn</option>
-              <option>Giường trẻ em</option>
-              <option>Bàn trang điểm</option>
-              <option>Giá đỡ</option>
-            </select>
-          </div>
-      </div>
-      <BR>
-      <a href="#" style="    float: right;
-    font-weight: 600;
-    color: #ea0000;">Chỉnh sửa sản phẩm nâng cao</a>
-      <BR>
-      <BR>
-      <button class="btn btn-save" type="button">Lưu lại</button>
-      <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-      <BR>
-    </div>
-    <div class="modal-footer">
-    </div>
-  </div>
-</div>
-</div>
-<!--
-MODAL
--->
 
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.2.1.min.js"></script>
@@ -312,7 +215,7 @@ MODAL
             jQuery(".trash").click(function () {
                 swal({
                     title: "Cảnh báo",
-                    text: "Bạn có chắc chắn là muốn xóa sản phẩm này?",
+                    text: "Bạn có chắc chắn là muốn bài viết này?",
                     buttons: ["Hủy bỏ", "Đồng ý"],
                 })
                     .then((willDelete) => {
