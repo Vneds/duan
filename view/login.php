@@ -1,12 +1,12 @@
 <?php
     session_start();
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $user = $_POST['user'];
+        $email = $_POST['email'];
         $pass = $_POST['pass'];
-        $kq = getuser($user,$pass);
-        if (!$kq){
-            header('location: ./index.php?page=login');
-        }
+        $kq = getuser($email,$pass);
+        // if (!$kq){
+        //     header('location: ./index.php?page=login');
+        // }
 
         $_SESSION['user'] = [
             'role' => $kq['role'],
@@ -63,7 +63,7 @@
                     <!--=====FORM INPUT TÀI KHOẢN VÀ PASSWORD======-->
                     <form action="" enctype="multipart/form-data" method="post">
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" type="text" required placeholder="Tên đăng nhập" name="user">
+                            <input class="input100" type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" placeholder="Nhập email" name="email" required>
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class='bx bx-user'></i>
