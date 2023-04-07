@@ -46,6 +46,7 @@
             include_once 'model/login_add.php';
             break;
         case 'user':
+            include_once 'model/user_model.php';
             include_once 'view/user.php';
             break;
         case 'user_bill':

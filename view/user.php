@@ -1,5 +1,20 @@
 <?php
-session_start();
+    session_start();
+    if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $img_name = get_img_name();
+        update_user($_POST['id'], $img_name);
+        update_user_in_session();
+    }
+
+    function get_img_name(){
+        if (!isset($_FILES['img']['name'])){
+            return null;
+        }
+        $des = dirname(__FILE__) . '/img/user/' . $_FILES['img']['name'];
+        if (move_uploaded_file($_FILES["img"]["tmp_name"], $des)){
+            return $_FILES['img']['name'];
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,8 +45,9 @@ session_start();
 
         <div class="main">
             <div class="flex">  
-            <img class="user_avatar" src="view/img/user/<?php echo $user['img']?>" alt="">
+            <img class="user_avatar" src="view/img/user/<?php echo $_SESSION['user']['img']?>" alt="">
             <form class="form" action="" method="POST" enctype="multipart/form-data">
+                <input type="text" value="<?php echo $_GET['id'] ?>" hidden name="id">
                 <div class="form-group">
                     <label for="userName">Tên người dùng</label>
                     <input type="text" name='name' class="form-control" id="user_name" value="<?php echo $user['user_name'] ?>">
