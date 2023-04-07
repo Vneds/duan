@@ -40,6 +40,9 @@
   --p_wrap_login:100px 100px 50px 100px;
   --shadow_login:0px 0px 20px 0px #0000003b;
 }
+.error {
+  color: red;
+}
 * {
 	margin: var(--margin_0); 
 	padding: var(--padding_0); 
