@@ -243,18 +243,18 @@
                         <option value="<?php echo $catergory['id']?>"><?php echo $catergory['catergory_name']?></option>
                 <?php }?>
                 </select>
-                <span class="text-danger"><?php echo $_GET['error_catergory'] ?? ''?></span>
+                <span class="text-danger"><?php echo $_GET['catergory_error'] ?? ''?></span>
               </div>
               <div class="form-group col-md-3">
                 <label class="control-label">Giá bán</label>
                 <input class="form-control" type="text" name="product_price" required>
-                <span class="text-danger"><?php echo $_GET['error_price'] ?? ''?></span>
+                <span class="text-danger"><?php echo $_GET['price_error'] ?? ''?></span>
               </div>
 
               <div class="form-group col-md-3">
                 <label class="control-label">Hàng tồn</label>
                 <input class="form-control" type="text" name="stock" required>
-                <span class="text-danger"><?php echo $_GET['error_stock'] ?? ''?></span>
+                <span class="text-danger"><?php echo $_GET['stock_error'] ?? ''?></span>
               </div>
 
               <div class="form-group col-md-12">
@@ -270,17 +270,17 @@
                   <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
                   <p style="clear:both"></p>
                 </div>
-                <span class="text-danger"><?php echo $_GET['error_img'] ?? ''?></span>
+                <span class="text-danger"><?php echo $_GET['img_error'] ?? ''?></span>
 
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Mô tả sản phẩm</label>
                 <textarea class="form-control" name="des" id="mota" required></textarea>
-                <span class="text-danger"><?php echo $_GET['error_des'] ?? ''?></span>
+                <span class="text-danger"><?php echo $_GET['des_error'] ?? ''?></span>
                 <script>CKEDITOR.replace('mota');</script>
               </div>
               <button class="btn btn-save" type="submit">Tạo mới</button>
-              <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
+              <a class="btn btn-cancel" href="./index.php?page=product&action=list">Hủy bỏ</a>
             </div>
             </div>
           </form> 
