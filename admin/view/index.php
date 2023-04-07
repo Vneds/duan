@@ -61,7 +61,7 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="./index.php?page=log_out"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+      <li><a class="app-nav__item" href="../model/log_out.php"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
     </ul>

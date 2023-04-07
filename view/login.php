@@ -19,7 +19,7 @@
             header('location: ./admin/index.php?page=index');
             die();
         }
-        
+        else if($_SESSION['user']['role'] == 0){
             // $_SESSION['role'] = $role;
             // $_SESSION['iduser'] = $kq['id'];
             // $_SESSION['user_name'] = $kq['user_name'];
@@ -27,8 +27,11 @@
             // $_SESSION['img']=$kq[0]['img'];
         header('location: ./index.php?page=index');
 
-        
         die();
+        }
+        else{
+            header('location: ./index.php?page=index');
+        }
     }
 ?>
 <!DOCTYPE html>
