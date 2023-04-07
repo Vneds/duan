@@ -241,23 +241,23 @@
                         <option value="<?php echo $catergory['id']?>"><?php echo $catergory['catergory_name']?></option>
                 <?php }?>
                 </select>
-                <span class="text-danger"><?php echo $_GET['error_catergory'] ?? ''?></span>
+                <span class="text-danger"><?php echo $_GET['catergory_error'] ?? ''?></span>
               </div>
               <div class="form-group col-md-3">
                 <label class="control-label">Giá bán</label>
                 <input required class="form-control" type="text" name="product_price" value="<?php echo $product['product_price']?>">
-                <span class="text-danger"><?php echo $_GET['error_price'] ?? ''?></span>
+                <span class="text-danger"><?php echo $_GET['price_error'] ?? ''?></span>
               </div>
               <div class="form-group col-md-3">
                 <label class="control-label">Hàng tồn</label>
                 <input required class="form-control" type="text" name="stock" value="<?php echo $product['kho_hang']?>">
-                <span class="text-danger"><?php echo $_GET['error_stock'] ?? ''?></span>
+                <span class="text-danger"><?php echo $_GET['stock_error'] ?? ''?></span>
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Ảnh sản phẩm</label>
                 <div id="myfileupload">
                   <img src="../<?php echo $image_path ?>" alt="" style="width:300px">
-                  <input type="file" id="uploadfile" name="img" onchange="readURL(this);" >
+                  <input type="file" id="uploadfile" name="img" >
                 </div>
                 <div id="thumbbox">
                   <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
@@ -272,11 +272,11 @@
               <div class="form-group col-md-12">
                 <label class="control-label">Mô tả sản phẩm</label>
                 <textarea class="form-control" name="des" id="mota"><?php echo $product['des']?></textarea>
-                <span class="text-danger"><?php echo $_GET['error_des'] ?? ''?></span>
+                <span class="text-danger"><?php echo $_GET['des_error'] ?? ''?></span>
                 <script>CKEDITOR.replace('mota');</script>
               </div>
               <button class="btn btn-save" type="submit">Lưu lại</button>
-              <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
+              <a class="btn btn-cancel" href="./index.php?page=product&action=list">Hủy bỏ</a>
             </div>
             </div>
           </form> 
