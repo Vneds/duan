@@ -4,10 +4,9 @@
         $email = $_POST['email'];
         $pass = $_POST['pass'];
         $kq = getuser($email,$pass);
-        // if (!$kq){
-        //     header('location: ./index.php?page=login');
-        // }
-
+        if (!$kq){
+            header('location: ./index.php?page=login');
+        }
         $_SESSION['user'] = [
             'role' => $kq['role'],
             'iduser' => $kq['id'],
