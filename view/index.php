@@ -1,6 +1,5 @@
 <?php 
 session_start();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -78,47 +77,24 @@ session_start();
             <div class="new-product">
                 <div class="grid">
                     <h2 class="product__title">SẢN PHẨM MỚI</h2>
-                    <div class="product__wrapper product__wrapper--huge">
-                        <img src="view/img/product/product-26-150x150 1.svg" alt="" class="product__img">
-                        <span class="product__name">RUNNER RED GALBRAITH</span>
-                        <span class="product__price">123.000VNĐ</span>
-                    </div>
-
+                <?php
+                $product_list = $conn->query('SELECT * FROM product limit 6')->fetchAll();
+                $i = 0;
+                foreach($product_list as $product){
+                    $image_path = "view/img/shop/" . $product['image_path'];
+                    if ($i == 0 ):?>
+                        <div class="product__wrapper product__wrapper--huge">
+                            <img src="<?php echo $image_path ?>" alt="" class="product__img" style="height: 308px">
+                            <span class="product__name"><?php echo $product['product_name']?></span>
+                            <span class="product__price"><?php echo $product['product_price']?></span>
+                        </div>
+                    <?php endif?>
                     <div class="product__wrapper">
-                        <img src="view/img/product/product-26-150x150 2.svg" alt="" class="product__img">
-                        <span class="product__name">RUNNER RED GALBRAITH</span>
-                        <span class="product__price">123.000VNĐ</span>
+                    <img src="<?php echo $image_path ?>" alt="" class="product__img" style="height: 308px">
+                            <span class="product__name"><?php echo $product['product_name']?></span>
+                            <span class="product__price"><?php echo $product['product_price']?></span>
                     </div>
-
-                    <div class="product__wrapper">
-                        <img src="view/img/product/Rectangle 174.svg" alt="" class="product__img">
-                        <span class="product__name">RUNNER RED GALBRAITH</span>
-                        <span class="product__price">123.000VNĐ</span>
-                    </div>
-
-                    <div class="product__wrapper">
-                        <img src="view/img/product/product-26-150x150 4.svg" alt="" class="product__img">
-                        <span class="product__name">RUNNER RED GALBRAITH</span>
-                        <span class="product__price">123.000VNĐ</span>
-                    </div>
-
-                    <div class="product__wrapper">
-                        <img src="view/img/product/product-26-150x150 5.svg" alt="" class="product__img">
-                        <span class="product__name">RUNNER RED GALBRAITH</span>
-                        <span class="product__price">123.000VNĐ</span>
-                    </div>
-
-                    <div class="product__wrapper">
-                        <img src="view/img/product/product-26-150x150 6.svg" alt="" class="product__img">
-                        <span class="product__name">RUNNER RED GALBRAITH</span>
-                        <span class="product__price">123.000VNĐ</span>
-                    </div>
-
-                    <div class="product__wrapper">
-                        <img src="view/img/product/product-26-150x150 7.svg" alt="" class="product__img">
-                        <span class="product__name">RUNNER RED GALBRAITH</span>
-                        <span class="product__price">123.000VNĐ</span>
-                    </div>
+                    <?php $i++;}?>
                 </div>
             </div>
 
@@ -138,54 +114,18 @@ session_start();
 
             <div class="hot-product">
                 <div class="grid">
-                    <h2 class="product__title">SẢN PHẨM HOT</h2>
+                <h2 class="product__title">SẢN PHẨM HOT</h2>
+                <?php
+                $product_list = $conn->query('SELECT * FROM product  ORDER BY id DESC limit 8 ')->fetchAll();
+                foreach($product_list as $product){
+                    $image_path = "view/img/shop/" . $product['image_path'];
+                ?>
                     <div class="product__wrapper">
-                        <img src="view/img/product/product-26-150x150 2.svg" alt="" class="product__img">
-                        <span class="product__name">RUNNER RED GALBRAITH</span>
-                        <span class="product__price">123.000VNĐ</span>
-                    </div>
-
-                    <div class="product__wrapper">
-                        <img src="view/img/product/product-26-150x150 2.svg" alt="" class="product__img">
-                        <span class="product__name">RUNNER RED GALBRAITH</span>
-                        <span class="product__price">123.000VNĐ</span>
-                    </div>
-
-                    <div class="product__wrapper">
-                        <img src="view/img/product/product-26-150x150 2.svg" alt="" class="product__img">
-                        <span class="product__name">RUNNER RED GALBRAITH</span>
-                        <span class="product__price">123.000VNĐ</span>
-                    </div>
-
-                    <div class="product__wrapper">
-                        <img src="view/img/product/Rectangle 174.svg" alt="" class="product__img">
-                        <span class="product__name">RUNNER RED GALBRAITH</span>
-                        <span class="product__price">123.000VNĐ</span>
-                    </div>
-
-                    <div class="product__wrapper">
-                        <img src="view/img/product/product-26-150x150 4.svg" alt="" class="product__img">
-                        <span class="product__name">RUNNER RED GALBRAITH</span>
-                        <span class="product__price">123.000VNĐ</span>
-                    </div>
-
-                    <div class="product__wrapper">
-                        <img src="view/img/product/product-26-150x150 5.svg" alt="" class="product__img">
-                        <span class="product__name">RUNNER RED GALBRAITH</span>
-                        <span class="product__price">123.000VNĐ</span>
-                    </div>
-
-                    <div class="product__wrapper">
-                        <img src="view/img/product/product-26-150x150 6.svg" alt="" class="product__img">
-                        <span class="product__name">RUNNER RED GALBRAITH</span>
-                        <span class="product__price">123.000VNĐ</span>
-                    </div>
-
-                    <div class="product__wrapper">
-                        <img src="view/img/product/product-26-150x150 7.svg" alt="" class="product__img">
-                        <span class="product__name">RUNNER RED GALBRAITH</span>
-                        <span class="product__price">123.000VNĐ</span>
-                    </div>
+                        <img src="<?php echo $image_path ?>" alt="" class="product__img" style="height: 308px">
+                        <span class="product__name"><?php echo $product['product_name']?></span>
+                        <span class="product__price"><?php echo $product['product_price']?>
+                        </div>
+                <?php }?>
                 </div>
             </div>
 
