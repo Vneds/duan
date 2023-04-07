@@ -86,13 +86,14 @@
             <div class="col-md-12">
                 <div class="tile">
                     <div class="tile-body">
-                        <div class="row element-button">
-                            <div class="col-sm-2">
+                        <h3>Danh sách khách hàng</h3>
+                        <!-- <div class="row element-button"> -->
+                            <!-- <div class="col-sm-2">
               
                               <a class="btn btn-add btn-sm" href="./index.php?page=product&action=add" title="Thêm"><i class="fas fa-plus"></i>
                                 Tạo mới sản phẩm</a>
-                            </div>
-                            <div class="col-sm-2">
+                            </div> -->
+                            <!-- <div class="col-sm-2">
                               <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
                                   class="fas fa-file-upload"></i> Tải từ file</a>
                             </div>
@@ -116,7 +117,7 @@
                             <div class="col-sm-2">
                               <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
                                   class="fas fa-trash-alt"></i> Xóa tất cả </a>
-                            </div>
+                            </div> -->
                           </div>
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>

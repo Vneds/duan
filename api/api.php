@@ -41,11 +41,11 @@
 
     function filter_bill_status($conn, $status){
         if ($status == 'all') {
-            $sql = 'SELECT * FROM bill';
+            $sql = 'SELECT * FROM bill ORDER BY id DESC';
             echo json_encode( $conn->query($sql)->fetchAll());
             return;
         }
-        $sql = 'SELECT * FROM bill WHERE status = ?';
+        $sql = 'SELECT * FROM bill WHERE status = ? ORDER BY id DESC';
         $stmt = $conn->prepare($sql);
         $stmt->execute([$status]);
         echo json_encode($stmt->fetchAll());
@@ -79,7 +79,7 @@
     }
 
     function get_chart_data($conn, $start_date, $end_date){
-        $sql = "SELECT sum(total_money) as 'sum' , date FROM bill WHERE date BETWEEN ? AND ? GROUP BY date ORDER BY date";
+        $sql = "SELECT sum(total_money) as 'sum' , date FROM bill WHERE date BETWEEN ? AND ?  AND status = 'Hoàn tất'  GROUP BY date ORDER BY date";
         $stmt = $conn->prepare($sql);
         $stmt->execute([$start_date, $end_date]);
         echo json_encode($stmt->fetchAll());

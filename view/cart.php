@@ -35,7 +35,7 @@ session_start();
                     </tr>
                     
                     <?php 
-                        if (count($_SESSION['cart']) == 0){
+                        if (empty($_SESSION['cart']) || count($_SESSION['cart']) == 0 ){
                             echo 'Hiện chưa có sản phẩm nào';
                         } else {
                     ?>
@@ -75,9 +75,10 @@ session_start();
 
                             <td>
                                 <div class="container__quantity">
-                                        <a class="container__quantity-item decrease" onclick="decrease($(this))">-</a>
-                                        <a class="container__quantity-item value" id="<?php echo $i; ?>"> <?php echo $product['quantity']?></a>
-                                        <a class="container__quantity-item increase" onclick="increase($(this))">+</a>
+                                    <input class="stock" stype="text" value=<?php echo $product['stock']?> hidden>
+                                    <a class="container__quantity-item decrease" onclick="decrease($(this))">-</a>
+                                    <a class="container__quantity-item value" id="<?php echo $i; ?>"> <?php echo $product['quantity']?></a>
+                                    <a class="container__quantity-item increase" onclick="increase($(this))">+</a>
                                 </div>
                             </td>
                             <td>
@@ -127,9 +128,22 @@ session_start();
     <?php include_once 'view/components/footer.php'?>;
 
     <script>
+        function isStockAvalible(stock, number){
+            if (number > stock){
+                return false;
+            }
+            return true;
+        }   
+
         function increase(e){
             const valueEle = e.siblings('.value');
+            const stock =  e.siblings('.stock');
             let number = Number(valueEle.text()) + 1;
+            if (!isStockAvalible(stock.val(), number)){
+                alert('Vui lòng nhập đúng số lượng hàng tồn');
+                return;
+            }
+
             let index = valueEle.attr('id');
             valueEle.html(number);
             $.ajax({

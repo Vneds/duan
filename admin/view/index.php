@@ -1,6 +1,6 @@
 <?php 
-  $price_arr = $conn->query("SELECT sum(total_money) as 'sum', date FROM bill GROUP BY date ORDER BY date")->fetchAll();
-  $date_arr = $conn->query('SELECT date FROM bill GROUP BY date ORDER by date')->fetchAll();
+  $price_arr = $conn->query("SELECT sum(total_money) as 'sum', date FROM bill WHERE status = 'Hoàn tất' GROUP BY date ORDER BY date")->fetchAll();
+  $date_arr = $conn->query("SELECT date FROM bill WHERE status = 'Hoàn tất' GROUP BY date ORDER by date")->fetchAll();
 
 
   $user_count = $conn->query("SELECT count(*) as 'quantity' from user")->fetch();
@@ -8,10 +8,10 @@
   $product_count = $conn->query("SELECT count(*) as 'quantity' from product")->fetch();
 
   $bill_list = $conn->query('SELECT * FROM bill ORDER BY id DESC LIMIT 4;')->fetchAll();  
-  $user_list = $conn->query('SELECT * FROM user ORDER BY id DESC LIMIT 4')->fetchAll();  
-
-
+  $user_list = $conn->query('SELECT * FROM user ORDER BY id DESC LIMIT 4')->fetchAll();
   
+  $product_almost_run_out = $conn->query("SELECT count(*) as 'quantity' FROM product WHERE kho_hang <= 5")->fetch();
+
   function change_status_background($status){
     if ($status == 'Đang xử lý') {
         return "badge bg-info";
@@ -79,19 +79,17 @@
     </div>
     <hr>
     <ul class="app-menu">
-      <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
-          <span class="app-menu__label">POS Bán Hàng</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
+      <li><a class="app-menu__item active" href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="table-data-table.html"><i class='app-menu__icon bx bx-id-card'></i>
-          <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-      <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+      <li><a class="app-menu__item " href="table-data-banned.html"><i class='app-menu__icon bx bx-id-card'></i> <span
+            class="app-menu__label">Quản lý nhân viên</span></a></li>
+      <li><a class="app-menu__item" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
-            <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
-            class="app-menu__label">Quản lý bài viết</span></a></li>
-            <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+      <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý bình luận</span></a></li>
-      <li><a class="app-menu__item active" href="./index.php?page=product&action=list"><i
+       <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý bài viết</span></a></li>
+      <li><a class="app-menu__item" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
       <li><a class="app-menu__item" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
@@ -156,15 +154,15 @@
             </div>
           </div>
            <!-- col-6 -->
-          <!-- <div class="col-md-6">
+          <div class="col-md-6">
             <div class="widget-small danger coloured-icon"><i class='icon bx bxs-error-alt fa-3x'></i>
               <div class="info">
                 <h4>Sắp hết hàng</h4>
-                <p><b>4 sản phẩm</b></p>
+                <p><b><?php echo $product_almost_run_out['quantity']?></b></p>
                 <p class="info-tong">Số sản phẩm cảnh báo hết cần nhập thêm.</p>
               </div>
             </div>
-          </div> -->
+          </div>
            <!-- col-12 -->
            <div class="col-md-12">
             <div class="tile">
@@ -241,7 +239,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="tile">
-              <h3 class="tile-title">Thống kê 6 tháng doanh thu</h3>
+              <h3 class="tile-title">Thống kê doanh thu theo từng ngày</h3>
               <div class="embed-responsive embed-responsive-16by9">
                 <canvas class="embed-responsive-item" id="barChartDemo"></canvas>
               </div>

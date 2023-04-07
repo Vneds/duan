@@ -217,10 +217,8 @@
               <input type="text" name="id" value="<?php echo $product['id']?>" hidden>
               <div class="form-group col-md-3">
                 <label class="control-label">Tên sản phẩm</label>
-                <input class="form-control" type="text" name="product_name" value="<?php echo $product['product_name']?>">
+                <input required class="form-control" type="text" name="product_name" value="<?php echo $product['product_name']?>">
               </div>
-
-
               <!-- <div class="form-group  col-md-3">
                 <label class="control-label">Số lượng</label>
                 <input class="form-control" type="number">
@@ -238,15 +236,22 @@
                 <select class="form-control" id="exampleSelect1" name="catergory_id">
                 <?php 
                     $catergory_list = get_catergory_list(); ?>
-                    <option>-- Chọn danh mục --</option>
+                    <option value="">-- Chọn danh mục --</option>
                 <?php foreach ($catergory_list as $catergory){?>
                         <option value="<?php echo $catergory['id']?>"><?php echo $catergory['catergory_name']?></option>
                 <?php }?>
                 </select>
+                <span class="text-danger"><?php echo $_GET['error_catergory'] ?? ''?></span>
               </div>
               <div class="form-group col-md-3">
                 <label class="control-label">Giá bán</label>
-                <input class="form-control" type="text" name="product_price" value="<?php echo $product['product_price']?>">
+                <input required class="form-control" type="text" name="product_price" value="<?php echo $product['product_price']?>">
+                <span class="text-danger"><?php echo $_GET['error_price'] ?? ''?></span>
+              </div>
+              <div class="form-group col-md-3">
+                <label class="control-label">Hàng tồn</label>
+                <input required class="form-control" type="text" name="stock" value="<?php echo $product['kho_hang']?>">
+                <span class="text-danger"><?php echo $_GET['error_stock'] ?? ''?></span>
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Ảnh sản phẩm</label>
@@ -267,6 +272,7 @@
               <div class="form-group col-md-12">
                 <label class="control-label">Mô tả sản phẩm</label>
                 <textarea class="form-control" name="des" id="mota"><?php echo $product['des']?></textarea>
+                <span class="text-danger"><?php echo $_GET['error_des'] ?? ''?></span>
                 <script>CKEDITOR.replace('mota');</script>
               </div>
               <button class="btn btn-save" type="submit">Lưu lại</button>

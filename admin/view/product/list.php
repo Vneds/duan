@@ -88,34 +88,8 @@
                     <div class="tile-body">
                         <div class="row element-button">
                             <div class="col-sm-2">
-              
                               <a class="btn btn-add btn-sm" href="./index.php?page=product&action=add" title="Thêm"><i class="fas fa-plus"></i>
                                 Tạo mới sản phẩm</a>
-                            </div>
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
-                                  class="fas fa-file-upload"></i> Tải từ file</a>
-                            </div>
-              
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
-                                  class="fas fa-print"></i> In dữ liệu</a>
-                            </div>
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i
-                                  class="fas fa-copy"></i> Sao chép</a>
-                            </div>
-              
-                            <div class="col-sm-2">
-                              <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
-                            </div>
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i
-                                  class="fas fa-file-pdf"></i> Xuất PDF</a>
-                            </div>
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                                  class="fas fa-trash-alt"></i> Xóa tất cả </a>
                             </div>
                           </div>
                         <table class="table table-hover table-bordered" id="sampleTable">
@@ -134,7 +108,7 @@
                             </thead>
                             <tbody>
                                 <?php 
-                                    $product_list = get_product_list();
+                                    $product_list =  $conn->query('SELECT * FROM product')->fetchAll();
                                     foreach($product_list as $product){
                                     $catergory_name = get_catergory_name($product['catergory_id']);
                                     $image_path = '../' . get_image_path($product['image_path']);
@@ -144,8 +118,14 @@
                                     <td>83216006</td>
                                     <td><?php echo $product['product_name']?></td>
                                     <td><img src="<?php echo $image_path ?>" alt="" width="100px;"></td>
-                                    <td>60</td>
-                                     <td><span class="badge bg-success">Còn hàng</span></td>
+                                    <td><?php echo $product['kho_hang']?></td>
+                                    <td>
+                                      <?php if ($product['kho_hang'] == 0) { ?>
+                                        <span class="badge bg-danger">Hết hàng</span>
+                                      <?php } else {?>
+                                        <span class="badge bg-success">Còn hàng</span>
+                                      <?php }?>
+                                    </td>
                                     <td><?php echo $product['product_price']?> $</td>
                                     <td><?php echo $catergory_name?></td>
                                     <td>

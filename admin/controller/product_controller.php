@@ -28,12 +28,21 @@
     //POST thực hiện insert, update, detele
     if (isset($_POST['action'])){
         // include_once '../model/product_model.php';
+        $error_arr = [];
         switch($_POST['action']){
             case 'add':
-                add_product();
+                if (is_validate_add()){
+                    add_product();
+                    return;
+                }
+                save_error_add();
                 break;
             case 'edit':
-                update_product();
+                if (is_validate()){
+                    update_product();
+                    return;
+                }
+                save_error();
                 break;
             case 'delete':
                 delete_product($_POST['id']);
@@ -54,9 +63,9 @@
 
     function update_product(){
         global $conn;
-        $sql = 'UPDATE product SET product_name = ? , catergory_id = ?, product_price = ? , des = ?  WHERE id = '. $_POST['id'];
+        $sql = 'UPDATE product SET product_name = ? , catergory_id = ?, product_price = ? , des = ?, kho_hang = ?  WHERE id = '. $_POST['id'];
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$_POST['product_name'],$_POST['catergory_id'], $_POST['product_price'], $_POST['des']]);
+        $stmt->execute([$_POST['product_name'],$_POST['catergory_id'], $_POST['product_price'], $_POST['des'], $_POST['stock']]);
         header ('location: ../index.php?page=product&action=list');
     }
 
@@ -66,4 +75,127 @@
         $stmt->execute([$id]);
         header ('location: ../index.php?page=product&action=list');
     }
+
+    function is_validate(){
+        if ((int)$_POST['stock'] < 0){
+            return false;
+        }
+        if ((int)$_POST['product_price'] < 0){
+            return false;
+        }
+        if (empty($_POST['catergory_id'])){
+            return false;
+        }
+        return true;
+    }
+
+    function is_validate_add(){
+        if ((int)$_POST['stock'] < 0){
+            return false;
+        }
+        if ((int)$_POST['product_price'] < 0){
+            return false;
+        }
+        if (empty($_POST['catergory_id'])){
+            return false;
+        }
+        if (empty($_FILES["img"]['name'])){
+            return false;
+        }
+        if (empty($_POST['des'])){
+            return false;
+        }
+        return true;
+    }
+
+    function save_error_add(){
+        global $error_arr;
+        if ((int)$_POST['stock'] < 0){
+            $error_stock = 'Vui lòng nhập số dương';
+            $arr1 = [
+                'error_name' =>  'error_stock',
+                'error_value' => $error_stock
+            ];
+            array_push($error_arr , $arr1);
+        }
+        if ((int)$_POST['product_price'] < 0){
+            $error_price = 'Vui lòng nhập số dương';
+            $arr2 = [
+                'error_name' =>  'error_price',
+                'error_value' => $error_price
+            ];
+            array_push($error_arr , $arr2);
+        }
+
+        if (empty($_POST['catergory_id'])){
+            $error_catergory = 'Vui lòng chọn danh mục';
+            $arr3 = [
+                'error_name' =>  'error_catergory',
+                'error_value' => $error_catergory
+            ];
+            array_push($error_arr , $arr3);
+        }
+
+        if (empty($_FILES["img"]['name'])){
+            $error_img = 'Vui lòng chọn ảnh';
+            $arr4 = [
+                'error_name' =>  'error_img',
+                'error_value' => $error_img
+            ];
+            array_push($error_arr , $arr4);
+        }
+
+        if (empty($_POST['des'])){
+            $error_des = 'Vui lòng chọn danh mục';
+            $arr3 = [
+                'error_name' =>  'error_des',
+                'error_value' => $error_des
+            ];
+            array_push($error_arr , $arr3);
+        }
+        $query_param = generate_query_param($error_arr);
+        header ('location: ../index.php?page=product&action=add&' . $query_param);
+    }
+
+    function save_error(){
+        global $error_arr;
+        if ((int)$_POST['stock'] < 0){
+            $error_stock = 'Vui lòng nhập số dương';
+            $arr1 = [
+                'error_name' =>  'error_stock',
+                'error_value' => $error_stock
+            ];
+            array_push($error_arr , $arr1);
+        }
+        if ((int)$_POST['product_price'] < 0){
+            $error_price = 'Vui lòng nhập số dương';
+            $arr2 = [
+                'error_name' =>  'error_price',
+                'error_value' => $error_price
+            ];
+            array_push($error_arr , $arr2);
+        }
+
+        if (empty($_POST['catergory_id'])){
+            $error_catergory = 'Vui lòng chọn danh mục';
+            $arr3 = [
+                'error_name' =>  'error_catergory',
+                'error_value' => $error_catergory
+            ];
+            array_push($error_arr , $arr3);
+        }
+        $query_param = generate_query_param($error_arr);
+        header ('location: ../index.php?page=product&action=edit&id='. $_POST['id'] . '&' . $query_param);
+    }
+
+
+    function generate_query_param($arr){
+        $query_param = '';
+        foreach ($arr as $n){
+            $string = $n['error_name'] . '='. $n['error_value'] . '&';
+            $query_param .= $string;
+        }
+        return $query_param;
+    }
+
 ?>

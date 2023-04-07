@@ -18,7 +18,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-
+  <style>
+    .status-list {
+      display: flex;
+      gap: 10px;
+    }
+  </style>
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
@@ -86,7 +91,8 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-              <div class="row element-button">
+              <h3>Danh sách hóa đơn</h3>
+              <!-- <div class="row element-button">
                 <div class="col-sm-2">
   
                   <a class="btn btn-add btn-sm" href="form-add-don-hang.html" title="Thêm"><i class="fas fa-plus"></i>
@@ -117,18 +123,26 @@
                   <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
                       class="fas fa-trash-alt"></i> Xóa tất cả </a>
                 </div>
-              </div>
+              </div> -->
               <table class="table table-hover table-bordered" id="sampleTable">
               <div class="select">
                 <div class="status-list">
-                    <input value="all" checked name= "status" type="radio" id="all">
-                    <label for="all">Tất cả</label> 
-                    <input value="Đang xử lý" name= "status" type="radio" id="waiting">
-                    <label for="waiting">Đang xử lý</label> 
-                    <input value="Hoàn tất" name= "status" type="radio" id="done">
-                    <label for="done">Hoàn tất</label> 
-                    <input value="Đã hủy" name= "status" type="radio" id="delete">
-                    <label for="delete">Đã hủy</label> 
+                    <div class="status-item">
+                      <input value="all" checked name= "status" type="radio" id="all">
+                      <label for="all">Tất cả</label> 
+                    </div>
+                    <div>
+                      <input value="Đang xử lý" name= "status" type="radio" id="waiting">
+                      <label for="waiting">Đang xử lý</label> 
+                    </div>
+                    <div>
+                      <input value="Hoàn tất" name= "status" type="radio" id="done">
+                      <label for="done">Hoàn tất</label> 
+                    </div>
+                    <div>
+                      <input value="Đã hủy" name= "status" type="radio" id="delete">
+                      <label for="delete">Đã hủy</label> 
+                    </div>
                 </div>
               </div>
                 <thead>
@@ -136,9 +150,10 @@
                     <th width="10"><input type="checkbox" id="all"></th>
                     <th>ID đơn hàng</th>
                     <th>Khách hàng</th>
-                    <th>Đơn hàng</th>
+                    <th>Địa chỉ</th>
                     <th>Số lượng</th>
                     <th>Tổng tiền</th>
+                    <th>Ngày mua</th>
                     <th>Tình trạng</th>
                     <th>Tính năng</th>
                   </tr>
@@ -151,11 +166,12 @@
                   ?>
                   <tr>
                   <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>MD0837</td>
+                    <td><?php echo $bill['maDH'] ?></td>
                     <td><?php echo $bill['user_name'] ?></td>
                     <td><?php echo $bill['address'] ?></td>
                     <td><?php echo $bill['phone'] ?></td>
                     <td><?php echo $bill['total_money'] ?> đ</td>
+                    <td><?php echo $bill['date'] ?></td>
                     <td><span class="<?php echo $class_name ?>"><?php echo $bill['status']?></span></td>
                     <td>
                       <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
@@ -319,11 +335,12 @@
                         html += `   
                         <tr>
                           <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td>MD0837</td>
+                            <td>${bill['maDH']}</td>
                             <td>${bill['user_name']}</td>
                             <td>${bill['address']}</td>
                             <td>${bill['phone']}</td>
                             <td>${bill['total_money']} đ</td>
+                            <td>${bill['date']}</td>
                             <td><span class="${className}">${bill['status']}</span></td>
                           <td>
                             <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
