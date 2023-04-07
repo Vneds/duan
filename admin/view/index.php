@@ -11,7 +11,9 @@
   $user_list = $conn->query('SELECT * FROM user ORDER BY id DESC LIMIT 4')->fetchAll();
   
   $product_almost_run_out = $conn->query("SELECT count(*) as 'quantity' FROM product WHERE kho_hang <= 5")->fetch();
-
+ 
+  $catergory_data =  $conn->query("SELECT count(*) as 'stock', catergory_name from product JOIN catergory ON product.catergory_id = catergory.id GROUP BY catergory_id")->fetchAll();
+  $sale_data = $conn->query("SELECT count(*) as 'sale' , catergory_name from bill_detail JOIN product ON bill_detail.product_id = product.id JOIN catergory ON product.catergory_id = catergory.id GROUP BY product.catergory_id")->fetchAll();
   function change_status_background($status){
     if ($status == 'Đang xử lý') {
         return "badge bg-info";
@@ -48,7 +50,6 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
@@ -247,6 +248,14 @@
               </div>
             </div>
           </div>
+          <div class="col-md-12">
+            <div class="tile">
+              <h3 class="tile-title">Số lượng bán được theo từng doanh mục</h3>
+              <div class="embed-responsive embed-responsive-16by9">
+                <canvas class="embed-responsive-item" id="barChartDemo2"></canvas>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -306,6 +315,14 @@
     let price = priceData.map(price => price['sum']);
     let dateData = <?php echo json_encode($date_arr) ?>;
     let date = dateData.map(date => date['date']);
+
+    let catergoryData = <?php echo json_encode($catergory_data)?>;
+    
+    let catergoryName = catergoryData.map(catergory => catergory['catergory_name']);
+    let stock = catergoryData.map(catergory => catergory['stock']);
+    let saleData = <?php echo json_encode($sale_data)?>;
+    console.log(saleData);
+    let sale = saleData.map(sale => sale['sale']);
     // var data = {
     //   labels: date,
     //   datasets: [{
@@ -338,6 +355,28 @@
           borderWidth: 1
         }]
     }
+
+    const data2 = {
+        labels:  ['a', 'b'],
+        datasets: [{
+          label: 'Số hàng tồn',
+          data: [20, 10],
+          borderWidth: 1
+        }]
+    }
+
+    const config2 =  {
+      type: 'line',
+      data2,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    };
+
     const config =  {
       type: 'bar',
       data,
@@ -353,6 +392,31 @@
     const ctx = document.getElementById('barChartDemo');
     const myChart = new Chart(ctx, config);
 
+    const ctxb = document.getElementById('barChartDemo2');
+    // const myChart2 = new Chart(ctxb, config2);
+    
+    new Chart(ctxb, {
+      type: 'bar',
+      data: {
+        labels: catergoryName,
+        datasets: [{
+          label: 'Số lượng bán',
+          data: sale,
+          borderWidth: 1
+        },{
+          label: 'Số hàng tồn',
+          data: stock,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
 
   </script>
   <script type="text/javascript">
