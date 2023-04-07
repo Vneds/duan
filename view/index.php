@@ -78,7 +78,7 @@ session_start();
                 <div class="grid">
                     <h2 class="product__title">SẢN PHẨM MỚI</h2>
                 <?php
-                $product_list = $conn->query('SELECT * FROM product limit 6')->fetchAll();
+                $product_list = $conn->query('SELECT * FROM product where kho_hang >= 1 limit 6')->fetchAll();
                 $i = 0;
                 foreach($product_list as $product){
                     $image_path = "view/img/shop/" . $product['image_path'];
@@ -116,7 +116,7 @@ session_start();
                 <div class="grid">
                 <h2 class="product__title">SẢN PHẨM HOT</h2>
                 <?php
-                $product_list = $conn->query('SELECT * FROM product  ORDER BY id DESC limit 8 ')->fetchAll();
+                $product_list = $conn->query('SELECT * FROM product  where kho_hang >= 1  ORDER BY id DESC limit 8 ')->fetchAll();
                 foreach($product_list as $product){
                     $image_path = "view/img/shop/" . $product['image_path'];
                 ?>
