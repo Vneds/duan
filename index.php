@@ -52,6 +52,9 @@
         case 'user_bill':
             include_once 'view/user_bill.php';
             break;
+        case 'update_pass':
+            include_once 'view/update_pass.php';
+            break;
         case 'blog':
             include_once 'view/blog.php';
             break;

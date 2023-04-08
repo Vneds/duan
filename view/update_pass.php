@@ -1,20 +1,30 @@
 <?php
     session_start();
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $img_name = get_img_name();
-        update_user($_POST['id'], $img_name);
-        update_user_in_session();
+        global $conn;
+        $id = $_POST['id'];
+        $pass = $_POST['pass'];
+        $stmt = $conn->prepare("SELECT * FROM user WHERE id = ?" );
+        $stmt->execute([$id]);
+        $kq = $stmt->fetch();
+        echo $pass;
+        if(password_verify($pass,$kq['pass_word'])){ 
+            $sql = "UPDATE user SET pass_word=? WHERE id=?";
+            $stmt_2 = $conn->prepare($sql);
+            $pass_new = password_hash($_POST['pass_new'], PASSWORD_BCRYPT);
+            $stmt_2->execute([$pass_new,$_GET['id']]);
+            header('location: ./index.php?page=user&id='.$_GET['id'].'');
+        }
+        else {
+            $pass_error= 'mật khẩu đã sai';
+            header('location: ./index.php?page=update_pass&id='.$_GET['id'].'');
+            die();
+        }
     }
 
-    function get_img_name(){
-        if (!isset($_FILES['img']['name'])){
-            return null;
-        }
-        $des = dirname(__FILE__) . '/img/user/' . $_FILES['img']['name'];
-        if (move_uploaded_file($_FILES["img"]["tmp_name"], $des)){
-            return $_FILES['img']['name'];
-        }
-    }
+
+
+  
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,21 +59,21 @@
             <form class="form" action="" method="POST" enctype="multipart/form-data">
                 <input type="text" value="<?php echo $_GET['id'] ?>" hidden name="id">
                 <div class="form-group">
-                    <label for="userName">Tên người dùng</label>
-                    <input type="text" name='name' class="form-control" id="user_name" value="<?php echo $user['user_name'] ?>">
+                    <label for="userName">Mật khẩu cũ</label>
+                    <input type="password" name='pass' class="form-control" id="user_name">
+                    <?php 
+                        if (isset($_GET['pass_error'])) : ?>
+                            <div class="error"><?php echo $_GET['pass_error']?></div>
+                    <?php endif?>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text"name='email' class="form-control" id="email" value="<?php echo $user['email'] ?>" >
+                    <label for="email">Mật khẩu mới</label>
+                    <input type="password"name='pass_new' class="form-control" id="email">
                 </div>
-                <div class="form-group">
-                    <label for="file">Ảnh đại diện</label>
-                    <input type="file" name='img' class="form-control" id="file">
-                </div>
-                <button type='submit' class="btn btn-primary" name="update">Cập nhật</button>
+                <button type='submit' class="btn btn-primary" name="update">Xác nhận</button>
             </form>
             <a href="./index.php?page=user_bill&id=<?php echo $user['id'] ?>"><button class="btn btn-primary" >lịch sử đơn hàng</button></a>
-            <a href="./index.php?page=update_pass&id=<?php echo $user['id'] ?>"><button class="btn btn-primary" >Đổi mật khẩu</button></a>
+            <a href="././index.php?page=user&id=<?php echo $user['id'] ?>"><button class="btn btn-primary" >Quay lại</button></a>
             <a href="./model/log_out.php"><button class="btn btn-primary" >Đăng xuất</button></a>
             </div>
         </div>
