@@ -18,7 +18,36 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-      
+        <style>
+    .products__pagenation {
+    display: flex;
+    justify-content: end;
+    padding-right: 15px;
+    list-style-type: none;
+}
+
+.products__pagenation-item {
+    height: 38px;
+    width: 38px;
+    border: 1px #ccc solid;
+    margin-right: 4px;
+}
+
+.products__pagination-link {
+    color: #000;
+    font-size: 16px;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.products__pagination-link:hover {
+    font-weight: 500;
+}
+        </style>
       </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
@@ -120,7 +149,10 @@
                             </thead>
                             <tbody>
                                 <?php 
-                                    $catergory_list = $conn->query('SELECT * FROM catergory')->fetchAll(); 
+                                    // $catergory_list = $conn->query('SELECT * FROM catergory')->fetchAll(); 
+                                    $pro =  isset($_GET['pro']) ? $_GET['pro'] : 1;
+                                    $offset = ((int)$pro - 1) * 12;
+                                    $catergory_list =$conn->query("select * from catergory limit 12 offset " . $offset);
                                     foreach($catergory_list as $catergory){
                                 ?>                                                      
                                 <tr>
@@ -147,6 +179,15 @@
                 </div>
             </div>
         </div>
+        <ul class="products__pagenation">
+                            <?php
+                        $stmt = $conn->query("select * from catergory");
+                        for ($i = 1; $i < ceil( $stmt->rowCount() / 3); $i++){
+                        // echo '<a id="linkNum" href="?page=' . $i . '">' . $i . '</a>';
+                        echo '<li class="products__pagenation-item"><a class="products__pagination-link" href="./index.php?page=catergory&action=list&pro=' . $i . '">' . $i . '</a></li>';
+                        }
+                        ?>
+                        </ul>
     </main>
 
 <!--
