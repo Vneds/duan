@@ -47,6 +47,10 @@
 .products__pagination-link:hover {
     font-weight: 500;
 }
+.status-list {
+  display: flex;
+  gap: 15px;
+}
         </style>
 </head>
 
