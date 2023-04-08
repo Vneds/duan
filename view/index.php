@@ -147,12 +147,12 @@ session_start();
                     <img src="view/img/Rectangle 181.png" alt="">
                     <div class="news_email">
                          <div class="news_span">
-                            <h2>NEWSLETTER</h2>
-                            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</span>
+                            <h2>TÌM HIỂU</h2>
+                            <span>Hãy là người đầu tiên biết về hàng mới, giảm giá và khuyến mãi bằng cách gửi email của bạn!</span>
                          </div>
                          <div class="news_button">
-                            <input type="text" placeholder="ENTER YOUR MAIL" class="btn__mail">
-                            <button>SUBCRIBE</button>
+                            <input type="text" placeholder="HÃY NHẬP EMAIL CỦA BẠN" class="btn__mail">
+                            <button>ĐĂNG KÝ</button>
                          </div>
                     </div>
                 </div>
