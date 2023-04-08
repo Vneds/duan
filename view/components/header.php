@@ -31,7 +31,7 @@
 
         </ul>
         <div class="header__action">
-            <input type="text" class="input">
+            <input type="text" class="input" id='input' style='margin-right:50px;'>
             <div class="search__result"></div>
             <a href="" class="header__action-item"><img src="view/img/search_icon.svg" alt=""></a>
             <a href="./index.php?page=login" class="header__action-item"><img src="view/img/icon_user.svg" alt=""></a>

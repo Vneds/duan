@@ -31,7 +31,11 @@
                     <sidebar class="sidebar__filter-wrapper">
                         <div class="sidebar__filter">
                             <h2 class="sidebar__heading">Filter by price</h2>
-                            <input type="range" class="sidebar__range-input">
+                            <div class="range-slider-container">
+                            <input type="range" class="range-slider" />
+                            <span id="range-value-bar"></span>
+                            <!-- <span id="range-value"></span> -->
+                            </div>
                             <div class="spw">
                                 <span class="sidebar__span">Price: $7 - $56</span>
                                 <button class="btn">FILTER</button>
@@ -159,6 +163,41 @@
         }
         $('.sidebar__category-link').click(()=> {
         })
+    </script>
+
+    <script>
+        const rangeSlider = document.querySelector('.range-slider');
+        const rangeValueBar = document.querySelector('#range-value-bar');
+        const rangeValue = document.querySelector('#range-value');
+
+        let isDown = false;
+
+        function dragHandler() {
+        isDown = !isDown;
+        if (!isDown) {
+            // rangeValue.style.setProperty('opacity', '0');
+        } else {
+            rangeValue.style.setProperty('opacity', '1');
+        }
+        }
+
+        function dragOn(e) {
+        if (!isDown) return;
+        rangeValueHandler();
+        }
+
+        function rangeValueHandler() {
+        rangeValueBar.style.setProperty('width', `${rangeSlider.value}%`);
+        // rangeValue.style.setProperty('transform', `translateX(-${this.value}%)`);
+        // rangeValue.innerHTML = `${rangeSlider.value}%`;
+        // rangeValue.style.setProperty('left', `${rangeSlider.value}%`);
+        }
+
+        rangeValueHandler();
+        rangeSlider.addEventListener('mousedown', dragHandler);
+        rangeSlider.addEventListener('mousemove', dragOn);
+        rangeSlider.addEventListener('mouseup', dragHandler);
+        rangeSlider.addEventListener('click', rangeValueHandler);
     </script>
 
 </body>
