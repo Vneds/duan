@@ -1,3 +1,76 @@
+<?php 
+session_start();
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if(isset($_POST['email'])&& filter_var($_POST['email'],FILTER_VALIDATE_EMAIL)) {
+            $_SESSION['errors']='';
+            $_SESSION['success']='';
+            $email = $_POST['email'];
+            $stmt = $conn->prepare('SELECT * FROM user WHERE email = ?');
+            $stmt->execute([$email]);
+            $kq = $stmt->fetch();
+            if (empty($kq['email'])){
+                $_SESSION['errors'] = 'Vui lòng đúng nhập email';
+                header('location: ./index.php?page=forgot');
+                die();
+            }
+            $rand_pass = generate_random_string();
+            $title = 'Mật khẩu Mới';
+            $content = "<h3>Gửi ".$kq['user_name'].'</h3>';
+            $content .= "<p> chúng tôi đã nhận được yêu cầu cấp lại mật khẩu của bạn.</p>";
+            $content .= "<p> chúng tôi đã cập nhật và gửi cho bạn mật khẩu mới </p>";
+            $content .= "<p> mật khẩu mới của bạn là :</p> <b>$rand_pass</b>";
+            $sendMai = send($title,$content, $kq['user_name'], $kq['email']);
+            $hash = password_hash($rand_pass,PASSWORD_BCRYPT);
+            $sql = "UPDATE user SET pass_word=? WHERE id=?";
+            $stmt_2 = $conn->prepare($sql);
+            $stmt_2->execute([$hash,$kq['id']]);
+            $_SESSION['success']='Đã gửi đến email';
+            header('location: ./index.php?page=forgot');
+            die();
+        }
+    }
+
+    function generate_random_string(){
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+     
+        for ($i = 0; $i < 5; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+     
+        return $randomString;
+    }
+    
+    function send($title,$content,$name,$email){
+        require("PHPMailer-master/src/PHPMailer.php");
+        require("PHPMailer-master/src/SMTP.php");
+        require("PHPMailer-master/src/Exception.php");
+        $mail = new PHPMailer\PHPMailer\PHPMailer();
+        $mail->IsSMTP(); // enable SMTP
+    
+        $mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+        $mail->SMTPAuth = true; // authentication enabled
+        $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+        $mail->Host = "smtp.gmail.com";
+        $mail->Port = 465; // or 587
+        $mail->IsHTML(true);
+        $mail->Username = "yengiaYG@gmail.com";
+        $mail->Password = "frmzypgjlsydaxwy";
+        $mail->SetFrom("yengiaYG@gmail.com","YG");
+        $mail->Subject = "=?utf-8?b?".base64_encode($title)."?=";
+        $mail->Body = "$content";
+        $mail->AddAddress($email);
+    
+         if(!$mail->Send()) {
+            echo "Mailer Error: " . $mail->ErrorInfo;
+         } else {
+            echo "Message has been sent";
+         }
+        }
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,22 +101,28 @@
                 <div class="login100-pic js-tilt" data-tilt>
                     <img src="view/img/fg-img.png">
               </div>
-                <form class="login100-form validate-form">
+                <form class="login100-form validate-form" enctype="multipart/form-data" method="post">
                     <span class="login100-form-title">
                         <b>KHÔI PHỤC MẬT KHẨU</b>
                     </span>
-                    <form action="custommer.html">
-                        <div class="wrap-input100 validate-input"
-                            data-validate="Bạn cần nhập đúng thông tin như: ex@abc.xyz">
-                            <input class="input100" type="text" placeholder="Nhập email" name="emailInput"
-                                id="emailInput" value="" />
+                    <form action="" enctype="multipart/form-data" method="post">
+                        <div class="wrap-input100 validate-input">
+                        <input class="input100" type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" placeholder="Nhập email" name="email" required>
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class='bx bx-mail-send' ></i>
                             </span>
                         </div>
+                        <?php
+                        if (isset($_SESSION['errors'])){
+                            echo $_SESSION['errors'];
+                        }
+                        if(isset($_SESSION['success'])){
+                            echo $_SESSION['success'];
+                        }
+                        ?>
                         <div class="container-login100-form-btn">
-                            <input type="button" onclick="return RegexEmail('emailInput')" value="Lấy mật khẩu" />
+                            <input type="submit" name="login" value="Lấy mật khẩu" style="background: var(--main_bg); border: var(--px_1) solid var(--main_bg); color: var(--black_color);">
                         </div>
 
                         <div class="text-center p-t-12">
@@ -52,11 +131,7 @@
                             </a>
                         </div>
                     </form>
-                    <div class="text-center p-t-70 txt2">
-                        Phần mềm quản lý bán hàng <i class="far fa-copyright" aria-hidden="true"></i>
-                        <script type="text/javascript">document.write(new Date().getFullYear());</script> <a
-                            class="txt2" href="https://www.facebook.com/truongvo.vd1503/"> Code bởi Trường </a>
-                    </div>
+                    
                 </form>
             </div>
         </div>

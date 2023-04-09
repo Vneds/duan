@@ -58,7 +58,10 @@
         case 'blog':
             include_once 'view/blog.php';
             break;
-            
+        case 'mail_pass':
+            include_once 'model/bill_model.php';
+            include_once 'view/mail_pass.php';
+            break;
         default:
             include_once 'view/index.php';
             break;

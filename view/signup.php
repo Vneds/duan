@@ -1,8 +1,10 @@
 <?php
     session_start();
+
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         if (!is_avaible_email($conn)){
-            header('location: ./index.php?page=signup&email_error=Email đã tồn tại');
+            $_SESSION['email_error'] = 'Email đã tồn tại';
+            header('location: ./index.php?page=signup');
             die();
         }
         insert_user($conn);
@@ -75,13 +77,13 @@
                             <input class="input100" type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"  placeholder="Email" name="email" required>
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
-                                <i class='bx bx-user'></i>
+                                <i class='bx bx-mail-send'></i>
                             </span>
-                            <?php 
-                                if (isset($_GET['email_error'])) : ?>
-                                    <div class="error"><?php echo $_GET['email_error']?></div>
-                            <?php endif?>
                         </div>
+                        <?php 
+                                if (isset($_SESSION['email_error'])) : ?>
+                                    <div class="error"><?php echo $_SESSION['email_error']?></div>
+                            <?php endif?>
                         <div class="wrap-input100 validate-input">
                             <input autocomplete="off" class="input100" type="password" required placeholder="Mật khẩu" name="pass">
                             <span toggle="#password-field" class="bx fa-fw bx-hide field-icon click-eye"></span>
@@ -95,6 +97,9 @@
                         <input type="submit" name="signup" value="Đăng ký">
                         </div>
                         <div class="text-right p-t-12">
+                            <a class="txt2" href="./index.php?page=index" style="margin-right: 175px;">
+                                Trang chủ
+                            </a>
                             <a class="txt2" href="./index.php?page=login">
                                 Đăng nhập
                             </a>
