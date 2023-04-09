@@ -1,4 +1,5 @@
 <?php 
+    session_start();
     include_once '../model/connect_db.php';
     $page = $_GET['page'];
     switch($page){

@@ -160,12 +160,14 @@
     <ul class="app-menu">
       <li><a class="app-menu__item active" href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="table-data-banned.html"><i class='app-menu__icon bx bx-id-card'></i> <span
+      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i> <span
             class="app-menu__label">Quản lý nhân viên</span></a></li>
+
       <li><a class="app-menu__item" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
 
             <li><a class="app-menu__item " href="./index.php?page=post&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+
             class="app-menu__label">Quản lý bài viết</span></a></li>
             <li><a class="app-menu__item " href="./index.php?page=TA_cmt&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý bình luận</span></a></li>
@@ -178,85 +180,46 @@
       </li>
       <li><a class="app-menu__item" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
             class="app-menu__label">Quản lý đơn hàng</span></a></li>
-      <li><a class="app-menu__item" href="table-data-banned.html"><i class='app-menu__icon bx bx-run'></i><span
-            class="app-menu__label">Quản lý nội bộ
-          </span></a></li>
-      <li><a class="app-menu__item" href="table-data-money.html"><i class='app-menu__icon bx bx-dollar'></i><span
-            class="app-menu__label">Bảng kê lương</span></a></li>
-      <li><a class="app-menu__item" href="quan-ly-bao-cao.html"><i
-            class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Báo cáo doanh thu</span></a>
-      </li>
-      <li><a class="app-menu__item" href="page-calendar.html"><i class='app-menu__icon bx bx-calendar-check'></i><span
-            class="app-menu__label">Lịch công tác </span></a></li>
-      <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Cài
-            đặt hệ thống</span></a></li>
     </ul>
   </aside>
   <main class="app-content">
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb">
-        <li class="breadcrumb-item">Danh sách sản phẩm</li>
-        <li class="breadcrumb-item"><a href="#">Thêm sản phẩm</a></li>
+        <li class="breadcrumb-item">Danh sách người dùng</li>
+        <li class="breadcrumb-item"><a href="#">Chỉnh sửa người dùng</a></li>
       </ul>
     </div>
     <div class="row">
       <div class="col-md-12">
         <div class="tile">
-          <h3 class="tile-title">Tạo mới sản phẩm</h3>
+          <h3 class="tile-title">Chỉnh sửa người dùng</h3>
           <div class="tile-body">
-            <div class="row element-button">
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><i
-                    class="fas fa-folder-plus"></i> Thêm nhà cung cấp</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
-                    class="fas fa-folder-plus"></i> Thêm danh mục</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addtinhtrang"><i
-                    class="fas fa-folder-plus"></i> Thêm tình trạng</a>
-              </div>
-            </div>
-
           <form class="row" method="POST" enctype="multipart/form-data" action="./controller/user_controller.php">
               <input type="text" name="action" value="edit" hidden>
               <input type="text" name="id" value="<?php echo $user['id']?>" hidden>
               <div class="form-group col-md-3">
                 <label class="control-label">Tên người dùng</label>
-                <input class="form-control" type="text" name="user_name" value="<?php echo $user['user_name']?>">
+                <input class="form-control" type="text" name="user_name" value="<?php echo $user['user_name']?>" required>
               </div>
-
-
-              <!-- <div class="form-group  col-md-3">
-                <label class="control-label">Số lượng</label>
-                <input class="form-control" type="number">
-              </div> -->
-              <!-- <div class="form-group col-md-3 ">
-                <label for="exampleSelect1" class="control-label">Tình trạng</label>
-                <select class="form-control" id="exampleSelect1">
-                  <option>-- Chọn tình trạng --</option>
-                  <option>Còn hàng</option>
-                  <option>Hết hàng</option>
-                </select>
-              </div> -->
               <div class="form-group col-md-3">
                 <label class="control-label">Email</label>
-                <input class="form-control" type="text" name="email" value="<?php echo $user['email']?>">
+                <input class="form-control" type="text" name="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" value="<?php echo $user['email']?>" required>
+                <span class="text-danger"><?php echo $_GET['email_error'] ?? ''?></span>
               </div>
               <div class="form-group col-md-3">
                 <label for="exampleSelect1" class="control-label">Vai trò</label>
                 <select class="form-control" id="exampleSelect1" name="role">
-                    <option>-- Chọn vai trò --</option>
+                    <option value="">-- Chọn vai trò --</option>
                     <option value="1">Admin</option>
-                    <option value="1">User</option>
+                    <option value="0">User</option>
                 </select>
+                <span class="text-danger"><?php echo $_GET['role_error'] ?? ''?></span>
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Ảnh sản phẩm</label>
                 <div id="myfileupload">
-                  <img src="../<?php echo $image_path ?>" alt="" style="width:300px">
-                  <input type="file" id="uploadfile" name="img" onchange="readURL(this);" >
+                  <img src="../view/img/user/<?php echo $user['img'] ?>" alt="" style="width:300px">
+                  <input type="file" id="uploadfile" name="img">
                 </div>
                 <div id="thumbbox">
                   <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
@@ -268,7 +231,7 @@
                 </div>
               </div>
               <button class="btn btn-save" type="submit">Lưu lại</button>
-              <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
+              <a class="btn btn-cancel" href="./index.php?page=user&action=list">Hủy bỏ</a>
             </div>
             </div>
           </form> 

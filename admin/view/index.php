@@ -11,7 +11,9 @@
   $user_list = $conn->query('SELECT * FROM user ORDER BY id DESC LIMIT 4')->fetchAll();
   
   $product_almost_run_out = $conn->query("SELECT count(*) as 'quantity' FROM product WHERE kho_hang <= 5")->fetch();
-
+ 
+  $catergory_data =  $conn->query("SELECT count(*) as 'stock', catergory_name from product JOIN catergory ON product.catergory_id = catergory.id GROUP BY catergory_id")->fetchAll();
+  $sale_data = $conn->query("SELECT count(*) as 'sale' , catergory_name from bill_detail JOIN product ON bill_detail.product_id = product.id JOIN catergory ON product.catergory_id = catergory.id GROUP BY product.catergory_id")->fetchAll();
   function change_status_background($status){
     if ($status == 'Đang xử lý') {
         return "badge bg-info";
@@ -48,7 +50,6 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
@@ -69,10 +70,10 @@
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/hay.jpg" width="50px"
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="<?php echo '../view/img/user/'.$_SESSION['user']['img']?>" width="50px"
         alt="User Image">
       <div>
-        <p class="app-sidebar__user-name"><b>Admin</b></p>
+        <p class="app-sidebar__user-name"><b><?php echo $_SESSION['user']['user_name']?></b></p>
         <!-- <p class="app-sidebar__user-name"><b></b></p> -->
         <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
       </div>
@@ -81,12 +82,14 @@
     <ul class="app-menu">
       <li><a class="app-menu__item active" href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="table-data-banned.html"><i class='app-menu__icon bx bx-id-card'></i> <span
+      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i> <span
             class="app-menu__label">Quản lý nhân viên</span></a></li>
+
       <li><a class="app-menu__item" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
 
             <li><a class="app-menu__item " href="./index.php?page=post&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+
             class="app-menu__label">Quản lý bài viết</span></a></li>
             <li><a class="app-menu__item " href="./index.php?page=TA_cmt&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý bình luận</span></a></li>
@@ -99,18 +102,6 @@
       </li>
       <li><a class="app-menu__item" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
             class="app-menu__label">Quản lý đơn hàng</span></a></li>
-      <li><a class="app-menu__item" href="table-data-banned.html"><i class='app-menu__icon bx bx-run'></i><span
-            class="app-menu__label">Quản lý nội bộ
-          </span></a></li>
-      <li><a class="app-menu__item" href="table-data-money.html"><i class='app-menu__icon bx bx-dollar'></i><span
-            class="app-menu__label">Bảng kê lương</span></a></li>
-      <li><a class="app-menu__item" href="quan-ly-bao-cao.html"><i
-            class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Báo cáo doanh thu</span></a>
-      </li>
-      <li><a class="app-menu__item" href="page-calendar.html"><i class='app-menu__icon bx bx-calendar-check'></i><span
-            class="app-menu__label">Lịch công tác </span></a></li>
-      <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Cài
-            đặt hệ thống</span></a></li>
     </ul>
   </aside>
   <main class="app-content">
@@ -250,6 +241,14 @@
               </div>
             </div>
           </div>
+          <div class="col-md-12">
+            <div class="tile">
+              <h3 class="tile-title">Số lượng bán được theo từng doanh mục</h3>
+              <div class="embed-responsive embed-responsive-16by9">
+                <canvas class="embed-responsive-item" id="barChartDemo2"></canvas>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -258,10 +257,10 @@
 
 
     <div class="text-center" style="font-size: 13px">
-      <p><b>Copyright
+      <p><b>
           <script type="text/javascript">
-            document.write(new Date().getFullYear());
-          </script> Phần mềm quản lý bán hàng | Dev By Trường
+            
+          </script> 
         </b></p>
     </div>
   </main>
@@ -309,6 +308,14 @@
     let price = priceData.map(price => price['sum']);
     let dateData = <?php echo json_encode($date_arr) ?>;
     let date = dateData.map(date => date['date']);
+
+    let catergoryData = <?php echo json_encode($catergory_data)?>;
+    
+    let catergoryName = catergoryData.map(catergory => catergory['catergory_name']);
+    let stock = catergoryData.map(catergory => catergory['stock']);
+    let saleData = <?php echo json_encode($sale_data)?>;
+    console.log(saleData);
+    let sale = saleData.map(sale => sale['sale']);
     // var data = {
     //   labels: date,
     //   datasets: [{
@@ -341,6 +348,28 @@
           borderWidth: 1
         }]
     }
+
+    const data2 = {
+        labels:  ['a', 'b'],
+        datasets: [{
+          label: 'Số hàng tồn',
+          data: [20, 10],
+          borderWidth: 1
+        }]
+    }
+
+    const config2 =  {
+      type: 'line',
+      data2,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    };
+
     const config =  {
       type: 'bar',
       data,
@@ -356,6 +385,31 @@
     const ctx = document.getElementById('barChartDemo');
     const myChart = new Chart(ctx, config);
 
+    const ctxb = document.getElementById('barChartDemo2');
+    // const myChart2 = new Chart(ctxb, config2);
+    
+    new Chart(ctxb, {
+      type: 'bar',
+      data: {
+        labels: catergoryName,
+        datasets: [{
+          label: 'Số lượng bán',
+          data: sale,
+          borderWidth: 1
+        },{
+          label: 'Số hàng tồn',
+          data: stock,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
 
   </script>
   <script type="text/javascript">

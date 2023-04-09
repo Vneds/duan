@@ -31,7 +31,11 @@
                     <sidebar class="sidebar__filter-wrapper">
                         <div class="sidebar__filter">
                             <h2 class="sidebar__heading">Filter by price</h2>
-                            <input type="range" class="sidebar__range-input">
+                            <div class="range-slider-container">
+                            <input type="range" class="range-slider" />
+                            <span id="range-value-bar"></span>
+                            <!-- <span id="range-value"></span> -->
+                            </div>
                             <div class="spw">
                                 <span class="sidebar__span">Price: $7 - $56</span>
                                 <button class="btn">FILTER</button>
@@ -89,7 +93,7 @@
                         <ul class="products__warpper">
                             <?php 
                             $pro =  isset($_GET['pro']) ? $_GET['pro'] : 1;
-                            $offset = ((int)$pro ) * 12;
+                            $offset = ((int)$pro -1) * 12;
                                 $product_list =$conn->query("select * from product limit 12 offset " . $offset);
                                 foreach( $product_list as $product){
                                 $image_path = get_image_path($product['image_path']);
@@ -109,13 +113,9 @@
                         </ul>
 
                         <ul class="products__pagenation">
-                            <!-- <li class="products__pagenation-item"><a href="" class="products__pagination-link">1</a></li>
-                            <li class="products__pagenation-item"><a href="" class="products__pagination-link">2</a></li>
-                            <li class="products__pagenation-item"><a href="" class="products__pagination-link">3</a></li>
-                            <li class="products__pagenation-item"><a href="" class="products__pagination-link">-></a></li> -->
                             <?php
                         $stmt = $conn->query("select * from product");
-                        for ($i = 1; $i < ceil( $stmt->rowCount() / 12); $i++){
+                        for ($i = 1; $i < ceil( $stmt->rowCount() / 11); $i++){
                         // echo '<a id="linkNum" href="?page=' . $i . '">' . $i . '</a>';
                         echo '<li class="products__pagenation-item"><a class="products__pagination-link" href="./index.php?page=shop&pro=' . $i . '">' . $i . '</a></li>';
                         }
@@ -163,6 +163,41 @@
         }
         $('.sidebar__category-link').click(()=> {
         })
+    </script>
+
+    <script>
+        const rangeSlider = document.querySelector('.range-slider');
+        const rangeValueBar = document.querySelector('#range-value-bar');
+        const rangeValue = document.querySelector('#range-value');
+
+        let isDown = false;
+
+        function dragHandler() {
+        isDown = !isDown;
+        if (!isDown) {
+            // rangeValue.style.setProperty('opacity', '0');
+        } else {
+            rangeValue.style.setProperty('opacity', '1');
+        }
+        }
+
+        function dragOn(e) {
+        if (!isDown) return;
+        rangeValueHandler();
+        }
+
+        function rangeValueHandler() {
+        rangeValueBar.style.setProperty('width', `${rangeSlider.value}%`);
+        // rangeValue.style.setProperty('transform', `translateX(-${this.value}%)`);
+        // rangeValue.innerHTML = `${rangeSlider.value}%`;
+        // rangeValue.style.setProperty('left', `${rangeSlider.value}%`);
+        }
+
+        rangeValueHandler();
+        rangeSlider.addEventListener('mousedown', dragHandler);
+        rangeSlider.addEventListener('mousemove', dragOn);
+        rangeSlider.addEventListener('mouseup', dragHandler);
+        rangeSlider.addEventListener('click', rangeValueHandler);
     </script>
 
 </body>

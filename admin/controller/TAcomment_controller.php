@@ -55,7 +55,7 @@
         global $conn;
         $sql = 'UPDATE comment SET content = ? , user_id = ?, post_id = ? , sub_comment_id = ?  WHERE id = '. $_POST['id'];
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$_POST['content'],$_POST['user_id'], $_POST['post_price'], $_POST['subcomment_id']]);
+        $stmt->execute([$_POST['content'],$_POST['user_id'], $_POST['post_id'], $_POST['subcomment_id']]);
         header ('location: ../index.php?page=TA_cmt&action=list');
     }
 

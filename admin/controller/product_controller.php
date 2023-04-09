@@ -39,7 +39,8 @@
                 break;
             case 'edit':
                 if (is_validate()){
-                    update_product();
+                    $image_path = get_img_name();
+                    update_product($image_path);
                     return;
                 }
                 save_error();
@@ -61,11 +62,12 @@
         } 
     }
 
-    function update_product(){
+    function update_product($image_path){
         global $conn;
-        $sql = 'UPDATE product SET product_name = ? , catergory_id = ?, product_price = ? , des = ?, kho_hang = ?  WHERE id = '. $_POST['id'];
+        $image_path = $image_path ?? get_product_img($_POST['id']);
+        $sql = 'UPDATE product SET product_name = ? , catergory_id = ?, product_price = ? , des = ?, kho_hang = ? , image_path = ?  WHERE id = '. $_POST['id'];
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$_POST['product_name'],$_POST['catergory_id'], $_POST['product_price'], $_POST['des'], $_POST['stock']]);
+        $stmt->execute([$_POST['product_name'],$_POST['catergory_id'], $_POST['product_price'], $_POST['des'], $_POST['stock'], $image_path]);
         header ('location: ../index.php?page=product&action=list');
     }
 
@@ -77,6 +79,14 @@
     }
 
     function is_validate(){
+        if (!is_numeric($_POST['stock'])){
+            return false;
+        }
+
+        if (!is_numeric($_POST['product_price'])){
+            return false;
+        }
+
         if ((int)$_POST['stock'] < 0){
             return false;
         }
@@ -110,48 +120,32 @@
 
     function save_error_add(){
         global $error_arr;
+
+        if (!is_numeric($_POST['stock'])){
+            save_error_in_arr('stock_error', 'Vui lòng nhập số ');
+        }
+
+        if (!is_numeric($_POST['product_price'])){
+            save_error_in_arr('price_error', 'Vui lòng nhập số ');
+        }
+
         if ((int)$_POST['stock'] < 0){
-            $error_stock = 'Vui lòng nhập số dương';
-            $arr1 = [
-                'error_name' =>  'error_stock',
-                'error_value' => $error_stock
-            ];
-            array_push($error_arr , $arr1);
+            save_error_in_arr('stock_error', 'Vui lòng nhập số dương');
         }
         if ((int)$_POST['product_price'] < 0){
-            $error_price = 'Vui lòng nhập số dương';
-            $arr2 = [
-                'error_name' =>  'error_price',
-                'error_value' => $error_price
-            ];
-            array_push($error_arr , $arr2);
+            save_error_in_arr('price_error', 'Vui lòng nhập số dương');
         }
 
         if (empty($_POST['catergory_id'])){
-            $error_catergory = 'Vui lòng chọn danh mục';
-            $arr3 = [
-                'error_name' =>  'error_catergory',
-                'error_value' => $error_catergory
-            ];
-            array_push($error_arr , $arr3);
+            save_error_in_arr('catergory_error', 'Vui lòng chọn danh mục');
         }
 
         if (empty($_FILES["img"]['name'])){
-            $error_img = 'Vui lòng chọn ảnh';
-            $arr4 = [
-                'error_name' =>  'error_img',
-                'error_value' => $error_img
-            ];
-            array_push($error_arr , $arr4);
+            save_error_in_arr('img_error', 'Vui lòng chọn ảnh');
         }
 
         if (empty($_POST['des'])){
-            $error_des = 'Vui lòng chọn danh mục';
-            $arr3 = [
-                'error_name' =>  'error_des',
-                'error_value' => $error_des
-            ];
-            array_push($error_arr , $arr3);
+            save_error_in_arr('des_error', 'Vui lòng điền mô tả');
         }
         $query_param = generate_query_param($error_arr);
         header ('location: ../index.php?page=product&action=add&' . $query_param);
@@ -159,31 +153,31 @@
 
     function save_error(){
         global $error_arr;
-        if ((int)$_POST['stock'] < 0){
-            $error_stock = 'Vui lòng nhập số dương';
-            $arr1 = [
-                'error_name' =>  'error_stock',
-                'error_value' => $error_stock
-            ];
-            array_push($error_arr , $arr1);
+
+        if (!is_numeric($_POST['stock'])){
+            save_error_in_arr('stock_error', 'Vui lòng nhập số ');
         }
+
+        if (!is_numeric($_POST['product_price'])){
+            save_error_in_arr('price_error', 'Vui lòng nhập số ');
+        }
+
+        if ((int)$_POST['stock'] < 0){
+            save_error_in_arr('stock_error', 'Vui lòng nhập số dương');
+        }
+
         if ((int)$_POST['product_price'] < 0){
-            $error_price = 'Vui lòng nhập số dương';
-            $arr2 = [
-                'error_name' =>  'error_price',
-                'error_value' => $error_price
-            ];
-            array_push($error_arr , $arr2);
+            save_error_in_arr('price_error', 'Vui lòng nhập số dương');
         }
 
         if (empty($_POST['catergory_id'])){
-            $error_catergory = 'Vui lòng chọn danh mục';
-            $arr3 = [
-                'error_name' =>  'error_catergory',
-                'error_value' => $error_catergory
-            ];
-            array_push($error_arr , $arr3);
+            save_error_in_arr('catergory_error', 'Vui lòng chọn danh mục');
         }
+
+        if (empty($_POST['des'])){
+            save_error_in_arr('des_error', 'Vui lòng điền mô tả');
+        }
+        
         $query_param = generate_query_param($error_arr);
         header ('location: ../index.php?page=product&action=edit&id='. $_POST['id'] . '&' . $query_param);
     }
@@ -196,6 +190,34 @@
             $query_param .= $string;
         }
         return $query_param;
+    }
+
+    function save_error_in_arr($error_name, $error_value){
+        global $error_arr;
+        $arr = [
+            'error_name' =>  $error_name,
+            'error_value' => $error_value
+        ];
+        array_push($error_arr , $arr);
+    }
+
+    function get_img_name(){
+        if (!isset($_FILES['img']['name'])){
+            return null;
+        }
+        $des = "../../view/img/shop/". $_FILES["img"]['name'];
+        if (move_uploaded_file($_FILES["img"]["tmp_name"], $des)){
+            return $_FILES['img']['name'];
+        }
+    }              
+
+    function get_product_img($product_id){
+        global $conn;
+        $sql = 'SELECT image_path FROM product WHERE id = ' . $product_id;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result['image_path'];
     }
 
 ?>

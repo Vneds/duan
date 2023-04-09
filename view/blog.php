@@ -22,7 +22,7 @@ session_start();
         <div class="container">
             <div class="slider">
                 <div class="content">
-                    <h1 class="slider__title">Blogs
+                    <h1 class="slider__title">BÀI VIẾT
                     </h1>
                 </div>
             </div>
@@ -64,18 +64,18 @@ session_start();
 
             
         </div>
-        <div class="grid">
+        <div class="gird">
                 <div class="news">
                     <img src="view/img/Rectangle 178.png" alt="">
                     <img src="view/img/Rectangle 181.png" alt="">
                     <div class="news_email">
                          <div class="news_span">
-                            <h2>NEWSLETTER</h2>
-                            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</span>
+                            <h2>TÌM HIỂU</h2>
+                            <span>Hãy là người đầu tiên biết về hàng mới, giảm giá và khuyến mãi bằng cách gửi email của bạn!</span>
                          </div>
                          <div class="news_button">
-                            <input type="text" placeholder="ENTER YOUR MAIL" class="btn__mail">
-                            <button>SUBCRIBE</button>
+                            <input type="text" placeholder="HÃY NHẬP EMAIL CỦA BẠN" class="btn__mail">
+                            <button>ĐĂNG KÝ</button>
                          </div>
 
                     </div>

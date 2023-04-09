@@ -158,6 +158,7 @@
     </div>
     <hr>
     <ul class="app-menu">
+
       <li><a class="app-menu__item active" href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
       <li><a class="app-menu__item " href="table-data-banned.html"><i class='app-menu__icon bx bx-id-card'></i> <span
@@ -173,23 +174,24 @@
       
       <li><a class="app-menu__item" href="./index.php?page=catergory&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý danh mục</span></a></li>
+
+      <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
+            class="app-menu__label">Bảng điều khiển</span></a></li>
+      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i>
+          <span class="app-menu__label">Quản lý nhân viên</span></a></li>
+      <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý bình luận</span></a></li>
+      <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý bài viết</span></a></li>
+      <li><a class="app-menu__item active" href="./index.php?page=catergory&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý danh mục
+      </span></a></li>
+
       <li><a class="app-menu__item" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
       <li><a class="app-menu__item" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
             class="app-menu__label">Quản lý đơn hàng</span></a></li>
-      <li><a class="app-menu__item" href="table-data-banned.html"><i class='app-menu__icon bx bx-run'></i><span
-            class="app-menu__label">Quản lý nội bộ
-          </span></a></li>
-      <li><a class="app-menu__item" href="table-data-money.html"><i class='app-menu__icon bx bx-dollar'></i><span
-            class="app-menu__label">Bảng kê lương</span></a></li>
-      <li><a class="app-menu__item" href="quan-ly-bao-cao.html"><i
-            class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Báo cáo doanh thu</span></a>
-      </li>
-      <li><a class="app-menu__item" href="page-calendar.html"><i class='app-menu__icon bx bx-calendar-check'></i><span
-            class="app-menu__label">Lịch công tác </span></a></li>
-      <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Cài
-            đặt hệ thống</span></a></li>
     </ul>
   </aside>
   <main class="app-content">
@@ -204,26 +206,11 @@
         <div class="tile">
           <h3 class="tile-title">Tạo mới danh mục</h3>
           <div class="tile-body">
-            <div class="row element-button">
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#exampleModalCenter"><i
-                    class="fas fa-folder-plus"></i> Thêm nhà cung cấp</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
-                    class="fas fa-folder-plus"></i> Thêm danh mục</a>
-              </div>
-              <div class="col-sm-2">
-                <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#addtinhtrang"><i
-                    class="fas fa-folder-plus"></i> Thêm tình trạng</a>
-              </div>
-            </div>
-
           <form class="row" method="POST" enctype="multipart/form-data"  action="./controller/catergory_controller.php">
               <input type="text" name="action" value="add" hidden>
               <div class="form-group col-md-3">
-                <label class="control-label">Tên sản phẩm</label>
-                <input class="form-control" type="text" name="catergory_name">
+                <label class="control-label">Tên danh mục</label>
+                <input class="form-control" type="text" name="catergory_name" required>
               </div>
 
 
@@ -241,8 +228,8 @@
               </div> -->
   </div>
               <div class="form-group col-md-12"></div>
-              <button class="btn btn-save" type="submit">Lưu lại</button>
-              <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
+              <button class="btn btn-save" type="submit">Tạo mới</button>
+              <a class="btn btn-cancel" href="./index.php?page=catergory&action=list">Hủy bỏ</a>
             </div>
             </div>
           </form> 

@@ -18,7 +18,36 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-      
+        <style>
+    .products__pagenation {
+    display: flex;
+    justify-content: end;
+    padding-right: 15px;
+    list-style-type: none;
+}
+
+.products__pagenation-item {
+    height: 38px;
+    width: 38px;
+    border: 1px #ccc solid;
+    margin-right: 4px;
+}
+
+.products__pagination-link {
+    color: #000;
+    font-size: 16px;
+    font-weight: 300;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.products__pagination-link:hover {
+    font-weight: 500;
+}
+        </style>
       </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
@@ -39,10 +68,10 @@
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/hay.jpg" width="50px"
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="<?php echo '../view/img/user/'.$_SESSION['user']['img']?>" width="50px"
         alt="User Image">
       <div>
-      <p class="app-sidebar__user-name"><b>Admin</b></p>
+      <p class="app-sidebar__user-name"><b><?php echo $_SESSION['user']['user_name']?></b></p>
         <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
       </div>
     </div>
@@ -50,12 +79,14 @@
     <ul class="app-menu">
       <li><a class="app-menu__item active" href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="table-data-banned.html"><i class='app-menu__icon bx bx-id-card'></i> <span
+      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i> <span
             class="app-menu__label">Quản lý nhân viên</span></a></li>
+
       <li><a class="app-menu__item" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
 
             <li><a class="app-menu__item " href="./index.php?page=post&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+
             class="app-menu__label">Quản lý bài viết</span></a></li>
             <li><a class="app-menu__item " href="./index.php?page=TA_cmt&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý bình luận</span></a></li>
@@ -68,18 +99,6 @@
       </li>
       <li><a class="app-menu__item" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
             class="app-menu__label">Quản lý đơn hàng</span></a></li>
-      <li><a class="app-menu__item" href="table-data-banned.html"><i class='app-menu__icon bx bx-run'></i><span
-            class="app-menu__label">Quản lý nội bộ
-          </span></a></li>
-      <li><a class="app-menu__item" href="table-data-money.html"><i class='app-menu__icon bx bx-dollar'></i><span
-            class="app-menu__label">Bảng kê lương</span></a></li>
-      <li><a class="app-menu__item" href="quan-ly-bao-cao.html"><i
-            class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Báo cáo doanh thu</span></a>
-      </li>
-      <li><a class="app-menu__item" href="page-calendar.html"><i class='app-menu__icon bx bx-calendar-check'></i><span
-            class="app-menu__label">Lịch công tác </span></a></li>
-      <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Cài
-            đặt hệ thống</span></a></li>
     </ul>
   </aside>
     <main class="app-content">
@@ -139,7 +158,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
+                                <?php
+                                $pro =  isset($_GET['pro']) ? $_GET['pro'] : 1;
+                                $offset = ((int)$pro - 1) * 12;
+                                $user_list =$conn->query("select * from user limit 12 offset " . $offset); 
                                     foreach($user_list as $user){
                                 ?>                                                      
                                 <tr>
@@ -179,6 +201,15 @@
                 </div>
             </div>
         </div>
+        <ul class="products__pagenation">
+                            <?php
+                        $stmt = $conn->query("select * from user");
+                        for ($i = 1; $i < ceil( $stmt->rowCount() / 3); $i++){
+                        // echo '<a id="linkNum" href="?page=' . $i . '">' . $i . '</a>';
+                        echo '<li class="products__pagenation-item"><a class="products__pagination-link" href="./index.php?page=user&action=list&pro=' . $i . '">' . $i . '</a></li>';
+                        }
+                        ?>
+                        </ul>
     </main>
 
 <!--
