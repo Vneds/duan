@@ -65,6 +65,7 @@
             include_once 'view/blogdetail.php';
             
             break;
+
         default:
             include_once 'view/index.php';
             break;

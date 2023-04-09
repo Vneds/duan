@@ -19,6 +19,7 @@
                 }
             else {
                 $_SESSION['pass_error'] = 'Mật khẩu trùng nhau';
+                header('location: ./index.php?page=update_pass&id='.$_GET['id'].'');
                 die();
             }
         }
