@@ -56,9 +56,13 @@
             include_once 'view/update_pass.php';
             break;
         case 'blog':
+            include_once 'model/post_model.php';
             include_once 'view/blog.php';
             break;
-            
+        case 'blogdetail':
+            include_once 'model/post_model.php';
+            include_once 'view/blogdetail.php';
+            break;
         default:
             include_once 'view/index.php';
             break;

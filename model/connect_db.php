@@ -3,7 +3,7 @@
     $host= 'localhost';
     $dbName = 'duan1';
     $userName = 'root';
-    $password = '123456';
+    $password = '';
 
     try {
         // Kết nối

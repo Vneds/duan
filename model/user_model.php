@@ -21,5 +21,5 @@
         $_SESSION['user']['email'] = $user['email'];
         $_SESSION['user']['img'] = $user['img'];
     }    
-
+    
 ?>

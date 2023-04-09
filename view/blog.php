@@ -28,12 +28,24 @@ session_start();
             </div>
         </div>
             </div>
-
-
+          
             <div class="grid">
-                <div class="article" style="background-image: url('view/img/Group\ 399.svg');">
-                
+            <?php 
+                                $post_list = get_post_list();
+                                foreach($post_list as $post){
+                                $image_path = get_image_path($post['image_path']);
+                            ?>
+                <div class="article">
+                    
                     <span class="article__author">By: admin</span>
+
+                    <h2 class="article__heading"> <?php echo $post['title']?> </h2>
+                    <span class="article__subheading"> <?php echo $post['content']?> </span>
+                    <a href="index.php?page=blogdetail&id=<?php echo $post['id']?>"><button class="btn" >Đọc thêm</button></a>
+                    
+                    <div class="post_item-img">
+                    <img src=<?php echo $image_path ?> alt="" >
+                    </div>
                     <h2 class="article__heading">THE KEY IS VICTORY WAS<br>CREATING ROUTINES</h2>
                     <span class="article__subheading">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</span>
                     <button class="btn">Đọc thêm</button>
@@ -41,48 +53,16 @@ session_start();
             </div>
 
 
-            <div class="grid">
-                <div class="article2" style="background-image: url('view/img/Group\ 393(2).svg');">
-                
-                    <span class="article2__author">By: admin</span>
-                    <h2 class="article2__heading">MODERN HOUSE REMODEL IS ALL<br>ABOUT DETAILS</h2>
-                    <span class="article2__subheading">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</span>
-                    <button class="btn2">Đọc thêm</button>
-                </div>
-            </div>
+            
 
 
-            <div class="grid">
-                <div class="article" style="background-image: url('view/img/Group\ 394.svg');">
-                
-                    <span class="article__author">By: admin</span>
-                    <h2 class="article__heading">DESIGNING A MANAGER OFFICE</h2>
-                    <span class="article__subheading">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</span>
-                    <button class="btn">Đọc thêm</button>
-                </div>
-            </div>
+            
 
 
-            <div class="grid">
-                <div class="article2" style="background-image: url('view/img/Group\ 395.svg');">
-                
-                    <span class="article2__author">By: admin</span>
-                    <h2 class="article2__heading">FURNITURE DESIGN BASICS</h2>
-                    <span class="article2__subheading">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</span>
-                    <button class="btn2">Đọc thêm</button>
-                </div>
-            </div>
+            
 
 
-            <div class="grid" >
-                <div class="article" style="background-image: url('view/img/Group\ 396.svg');">
-                
-                    <span class="article__author">By: admin</span>
-                    <h2 class="article__heading">EXPAND YOUR MIND,CHANGE<br>EVERYTHING</h2>
-                    <span class="article__subheading">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</span>
-                    <button class="btn">Đọc thêm</button>
-                </div>
-            </div>
+            
         </div>
         <div class="gird">
                 <div class="news">
@@ -97,8 +77,10 @@ session_start();
                             <input type="text" placeholder="HÃY NHẬP EMAIL CỦA BẠN" class="btn__mail">
                             <button>ĐĂNG KÝ</button>
                          </div>
+
                     </div>
                 </div>
+                <?php } ?>
             </div>
         <?php include_once 'view/components/footer.php'?>;
     </div>
