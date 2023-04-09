@@ -23,8 +23,8 @@ session_start();
             <div class="grid">
                 <div class="image__wrapper">
                     <img src="view/img/shop/Rectangle 2.svg" alt="" class="br">
-                    <h2 class="image__title">PRODUCT</h2>
-                    <span class="image__breadcrum">Home / Dinner ware / Product</span>
+                    <h2 class="image__title">SẢN PHẨM</h2>
+                    <span class="image__breadcrum">Trang chủ / Cửa hàng / Sản phẩm</span>
                 </div>
 
 
@@ -102,9 +102,9 @@ session_start();
                         <hr>
 
                         <div class="classify">
-                            <div class="classify__item"><b>CATEGORY:</b> Explore Dinnerware</div>
+                            <div class="classify__item"><b>DANH MỤC:</b> Nội thất trang trí</div>
 
-                            <div class="classify__item"><b>TAGS:</b> Explore Dinnerware</div>
+                            <div class="classify__item"><b>THẺ:</b> Đồ gốm</div>
                         </div>
                     </div>
                 </div>
@@ -117,21 +117,21 @@ session_start();
                     <hr>
                     <div class="spw detail-sub-content">
                         <div class="description__column">
-                            <h3 class="description__heading">Care Intructions</h3>
-                            <p class="description__paragraph">Microwave and dishwasher safe. We recommend using gentle, environmentally-friendly detergents. Not suitable for use on an open flame or electric stove top. Avoid temperature shock by heating things slowly, evenly, and carefully</p>
+                            <h3 class="description__heading">HƯỚNG DẪN SỬ DỤNG</h3>
+                            <p class="description__paragraph">Sản phẩm được dùng để trang trí, cắm hoa để cho không gian của bạn thật là tao nhã, đẹp đẽ. Tránh để dưới ánh nắng trực tiếp.</p>
                         </div>
 
                         <div class="description__column">
-                            <h3 class="description__heading">PRODUCT SPECS</h3>
-                            <p class="description__paragraph">Material: Ceramic<br>
-                                Size: 4″ dia.<br>
-                                Capacity: 16 oz<br>
-                                Designed and handcrafted in Sausalito, CA.</p>
+                            <h3 class="description__heading">THÔNG SỐ SẢN PHẨM</h3>
+                            <p class="description__paragraph">Chất liệu: Gốm<br>
+                                Kích thước: 24x24.<br>
+                                Cân nặng: 2.15 KG<br>
+                                Được thiết kế và làm thủ công tại YGshop.</p>
                         </div>
 
                         <div class="description__column">
-                            <h3 class="description__heading">DID YOU KNOW?</h3>
-                            <p class="description__paragraph">Microwave and dishwasher safe. We recommend using gentle, environmentally-friendly detergents. Not suitable for use on an open flame or electric stove top. Avoid temperature shock by heating things slowly, evenly, and carefully</p>
+                            <h3 class="description__heading">BẠN CÓ BIẾT KHÔNG?</h3>
+                            <p class="description__paragraph">YG cung cấp cho bạn những sản phẩm thiết kế độc đáo và chất lượng cao để trang trí cho không gian sống của bạn. Với đa dạng các loại nội thất như đồ gốm, bàn ăn, giường ngủ và nhiều sản phẩm khác, chúng tôi cam kết sẽ đem đến cho bạn những trải nghiệm tuyệt vời nhất trong việc lựa chọn và sử dụng sản phẩm của chúng tôi. </p>
                         </div>
                     </div>
                 </div>
@@ -159,6 +159,7 @@ session_start();
                     </ul>
                 </div>
             </div>
+            <br><br><br>
         </div>
     </div>
     <script>
@@ -252,21 +253,21 @@ session_start();
             let html = '';
             html += `     <div class="spw detail-sub-content">
                         <div class="description__column">
-                            <h3 class="description__heading">Care Intructions</h3>
-                            <p class="description__paragraph">Microwave and dishwasher safe. We recommend using gentle, environmentally-friendly detergents. Not suitable for use on an open flame or electric stove top. Avoid temperature shock by heating things slowly, evenly, and carefully</p>
+                            <h3 class="description__heading">MÔ TẢ</h3>
+                            <p class="description__paragraph">Sản phẩm được dùng để trang trí, cắm hoa để cho không gian của bạn thật là tao nhã, đẹp đẽ. Tránh để dưới ánh nắng trực tiếp.</p>
                         </div>
 
                         <div class="description__column">
-                            <h3 class="description__heading">PRODUCT SPECS</h3>
-                            <p class="description__paragraph">Material: Ceramic<br>
-                                Size: 4″ dia.<br>
-                                Capacity: 16 oz<br>
-                                Designed and handcrafted in Sausalito, CA.</p>
+                            <h3 class="description__heading">THÔNG SỐ SẢN PHẨM</h3>
+                            <p class="description__paragraph">Chất liệu: Gốm<br>
+                            Kích thước: 24x24.<br>
+                            Cân nặng: 2.15 KG<br>
+                            Được thiết kế và làm thủ công tại YGshop.</p>
                         </div>
 
                         <div class="description__column">
-                            <h3 class="description__heading">DID YOU KNOW?</h3>
-                            <p class="description__paragraph">Microwave and dishwasher safe. We recommend using gentle, environmentally-friendly detergents. Not suitable for use on an open flame or electric stove top. Avoid temperature shock by heating things slowly, evenly, and carefully</p>
+                            <h3 class="description__heading">BẠN CÓ BIẾT KHÔNG?</h3>
+                            <p class="description__paragraph">YG cung cấp cho bạn những sản phẩm thiết kế độc đáo và chất lượng cao để trang trí cho không gian sống của bạn. Với đa dạng các loại nội thất như đồ gốm, bàn ăn, giường ngủ và nhiều sản phẩm khác, chúng tôi cam kết sẽ đem đến cho bạn những trải nghiệm tuyệt vời nhất trong việc lựa chọn và sử dụng sản phẩm của chúng tôi.</p>
                         </div>
                     </div>`;
             detailSubContent.html(html);

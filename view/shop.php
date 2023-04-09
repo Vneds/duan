@@ -20,25 +20,27 @@
     <div class="app">
         <?php include_once 'view/components/header.php'?>;
         <div class="container">
+        <div class="grid">
+                <div class="image__wrapper">
+                    <img src="view/img/shop/Rectangle 2.svg" alt="" class="br">
+                    <h2 class="image__title">CỬA HÀNG</h2>
+                    <span class="image__breadcrum">Trang chủ / Cửa hàng</span>
+                </div>
             <div class="grid">
-                <div clas./detail.html="image__wrapper">
+                <!-- <div clas./detail.html="image__wrapper">
                     <img src="view/img/shop/Rectangle 2.svg" alt="" class="br">
                     <h2 class="image__title">SHOP</h2>
                     <span class="image__breadcrum">Home / Shop</span>
-                </div>
+                </div> -->
 
                 <div class="content spw">
                     <sidebar class="sidebar__filter-wrapper">
                         <div class="sidebar__filter">
-                            <h2 class="sidebar__heading">Filter by price</h2>
-                            <div class="range-slider-container">
-                            <input type="range" class="range-slider" />
-                            <span id="range-value-bar"></span>
-                            <!-- <span id="range-value"></span> -->
-                            </div>
+                            <h2 class="sidebar__heading">Lọc theo giá</h2>
+                            <input type="range" class="sidebar__range-input">
                             <div class="spw">
-                                <span class="sidebar__span">Price: $7 - $56</span>
-                                <button class="btn">FILTER</button>
+                                <span class="sidebar__span">Giá: $7 - $56</span>
+                                <button class="btn">TÌM</button>
                             </div>
                         </div>
 
@@ -59,17 +61,17 @@
                         </ul>
 
                         <ul class="sidebar__tags">
-                            <h2 class="sidebar__heading">Tags</h2>
-                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Casual</a></li>
-                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Classic</a></li>
-                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Creative</a></li>
-                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Elegant</a></li>
-                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Gadgets</a></li>
-                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Lifestyle</a></li>
-                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Minimal</a></li>
-                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Minimalistic</a></li>
-                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Modern</a></li>
-                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Style</a></li>
+                            <h2 class="sidebar__heading">Thẻ</h2>
+                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Bình thường</a></li>
+                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Cổ điển</a></li>
+                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Sáng tạo</a></li>
+                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Đồ gốm</a></li>
+                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Thẩm mỹ</a></li>
+                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Hằng ngày</a></li>
+                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Sành điệu</a></li>
+                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Trang trí</a></li>
+                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Kiểu mới</a></li>
+                            <li class="sidebar__tag-item"><a href="" class="sidebar__tag-link">Thời thượng</a></li>
                         </ul>
                     </sidebar>
 
@@ -126,6 +128,7 @@
                 </div>
             </div>
         </div>
+        </div>
         
     </div>
     <?php include_once 'view/components/footer.php'?>;
@@ -163,41 +166,6 @@
         }
         $('.sidebar__category-link').click(()=> {
         })
-    </script>
-
-    <script>
-        const rangeSlider = document.querySelector('.range-slider');
-        const rangeValueBar = document.querySelector('#range-value-bar');
-        const rangeValue = document.querySelector('#range-value');
-
-        let isDown = false;
-
-        function dragHandler() {
-        isDown = !isDown;
-        if (!isDown) {
-            // rangeValue.style.setProperty('opacity', '0');
-        } else {
-            rangeValue.style.setProperty('opacity', '1');
-        }
-        }
-
-        function dragOn(e) {
-        if (!isDown) return;
-        rangeValueHandler();
-        }
-
-        function rangeValueHandler() {
-        rangeValueBar.style.setProperty('width', `${rangeSlider.value}%`);
-        // rangeValue.style.setProperty('transform', `translateX(-${this.value}%)`);
-        // rangeValue.innerHTML = `${rangeSlider.value}%`;
-        // rangeValue.style.setProperty('left', `${rangeSlider.value}%`);
-        }
-
-        rangeValueHandler();
-        rangeSlider.addEventListener('mousedown', dragHandler);
-        rangeSlider.addEventListener('mousemove', dragOn);
-        rangeSlider.addEventListener('mouseup', dragHandler);
-        rangeSlider.addEventListener('click', rangeValueHandler);
     </script>
 
 </body>
