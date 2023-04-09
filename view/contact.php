@@ -77,7 +77,11 @@ session_start();
 
 
 <div style="color:#f5f5f5;" class="add_subheading">
+
+    <p>No. 23, St. Louis Street, Melbo, USA and 78, Thanh Xuan, Hanoi</p>
+
 <p>No. 23, St. Louis Street, Melbo, USA and 78, Thanh Xuan, Hanoi</p>
+
 </div>
 </div>
 <!-- item3 -->

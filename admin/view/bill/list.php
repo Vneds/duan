@@ -81,21 +81,27 @@
     </div>
     <hr>
     <ul class="app-menu">
-      <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
+      <li><a class="app-menu__item active" href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i>
-          <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-      <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
-            class="app-menu__label">Quản lý bình luận</span></a></li>
-      <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
+      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i> <span
+            class="app-menu__label">Quản lý nhân viên</span></a></li>
+
+      <li><a class="app-menu__item" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý khách hàng</span></a></li>
+
+      <li><a class="app-menu__item " href="./index.php?page=post&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+
             class="app-menu__label">Quản lý bài viết</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=catergory&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
-            class="app-menu__label">Quản lý danh mục
-      </span></a></li>
+      <li><a class="app-menu__item " href="./index.php?page=TA_cmt&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý bình luận</span></a></li>
+      
+      
+      <li><a class="app-menu__item" href="./index.php?page=catergory&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý danh mục</span></a></li>
       <li><a class="app-menu__item" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
-      <li><a class="app-menu__item active" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
+      <li><a class="app-menu__item" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
             class="app-menu__label">Quản lý đơn hàng</span></a></li>
     </ul>
   </aside>
@@ -196,8 +202,8 @@
                     <td><?php echo $bill['date'] ?></td>
                     <td><span class="<?php echo $class_name ?>"><?php echo $bill['status']?></span></td>
                     <td>
-                      <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <a href="./index.php?page=bill&action=detail&id=<?php echo $bill['id'] ?>"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></a>
+                      <!-- <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button> -->
+                      <a href="./index.php?page=bill&action=detail&id=<?php echo $bill['id'] ?>"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-plus"></i></button></a>
                     </td>
                   </tr>
                   <?php }?>
@@ -374,8 +380,7 @@
                             <td>${bill['date']}</td>
                             <td><span class="${className}">${bill['status']}</span></td>
                           <td>
-                            <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                            <a href="./index.php?page=bill&action=detail&id=${bill['id']}."><button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-edit"></i></button></a>
+                            <a href="./index.php?page=bill&action=detail&id=${bill['id']}."><button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fa fa-plus"></i></button></a>
                           </td>
                         </tr>
                                 `
