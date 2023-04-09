@@ -18,6 +18,13 @@
         case 'chart':
             include_once 'controller/chart_controller.php';
             break;
+        case 'post':
+            include_once 'controller/post_controller.php';
+            break;
+        case 'TA_cmt':
+            include_once 'controller/TAcomment_controller.php';
+            break;
+
         default:
             include_once 'view/index.php';
             break;

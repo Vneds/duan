@@ -18,36 +18,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-        <style>
-    .products__pagenation {
-    display: flex;
-    justify-content: end;
-    padding-right: 15px;
-    list-style-type: none;
-}
-
-.products__pagenation-item {
-    height: 38px;
-    width: 38px;
-    border: 1px #ccc solid;
-    margin-right: 4px;
-}
-
-.products__pagination-link {
-    color: #000;
-    font-size: 16px;
-    font-weight: 300;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-}
-
-.products__pagination-link:hover {
-    font-weight: 500;
-}
-        </style>
+      
       </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
@@ -60,18 +31,18 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="../model/log_out.php"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+      <li><a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
     </ul>
   </header>
-  <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
     <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="<?php echo '../view/img/user/'.$_SESSION['user']['img']?>" width="50px"
         alt="User Image">
       <div>
-      <p class="app-sidebar__user-name"><b><?php echo $_SESSION['user']['user_name']?></b></p>
+        <p class="app-sidebar__user-name"><b><?php echo $_SESSION['user']['user_name']?></b></p>
+        <!-- <p class="app-sidebar__user-name"><b></b></p> -->
         <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
       </div>
     </div>
@@ -104,7 +75,7 @@
     <main class="app-content">
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb side">
-                <li class="breadcrumb-item active"><a href="#"><b>Danh sách khách hàng</b></a></li>
+                <li class="breadcrumb-item active"><a href="#"><b>Danh sách bình luận</b></a></li>
             </ul>
             <div id="clock"></div>
         </div>
@@ -112,85 +83,54 @@
             <div class="col-md-12">
                 <div class="tile">
                     <div class="tile-body">
-                        <h3>Danh sách khách hàng</h3>
-                        <!-- <div class="row element-button"> -->
-                            <!-- <div class="col-sm-2">
+                        <div class="row element-button">
+                            <div class="col-sm-2">
               
-                              <a class="btn btn-add btn-sm" href="./index.php?page=product&action=add" title="Thêm"><i class="fas fa-plus"></i>
-                                Tạo mới sản phẩm</a>
-                            </div> -->
-                            <!-- <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
-                                  class="fas fa-file-upload"></i> Tải từ file</a>
-                            </div>
-              
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
-                                  class="fas fa-print"></i> In dữ liệu</a>
-                            </div>
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i
-                                  class="fas fa-copy"></i> Sao chép</a>
-                            </div>
-              
-                            <div class="col-sm-2">
-                              <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
-                            </div>
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i
-                                  class="fas fa-file-pdf"></i> Xuất PDF</a>
-                            </div>
+                              <a class="btn btn-add btn-sm" href="./index.php?page=TA_cmt&action=add" title="Thêm"><i class="fas fa-plus"></i>
+                                Tạo bình luận mớit</a>
+                           
                             <div class="col-sm-2">
                               <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
                                   class="fas fa-trash-alt"></i> Xóa tất cả </a>
-                            </div> -->
+                            </div>
                           </div>
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>
                                 <tr>
                                     <th width="10"><input type="checkbox" id="all"></th>
-                                    <th>id</th>
-                                    <th>Tên người dùng</th>
-                                    <!-- <th>Ảnh</th> -->
-                                    <th>Email</th>
-                                    <th>Vai trò</th>
-                                    <th>Chức năng</th>
+                                    <th>Nội dung bình luận</th>
+                                    <th>Mã người viết</th>
+                                    <th>Mã bài viết</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                $pro =  isset($_GET['pro']) ? $_GET['pro'] : 1;
-                                $offset = ((int)$pro - 1) * 12;
-                                $user_list =$conn->query("select * from user limit 12 offset " . $offset); 
-                                    foreach($user_list as $user){
+                                <?php 
+                                    $comment_list = get_comment_list();
+                                
+                                    foreach($comment_list as $comment){
+                                 
+                                    
                                 ?>                                                      
                                 <tr>
                                     <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                    <td>83216006</td>
-                                    <td><?php echo $user['user_name']?></td>
-                                    <td><?php echo $user['email']?></td>
-                                    <td>
-                                      <?php
-                                      if($user['role'] == 1){
-                                        echo ("admin");
-                                    }
-                                    else {
-                                        echo "user";
-                                    }
-                                    ?></td> 
                                     
-                                    </td>
-                                    <!-- <td><img src="" alt="" width="100px;"></td> -->
+                          
+                                    <td><?php echo $comment['content']?></td>
+                                    <td><?php echo $comment['user_id']?></td>
+                                    <td><?php echo $comment['post_id']?></td>
+                                    
+                                   
+                                   
                                     <td>
-                                      <form action="./controller/user_controller.php" method="POST"> 
-                                        <input type="text" value="<?php echo $user['id']?>" name="id" hidden>
+                                      <form action="./controller/TAcomment_controller.php" method="POST"> 
+                                        <input type="text" value="<?php echo $comment['id']?>" name="id" hidden>
                                         <input type="text" value="delete" name="action"hidden>
                                         <button class="btn btn-primary btn-sm trash" type="submit" title="Xóa"
                                                  onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
                                              </button>
                                         </form>
-                                        <a href="./index.php?page=user&action=edit&id=<?php echo $user['id']?>"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                                        data-target="#ModalUP"><i class="fas fa-edit"></i></button></a>
+                                        <a href="./index.php?page=TA_cmt&action=edit<?php echo $comment['id']?>"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                      data-target="#ModalUP"><i class="fas fa-edit"></i></button></a>
                                    
                                     </td>
                                 </tr>
@@ -201,91 +141,9 @@
                 </div>
             </div>
         </div>
-        <ul class="products__pagenation">
-                            <?php
-                        $stmt = $conn->query("select * from user");
-                        for ($i = 1; $i < ceil( $stmt->rowCount() / 3); $i++){
-                        // echo '<a id="linkNum" href="?page=' . $i . '">' . $i . '</a>';
-                        echo '<li class="products__pagenation-item"><a class="products__pagination-link" href="./index.php?page=user&action=list&pro=' . $i . '">' . $i . '</a></li>';
-                        }
-                        ?>
-                        </ul>
     </main>
 
-<!--
-  MODAL
--->
-<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-data-keyboard="false">
-<div class="modal-dialog modal-dialog-centered" role="document">
-  <div class="modal-content">
 
-    <div class="modal-body">
-      <div class="row">
-        <div class="form-group  col-md-12">
-          <span class="thong-tin-thanh-toan">
-            <h5>Chỉnh sửa thông tin sản phẩm cơ bản</h5>
-          </span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-6">
-            <label class="control-label">Mã sản phẩm </label>
-            <input class="form-control" type="number" value="71309005">
-          </div>
-        <div class="form-group col-md-6">
-            <label class="control-label">Tên sản phẩm</label>
-          <input class="form-control" type="text" required value="Bàn ăn gỗ Theresa">
-        </div>
-        <div class="form-group  col-md-6">
-            <label class="control-label">Số lượng</label>
-          <input class="form-control" type="number" required value="20">
-        </div>
-        <div class="form-group col-md-6 ">
-            <label for="exampleSelect1" class="control-label">Tình trạng sản phẩm</label>
-            <select class="form-control" id="exampleSelect1">
-              <option>Còn hàng</option>
-              <option>Hết hàng</option>
-              <option>Đang nhập hàng</option>
-            </select>
-          </div>
-          <div class="form-group col-md-6">
-            <label class="control-label">Giá bán</label>
-            <input class="form-control" type="text" value="5.600.000">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="exampleSelect1" class="control-label">Danh mục</label>
-            <select class="form-control" id="exampleSelect1">
-              <option>Bàn ăn</option>
-              <option>Bàn thông minh</option>
-              <option>Tủ</option>
-              <option>Ghế gỗ</option>
-              <option>Ghế sắt</option>
-              <option>Giường người lớn</option>
-              <option>Giường trẻ em</option>
-              <option>Bàn trang điểm</option>
-              <option>Giá đỡ</option>
-            </select>
-          </div>
-      </div>
-      <BR>
-      <a href="#" style="    float: right;
-    font-weight: 600;
-    color: #ea0000;">Chỉnh sửa sản phẩm nâng cao</a>
-      <BR>
-      <BR>
-      <button class="btn btn-save" type="button">Lưu lại</button>
-      <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-      <BR>
-    </div>
-    <div class="modal-footer">
-    </div>
-  </div>
-</div>
-</div>
-<!--
-MODAL
--->
 
     <!-- Essential javascripts for application to work-->
     <script src="js/jquery-3.2.1.min.js"></script>
@@ -353,7 +211,7 @@ MODAL
             jQuery(".trash").click(function () {
                 swal({
                     title: "Cảnh báo",
-                    text: "Bạn có chắc chắn là muốn xóa sản phẩm này?",
+                    text: "Bạn có chắc chắn là muốn bình luận này?",
                     buttons: ["Hủy bỏ", "Đồng ý"],
                 })
                     .then((willDelete) => {
