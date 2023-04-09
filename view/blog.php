@@ -20,12 +20,12 @@ session_start();
 
         <?php include_once 'view/components/header.php' ?>
         <div class="container">
-            <div class="slider">
-                <div class="content">
-                    <h1 class="slider__title">BÀI VIẾT
-                    </h1>
+        <div class="grid">    
+        <div class="image__wrapper">
+                    <img src="view/img/shop/Rectangle 2.svg" alt="" class="br">
+                    <h2 class="image__title">LIÊN HỆ</h2>
+                    <span class="image__breadcrum">Trang chủ / Liên hệ</span>
                 </div>
-            </div>
         </div>
             </div>
           
@@ -62,7 +62,7 @@ session_start();
             
 
 
-            
+    </div>    
         </div>
         <div class="gird">
                 <div class="news">
