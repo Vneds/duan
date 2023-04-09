@@ -1,11 +1,31 @@
 <?php
     session_start();
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $sql = "INSERT INTO user (user_name, pass_word, email) VALUES (?,?,?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$_POST['user'],$_POST['pass'], $_POST['email']]);
+        if (!is_avaible_email($conn)){
+            header('location: ./index.php?page=signup&email_error=Email đã tồn tại');
+            die();
+        }
+        insert_user($conn);
         header('location: ./index.php?page=login');
     }
+    
+    function insert_user($conn){
+        $sql = "INSERT INTO user (user_name, pass_word, email) VALUES (?,?,?)";
+        $stmt = $conn->prepare($sql);
+        $pass = password_hash($_POST['pass'], PASSWORD_BCRYPT);
+        $stmt->execute([$_POST['user'],$pass, $_POST['email']]);
+    }
+
+    function is_avaible_email($conn){
+        $stmt = $conn->prepare('SELECT * FROM user WHERE email = ?');
+        $stmt->execute([$_POST['email']]);
+        echo $stmt->rowCount();
+        if ($stmt->rowCount() == 0){
+            return true;
+        }
+        return false;
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +51,6 @@
 </head>
 
 <body>
-    
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
@@ -53,11 +72,15 @@
                             </span>
                         </div>
                         <div class="wrap-input100 validate-input">
-                            <input class="input100" type="email"required placeholder="Email" name="email">
+                            <input class="input100" type="email" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"  placeholder="Email" name="email" required>
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class='bx bx-user'></i>
                             </span>
+                            <?php 
+                                if (isset($_GET['email_error'])) : ?>
+                                    <div class="error"><?php echo $_GET['email_error']?></div>
+                            <?php endif?>
                         </div>
                         <div class="wrap-input100 validate-input">
                             <input autocomplete="off" class="input100" type="password" required placeholder="Mật khẩu" name="pass">

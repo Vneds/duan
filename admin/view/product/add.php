@@ -158,15 +158,22 @@
     </div>
     <hr>
     <ul class="app-menu">
-      <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
-          <span class="app-menu__label">POS Bán Hàng</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
+      <li><a class="app-menu__item active" href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i>
-          <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-      <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+      <li><a class="app-menu__item " href="table-data-banned.html"><i class='app-menu__icon bx bx-id-card'></i> <span
+            class="app-menu__label">Quản lý nhân viên</span></a></li>
+      <li><a class="app-menu__item" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
-      <li><a class="app-menu__item active" href="./index.php?page=product&action=list"><i
+
+            <li><a class="app-menu__item " href="./index.php?page=post&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý bài viết</span></a></li>
+            <li><a class="app-menu__item " href="./index.php?page=TA_cmt&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý bình luận</span></a></li>
+      
+      
+      <li><a class="app-menu__item" href="./index.php?page=catergory&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý danh mục</span></a></li>
+      <li><a class="app-menu__item" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
       <li><a class="app-menu__item" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
@@ -216,8 +223,9 @@
               <input type="text" name="action" value="add" hidden>
               <div class="form-group col-md-3">
                 <label class="control-label">Tên sản phẩm</label>
-                <input class="form-control" type="text" name="product_name">
+                <input class="form-control" type="text" name="product_name" required>
               </div>
+
 
 
               <!-- <div class="form-group  col-md-3">
@@ -237,20 +245,29 @@
                 <select class="form-control" id="exampleSelect1" name="catergory_id">
                 <?php 
                     $catergory_list = get_catergory_list(); ?>
-                    <option>-- Chọn danh mục --</option>
+                    <option value="">-- Chọn danh mục --</option>
                 <?php foreach ($catergory_list as $catergory){?>
                         <option value="<?php echo $catergory['id']?>"><?php echo $catergory['catergory_name']?></option>
                 <?php }?>
                 </select>
+                <span class="text-danger"><?php echo $_GET['error_catergory'] ?? ''?></span>
               </div>
               <div class="form-group col-md-3">
                 <label class="control-label">Giá bán</label>
-                <input class="form-control" type="text" name="product_price">
+                <input class="form-control" type="text" name="product_price" required>
+                <span class="text-danger"><?php echo $_GET['error_price'] ?? ''?></span>
               </div>
+
+              <div class="form-group col-md-3">
+                <label class="control-label">Hàng tồn</label>
+                <input class="form-control" type="text" name="stock" required>
+                <span class="text-danger"><?php echo $_GET['error_stock'] ?? ''?></span>
+              </div>
+
               <div class="form-group col-md-12">
                 <label class="control-label">Ảnh sản phẩm</label>
                 <div id="myfileupload">
-                  <input type="file" id="uploadfile" name="img" onchange="readURL(this);" />
+                  <input type="file" id="uploadfile" name="img" onchange="readURL(this);"/>
                 </div>
                 <div id="thumbbox">
                   <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
@@ -260,14 +277,16 @@
                   <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
                   <p style="clear:both"></p>
                 </div>
+                <span class="text-danger"><?php echo $_GET['error_img'] ?? ''?></span>
 
               </div>
               <div class="form-group col-md-12">
                 <label class="control-label">Mô tả sản phẩm</label>
-                <textarea class="form-control" name="des" id="mota"></textarea>
+                <textarea class="form-control" name="des" id="mota" required></textarea>
+                <span class="text-danger"><?php echo $_GET['error_des'] ?? ''?></span>
                 <script>CKEDITOR.replace('mota');</script>
               </div>
-              <button class="btn btn-save" type="submit">Lưu lại</button>
+              <button class="btn btn-save" type="submit">Tạo mới</button>
               <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
             </div>
             </div>

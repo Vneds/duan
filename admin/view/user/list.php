@@ -31,7 +31,7 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+      <li><a class="app-nav__item" href="../model/log_out.php"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
     </ul>
@@ -48,14 +48,21 @@
     </div>
     <hr>
     <ul class="app-menu">
-      <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
-          <span class="app-menu__label">POS Bán Hàng</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
+      <li><a class="app-menu__item active" href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item active" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i>
-          <span class="app-menu__label">Quản lý nhân viên</span></a></li>
+      <li><a class="app-menu__item " href="table-data-banned.html"><i class='app-menu__icon bx bx-id-card'></i> <span
+            class="app-menu__label">Quản lý nhân viên</span></a></li>
       <li><a class="app-menu__item" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
+
+            <li><a class="app-menu__item " href="./index.php?page=post&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý bài viết</span></a></li>
+            <li><a class="app-menu__item " href="./index.php?page=TA_cmt&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý bình luận</span></a></li>
+      
+      
+      <li><a class="app-menu__item" href="./index.php?page=catergory&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý danh mục</span></a></li>
       <li><a class="app-menu__item" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
@@ -86,13 +93,14 @@
             <div class="col-md-12">
                 <div class="tile">
                     <div class="tile-body">
-                        <div class="row element-button">
-                            <div class="col-sm-2">
+                        <h3>Danh sách khách hàng</h3>
+                        <!-- <div class="row element-button"> -->
+                            <!-- <div class="col-sm-2">
               
                               <a class="btn btn-add btn-sm" href="./index.php?page=product&action=add" title="Thêm"><i class="fas fa-plus"></i>
                                 Tạo mới sản phẩm</a>
-                            </div>
-                            <div class="col-sm-2">
+                            </div> -->
+                            <!-- <div class="col-sm-2">
                               <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
                                   class="fas fa-file-upload"></i> Tải từ file</a>
                             </div>
@@ -116,7 +124,7 @@
                             <div class="col-sm-2">
                               <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
                                   class="fas fa-trash-alt"></i> Xóa tất cả </a>
-                            </div>
+                            </div> -->
                           </div>
                         <table class="table table-hover table-bordered" id="sampleTable">
                             <thead>

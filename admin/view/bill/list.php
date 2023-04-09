@@ -18,7 +18,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-
+  <style>
+    .status-list {
+      display: flex;
+      gap: 10px;
+    }
+  </style>
 </head>
 
 <body onload="time()" class="app sidebar-mini rtl">
@@ -31,7 +36,7 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+      <li><a class="app-nav__item" href="../model/log_out.php"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
     </ul>
@@ -48,22 +53,25 @@
     </div>
     <hr>
     <ul class="app-menu">
-      <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
-          <span class="app-menu__label">POS Bán Hàng</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
+      <li><a class="app-menu__item active" href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i>
-          <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-      <li><a class="app-menu__item" href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+      <li><a class="app-menu__item " href="table-data-banned.html"><i class='app-menu__icon bx bx-id-card'></i> <span
+            class="app-menu__label">Quản lý nhân viên</span></a></li>
+      <li><a class="app-menu__item" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
+
             <li><a class="app-menu__item " href="./index.php?page=post&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý bài viết</span></a></li>
             <li><a class="app-menu__item " href="./index.php?page=TA_cmt&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý bình luận</span></a></li>
+      
+      
+      <li><a class="app-menu__item" href="./index.php?page=catergory&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý danh mục</span></a></li>
       <li><a class="app-menu__item" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
-      <li><a class="app-menu__item active" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
+      <li><a class="app-menu__item" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
             class="app-menu__label">Quản lý đơn hàng</span></a></li>
       <li><a class="app-menu__item" href="table-data-banned.html"><i class='app-menu__icon bx bx-run'></i><span
             class="app-menu__label">Quản lý nội bộ
@@ -90,7 +98,8 @@
         <div class="col-md-12">
           <div class="tile">
             <div class="tile-body">
-              <div class="row element-button">
+              <h3>Danh sách hóa đơn</h3>
+              <!-- <div class="row element-button">
                 <div class="col-sm-2">
   
                   <a class="btn btn-add btn-sm" href="form-add-don-hang.html" title="Thêm"><i class="fas fa-plus"></i>
@@ -121,18 +130,26 @@
                   <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
                       class="fas fa-trash-alt"></i> Xóa tất cả </a>
                 </div>
-              </div>
+              </div> -->
               <table class="table table-hover table-bordered" id="sampleTable">
               <div class="select">
                 <div class="status-list">
-                    <input value="all" checked name= "status" type="radio" id="all">
-                    <label for="all">Tất cả</label> 
-                    <input value="Đang xử lý" name= "status" type="radio" id="waiting">
-                    <label for="waiting">Đang xử lý</label> 
-                    <input value="Hoàn tất" name= "status" type="radio" id="done">
-                    <label for="done">Hoàn tất</label> 
-                    <input value="Đã hủy" name= "status" type="radio" id="delete">
-                    <label for="delete">Đã hủy</label> 
+                    <div class="status-item">
+                      <input value="all" checked name= "status" type="radio" id="all">
+                      <label for="all">Tất cả</label> 
+                    </div>
+                    <div>
+                      <input value="Đang xử lý" name= "status" type="radio" id="waiting">
+                      <label for="waiting">Đang xử lý</label> 
+                    </div>
+                    <div>
+                      <input value="Hoàn tất" name= "status" type="radio" id="done">
+                      <label for="done">Hoàn tất</label> 
+                    </div>
+                    <div>
+                      <input value="Đã hủy" name= "status" type="radio" id="delete">
+                      <label for="delete">Đã hủy</label> 
+                    </div>
                 </div>
               </div>
                 <thead>
@@ -140,9 +157,10 @@
                     <th width="10"><input type="checkbox" id="all"></th>
                     <th>ID đơn hàng</th>
                     <th>Khách hàng</th>
-                    <th>Đơn hàng</th>
+                    <th>Địa chỉ</th>
                     <th>Số lượng</th>
                     <th>Tổng tiền</th>
+                    <th>Ngày mua</th>
                     <th>Tình trạng</th>
                     <th>Tính năng</th>
                   </tr>
@@ -155,11 +173,12 @@
                   ?>
                   <tr>
                   <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                    <td>MD0837</td>
+                    <td><?php echo $bill['maDH'] ?></td>
                     <td><?php echo $bill['user_name'] ?></td>
                     <td><?php echo $bill['address'] ?></td>
                     <td><?php echo $bill['phone'] ?></td>
                     <td><?php echo $bill['total_money'] ?> đ</td>
+                    <td><?php echo $bill['date'] ?></td>
                     <td><span class="<?php echo $class_name ?>"><?php echo $bill['status']?></span></td>
                     <td>
                       <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
@@ -323,11 +342,12 @@
                         html += `   
                         <tr>
                           <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                            <td>MD0837</td>
+                            <td>${bill['maDH']}</td>
                             <td>${bill['user_name']}</td>
                             <td>${bill['address']}</td>
                             <td>${bill['phone']}</td>
                             <td>${bill['total_money']} đ</td>
+                            <td>${bill['date']}</td>
                             <td><span class="${className}">${bill['status']}</span></td>
                           <td>
                             <button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>

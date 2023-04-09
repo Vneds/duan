@@ -31,7 +31,7 @@
 
 
       <!-- User Menu-->
-      <li><a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+      <li><a class="app-nav__item" href="../model/log_out.php"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
     </ul>
@@ -48,16 +48,22 @@
     </div>
     <hr>
     <ul class="app-menu">
-      <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
-          <span class="app-menu__label">POS Bán Hàng</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
+      <li><a class="app-menu__item active" href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i>
-          <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+      <li><a class="app-menu__item " href="table-data-banned.html"><i class='app-menu__icon bx bx-id-card'></i> <span
+            class="app-menu__label">Quản lý nhân viên</span></a></li>
+      <li><a class="app-menu__item" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
-            
-      <li><a class="app-menu__item active" href="./index.php?page=product&action=list"><i
+
+            <li><a class="app-menu__item " href="./index.php?page=post&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý bài viết</span></a></li>
+            <li><a class="app-menu__item " href="./index.php?page=TA_cmt&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý bình luận</span></a></li>
+      
+      
+      <li><a class="app-menu__item" href="./index.php?page=catergory&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý danh mục</span></a></li>
+      <li><a class="app-menu__item" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
       <li><a class="app-menu__item" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
@@ -89,34 +95,8 @@
                     <div class="tile-body">
                         <div class="row element-button">
                             <div class="col-sm-2">
-              
                               <a class="btn btn-add btn-sm" href="./index.php?page=product&action=add" title="Thêm"><i class="fas fa-plus"></i>
                                 Tạo mới sản phẩm</a>
-                            </div>
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm nhap-tu-file" type="button" title="Nhập" onclick="myFunction(this)"><i
-                                  class="fas fa-file-upload"></i> Tải từ file</a>
-                            </div>
-              
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
-                                  class="fas fa-print"></i> In dữ liệu</a>
-                            </div>
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm print-file js-textareacopybtn" type="button" title="Sao chép"><i
-                                  class="fas fa-copy"></i> Sao chép</a>
-                            </div>
-              
-                            <div class="col-sm-2">
-                              <a class="btn btn-excel btn-sm" href="" title="In"><i class="fas fa-file-excel"></i> Xuất Excel</a>
-                            </div>
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i
-                                  class="fas fa-file-pdf"></i> Xuất PDF</a>
-                            </div>
-                            <div class="col-sm-2">
-                              <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
-                                  class="fas fa-trash-alt"></i> Xóa tất cả </a>
                             </div>
                           </div>
                         <table class="table table-hover table-bordered" id="sampleTable">
@@ -135,7 +115,7 @@
                             </thead>
                             <tbody>
                                 <?php 
-                                    $product_list = get_product_list();
+                                    $product_list =  $conn->query('SELECT * FROM product')->fetchAll();
                                     foreach($product_list as $product){
                                     $catergory_name = get_catergory_name($product['catergory_id']);
                                     $image_path = '../' . get_image_path($product['image_path']);
@@ -145,8 +125,14 @@
                                     <td>83216006</td>
                                     <td><?php echo $product['product_name']?></td>
                                     <td><img src="<?php echo $image_path ?>" alt="" width="100px;"></td>
-                                    <td>60</td>
-                                     <td><span class="badge bg-success">Còn hàng</span></td>
+                                    <td><?php echo $product['kho_hang']?></td>
+                                    <td>
+                                      <?php if ($product['kho_hang'] == 0) { ?>
+                                        <span class="badge bg-danger">Hết hàng</span>
+                                      <?php } else {?>
+                                        <span class="badge bg-success">Còn hàng</span>
+                                      <?php }?>
+                                    </td>
                                     <td><?php echo $product['product_price']?> $</td>
                                     <td><?php echo $catergory_name?></td>
                                     <td>

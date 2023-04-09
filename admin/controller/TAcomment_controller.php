@@ -53,9 +53,9 @@
 
     function update_comment(){
         global $conn;
-        $sql = 'UPDATE product SET product_name = ? , catergory_id = ?, product_price = ? , des = ?  WHERE id = '. $_POST['id'];
+        $sql = 'UPDATE comment SET content = ? , user_id = ?, post_id = ? , sub_comment_id = ?  WHERE id = '. $_POST['id'];
         $stmt = $conn->prepare($sql);
-        $stmt->execute([$_POST['product_name'],$_POST['catergory_id'], $_POST['product_price'], $_POST['des']]);
+        $stmt->execute([$_POST['content'],$_POST['user_id'], $_POST['post_price'], $_POST['subcomment_id']]);
         header ('location: ../index.php?page=TA_cmt&action=list');
     }
 

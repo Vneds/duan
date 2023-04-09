@@ -158,19 +158,22 @@
     </div>
     <hr>
     <ul class="app-menu">
-      <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
-          <span class="app-menu__label">POS Bán Hàng</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
+      <li><a class="app-menu__item active" href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i>
-          <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-      <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+      <li><a class="app-menu__item " href="table-data-banned.html"><i class='app-menu__icon bx bx-id-card'></i> <span
+            class="app-menu__label">Quản lý nhân viên</span></a></li>
+      <li><a class="app-menu__item" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
-            <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+
+            <li><a class="app-menu__item " href="./index.php?page=post&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý bài viết</span></a></li>
-            <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+            <li><a class="app-menu__item " href="./index.php?page=TA_cmt&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý bình luận</span></a></li>
-      <li><a class="app-menu__item active" href="./index.php?page=product&action=list"><i
+      
+      
+      <li><a class="app-menu__item" href="./index.php?page=catergory&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý danh mục</span></a></li>
+      <li><a class="app-menu__item" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
       <li><a class="app-menu__item" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
@@ -192,33 +195,34 @@
   <main class="app-content">
     <div class="app-title">
       <ul class="app-breadcrumb breadcrumb">
-        <li class="breadcrumb-item">Danh sách bài viết</li>
-        <li class="breadcrumb-item"><a href="#">Thêm bài viết</a></li>
+        <li class="breadcrumb-item">Danh sách bình luận</li>
+        <li class="breadcrumb-item"><a href="#">Thêm bình luận</a></li>
       </ul>
     </div>
     <div class="row">
       <div class="col-md-12">
         <div class="tile">
-          <h3 class="tile-title">Tạo bài viết mới</h3>
+          <h3 class="tile-title">Tạo bình luận mới</h3>
           <div class="tile-body">
             
 
-          <form class="row" method="POST" enctype="multipart/form-data"  action="./controller/catergory_controller.php">
+        
+              <form class="row" method="POST" enctype="multipart/form-data"  action="./controller/catergory_controller.php">
+              <input type="text" name="action" value="add" hidden>
+              <div class="form-group col-md-3">
+                <label class="control-label">Nội dung bình luận</label>
+                <input class="form-control" type="text" name="catergory_name">
+              </div>
+              <form class="row" method="POST" enctype="multipart/form-data"  action="./controller/catergory_controller.php">
+              <input type="text" name="action" value="add" hidden>
+              <div class="form-group col-md-3">
+                <label class="control-label">Mã người viết</label>
+                <input class="form-control" type="text" name="catergory_name">
+              </div>
+              <form class="row" method="POST" enctype="multipart/form-data"  action="./controller/catergory_controller.php">
               <input type="text" name="action" value="add" hidden>
               <div class="form-group col-md-3">
                 <label class="control-label">Mã bài viết</label>
-                <input class="form-control" type="text" name="catergory_name">
-              </div>
-              <form class="row" method="POST" enctype="multipart/form-data"  action="./controller/catergory_controller.php">
-              <input type="text" name="action" value="add" hidden>
-              <div class="form-group col-md-3">
-                <label class="control-label">Tên bài viết</label>
-                <input class="form-control" type="text" name="catergory_name">
-              </div>
-              <form class="row" method="POST" enctype="multipart/form-data"  action="./controller/catergory_controller.php">
-              <input type="text" name="action" value="add" hidden>
-              <div class="form-group col-md-3">
-                <label class="control-label">Nội dung</label>
                 <input class="form-control" type="text" name="catergory_name">
               </div>
 

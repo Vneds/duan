@@ -29,8 +29,8 @@ session_start();
 
 
                 <?php 
-                    $product = get_product_with_ID($_GET['id']);
-                    $image_path = get_image_path($product['image_path']);
+                    $current_product = get_product_with_ID($_GET['id']);
+                    $image_path = get_image_path($current_product['image_path']);
                 ?>
 
                 <div class="spw">
@@ -56,13 +56,13 @@ session_start();
 
                     <div class="infor">
                         <h1 class="infor__title">
-                            <?php echo $product['product_name']?>
+                            <?php echo $current_product['product_name']?>
                         </h1>
-                        <span class="infor__price"><b><?php echo $product['product_price']?></b></span>
-                        <p class="infor__paragraph"><?php echo $product['des']?></p>
+                        <span class="infor__price"><b><?php echo $current_product['product_price']?></b></span>
+                        <p class="infor__paragraph"><?php echo $current_product['des']?></p>
                         <div class="spw">
                             <span class="infor__status">
-                                Availability: <b>IN STOCK</b>
+                                Số lượng hàng tồn: <b><?php echo $current_product['kho_hang']?></b>
                             </span>
 
                             <span class="infor__id"> SKU: NO-6700-54</span>
@@ -79,7 +79,7 @@ session_start();
                                 <a class="infor__quantity-item increase">+</a>
                             </div>
 
-                           <button class="btn add-to-cart" id=<?php echo $product['id']?>>Thêm vào giỏ</button>
+                           <button class="btn add-to-cart" id=<?php echo $current_product['id']?>>Thêm vào giỏ</button>
                         </div>
 
                         <hr>
@@ -161,14 +161,18 @@ session_start();
             </div>
         </div>
     </div>
-
     <script>
+        const stock = <?php echo $current_product['kho_hang']?>;
         const increseBtn = $('.increase');
         const decreseBtn = $('.decrease');
         const value = $('.value');
 
         increseBtn.click(()=> {
             let number = Number(value.text()) + 1;
+            if (!isStockAvalible()){
+                alert('Vui lòng nhập đúng số lượng hàng tồn');
+                return;
+            }
             value.html(number)
         })
 
@@ -187,6 +191,15 @@ session_start();
             }
             return false;
         }
+
+        function isStockAvalible(){
+            let number = Number(value.text());
+            if (number >= stock){
+                return false;
+            }
+            return true;
+        }   
+
 
         const addToCartBtn = $('.add-to-cart');
 

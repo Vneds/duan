@@ -1,32 +1,28 @@
 <?php 
 
-function get_cmt_list($limit = null){
+function get_comment_list($limit = null){
     global $conn;
     if (!$limit){
-        $cmt_list = $conn->query('SELECT * FROM comment')->fetchAll();
-        return $cmt_list;
+        $comment_list = $conn->query('SELECT * FROM comment')->fetchAll();
+        return $comment_list;
     }
     $sql = 'SELECT * FROM comment LIMIT ' . $limit;
-    $cmt_list = $conn->query($sql)->fetchAll();
-    return $cmt_list;
+    $comment_list = $conn->query($sql)->fetchAll();
+    return $comment_list;
 }
 
-    function get_cmt_with_ID($cmt_id){
+    function get_comment_with_ID($comment_id){
         global $conn;
         $stmt = $conn->prepare('SELECT * FROM comment WHERE id = ? ');
-        $stmt->execute([$cmt_id]);
+        $stmt->execute([$comment_id]);
         return $stmt->fetch();
     }
-    function get_cmt_title($cmt_id){
+    function get_comment_content($comment_content){
         global $conn;
-        $sql = 'SELECT * FROM comment WHERE id = ' . $cmt_id;
-        $cmt =  $conn->query($sql)->fetch();
-        return $cmt['post_title']; 
+        $stmt = $conn->prepare('SELECT * FROM post WHERE id = ? ');
+        $stmt->execute([$comment_content]);
+        return $stmt->fetch();
     }
-
-    
-
-
 
 
 ?>

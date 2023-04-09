@@ -38,12 +38,46 @@ session_start();
                 <div class="article">
                     
                     <span class="article__author">By: admin</span>
+
                     <h2 class="article__heading"> <?php echo $post['title']?> </h2>
                     <span class="article__subheading"> <?php echo $post['content']?> </span>
                     <a href="index.php?page=blogdetail&id=<?php echo $post['id']?>"><button class="btn" >Đọc thêm</button></a>
                     
                     <div class="post_item-img">
                     <img src=<?php echo $image_path ?> alt="" >
+                    </div>
+                    <h2 class="article__heading">THE KEY IS VICTORY WAS<br>CREATING ROUTINES</h2>
+                    <span class="article__subheading">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt</span>
+                    <button class="btn">Đọc thêm</button>
+                </div>
+            </div>
+
+
+            
+
+
+            
+
+
+            
+
+
+            
+        </div>
+        <div class="grid">
+                <div class="news">
+                    <img src="view/img/Rectangle 178.png" alt="">
+                    <img src="view/img/Rectangle 181.png" alt="">
+                    <div class="news_email">
+                         <div class="news_span">
+                            <h2>NEWSLETTER</h2>
+                            <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</span>
+                         </div>
+                         <div class="news_button">
+                            <input type="text" placeholder="ENTER YOUR MAIL" class="btn__mail">
+                            <button>SUBCRIBE</button>
+                         </div>
+
                     </div>
                 </div>
                 <?php } ?>

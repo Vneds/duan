@@ -48,19 +48,22 @@
     </div>
     <hr>
     <ul class="app-menu">
-      <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
-          <span class="app-menu__label">POS Bán Hàng</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
+      <li><a class="app-menu__item active" href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i>
-          <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+      <li><a class="app-menu__item " href="table-data-banned.html"><i class='app-menu__icon bx bx-id-card'></i> <span
+            class="app-menu__label">Quản lý nhân viên</span></a></li>
+      <li><a class="app-menu__item" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
-            <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+
+            <li><a class="app-menu__item " href="./index.php?page=post&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý bài viết</span></a></li>
-            <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+            <li><a class="app-menu__item " href="./index.php?page=TA_cmt&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý bình luận</span></a></li>
-      <li><a class="app-menu__item active" href="./index.php?page=product&action=list"><i
+      
+      
+      <li><a class="app-menu__item" href="./index.php?page=catergory&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý danh mục</span></a></li>
+      <li><a class="app-menu__item" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
       <li><a class="app-menu__item" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
@@ -82,7 +85,7 @@
     <main class="app-content">
         <div class="app-title">
             <ul class="app-breadcrumb breadcrumb side">
-                <li class="breadcrumb-item active"><a href="#"><b>Danh sách bài viết</b></a></li>
+                <li class="breadcrumb-item active"><a href="#"><b>Danh sách bình luận</b></a></li>
             </ul>
             <div id="clock"></div>
         </div>
@@ -94,7 +97,7 @@
                             <div class="col-sm-2">
               
                               <a class="btn btn-add btn-sm" href="./index.php?page=post&action=add" title="Thêm"><i class="fas fa-plus"></i>
-                                Tạo mới bài viết</a>
+                                Tạo bình luận mới</a>
                            
                             <div class="col-sm-2">
                               <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
@@ -105,35 +108,36 @@
                             <thead>
                                 <tr>
                                     <th width="10"><input type="checkbox" id="all"></th>
+                                    <th>Nội dung bình luận</th>
+                                    <th>Mã người viết</th>
                                     <th>Mã bài viết</th>
-                                    <th>Tên bài viết</th>
-                                    <th>Nội dung</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php 
-                                    $post_list = get_post_list();
+                                    $post_list = get_comment_list();
                                     foreach($post_list as $post){
                                  
                                     
                                 ?>                                                      
                                 <tr>
                                     <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                    <td><?php echo $post['id']?></td>
-                                    <td><?php echo $post['title']?></td>
-                                    <td><?php echo $post['content']?></td>
+                                    <td><?php echo $comment['id']?></td>
+                                    <td><?php echo $comment['content']?></td>
+                                    <td><?php echo $comment['user_id']?></td>
+                                    <td><?php echo $comment['post_id']?></td>
                                     
                                    
                                    
                                     <td>
-                                      <form action="./controller/post_controller.php" method="POST"> 
-                                        <input type="text" value="<?php echo $post['id']?>" name="id" hidden>
+                                      <form action="./controller/TAcomment_controller.php" method="POST"> 
+                                        <input type="text" value="<?php echo $comment['id']?>" name="id" hidden>
                                         <input type="text" value="delete" name="action"hidden>
                                         <button class="btn btn-primary btn-sm trash" type="submit" title="Xóa"
                                                  onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
                                              </button>
                                         </form>
-                                        <a href="./index.php?page=post&action=edit<?php echo $post['id']?>"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                                        <a href="./index.php?page=TA_cmt&action=edit<?php echo $comment['id']?>"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
                       data-target="#ModalUP"><i class="fas fa-edit"></i></button></a>
                                    
                                     </td>

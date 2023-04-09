@@ -1,139 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <title>Thêm sản phẩm | Quản trị Admin</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="view/css/admin.css">
-  <!-- Font-icon css-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-  <!-- or -->
-  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-  <link rel="stylesheet" type="text/css"
-    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
-  <script src="http://code.jquery.com/jquery.min.js" type="text/javascript"></script>
-  <script>
+    <head>
+        <title>Danh sách nhân viên | Quản trị Admin</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Main CSS-->
+        <link rel="stylesheet" type="text/css" href="view/css/admin.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+        <!-- or -->
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+      
+        <!-- Font-icon css-->
+        <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+      
+      </head>
 
-    function readURL(input, thumbimage) {
-      if (input.files && input.files[0]) { //Sử dụng  cho Firefox - chrome
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          $("#thumbimage").attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-      }
-      else { // Sử dụng cho IE
-        $("#thumbimage").attr('src', input.value);
-
-      }
-      $("#thumbimage").show();
-      $('.filename').text($("#uploadfile").val());
-      $('.Choicefile').css('background', '#14142B');
-      $('.Choicefile').css('cursor', 'default');
-      $(".removeimg").show();
-      $(".Choicefile").unbind('click');
-
-    }
-    $(document).ready(function () {
-      $(".Choicefile").bind('click', function () {
-        $("#uploadfile").click();
-
-      });
-      $(".removeimg").click(function () {
-        $("#thumbimage").attr('src', '').hide();
-        $("#myfileupload").html('<input type="file" id="uploadfile"  onchange="readURL(this);" />');
-        $(".removeimg").hide();
-        $(".Choicefile").bind('click', function () {
-          $("#uploadfile").click();
-        });
-        $('.Choicefile').css('background', '#14142B');
-        $('.Choicefile').css('cursor', 'pointer');
-        $(".filename").text("");
-      });
-    })
-  </script>
-</head>
-
-<body class="app sidebar-mini rtl">
-  <style>
-    .Choicefile {
-      display: block;
-      background: #14142B;
-      border: 1px solid #fff;
-      color: #fff;
-      width: 150px;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      padding: 5px 0px;
-      border-radius: 5px;
-      font-weight: 500;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .Choicefile:hover {
-      text-decoration: none;
-      color: white;
-    }
-
-    #uploadfile,
-    .removeimg {
-      display: none;
-    }
-
-    #thumbbox {
-      position: relative;
-      width: 100%;
-      margin-bottom: 20px;
-    }
-
-    .removeimg {
-      height: 25px;
-      position: absolute;
-      background-repeat: no-repeat;
-      top: 5px;
-      left: 5px;
-      background-size: 25px;
-      width: 25px;
-      /* border: 3px solid red; */
-      border-radius: 50%;
-
-    }
-
-    .removeimg::before {
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      content: '';
-      border: 1px solid red;
-      background: red;
-      text-align: center;
-      display: block;
-      margin-top: 11px;
-      transform: rotate(45deg);
-    }
-
-    .removeimg::after {
-      /* color: #FFF; */
-      /* background-color: #DC403B; */
-      content: '';
-      background: red;
-      border: 1px solid red;
-      text-align: center;
-      display: block;
-      transform: rotate(-45deg);
-      margin-top: -2px;
-    }
-  </style>
-  <!-- Navbar-->
-  <header class="app-header">
+<body onload="time()" class="app sidebar-mini rtl">
+   <!-- Navbar-->
+   <header class="app-header">
     <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
       aria-label="Hide Sidebar"></a>
     <!-- Navbar Right Menu-->
@@ -144,33 +34,23 @@
       <li><a class="app-nav__item" href="/index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
       </li>
-    </ul>
-  </header>
-  <!-- Sidebar menu-->
-  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-  <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/hay.jpg" width="50px"
-        alt="User Image">
-      <div>
-      <p class="app-sidebar__user-name"><b>Admin</b></p>
-        <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
-      </div>
-    </div>
-    <hr>
-    <ul class="app-menu">
-      <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
-          <span class="app-menu__label">POS Bán Hàng</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
+      <ul class="app-menu">
+      <li><a class="app-menu__item active" href="./index.php?page=index"><i class='app-menu__icon bx bx-tachometer'></i><span
             class="app-menu__label">Bảng điều khiển</span></a></li>
-      <li><a class="app-menu__item " href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-id-card'></i>
-          <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-      <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+      <li><a class="app-menu__item " href="table-data-banned.html"><i class='app-menu__icon bx bx-id-card'></i> <span
+            class="app-menu__label">Quản lý nhân viên</span></a></li>
+      <li><a class="app-menu__item" href="./index.php?page=user&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý khách hàng</span></a></li>
-            <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+
+            <li><a class="app-menu__item " href="./index.php?page=post&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý bài viết</span></a></li>
-            <li><a class="app-menu__item " href=""><i class='app-menu__icon bx bx-user-voice'></i><span
+            <li><a class="app-menu__item " href="./index.php?page=TA_cmt&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
             class="app-menu__label">Quản lý bình luận</span></a></li>
-      <li><a class="app-menu__item active" href="./index.php?page=product&action=list"><i
+      
+      
+      <li><a class="app-menu__item" href="./index.php?page=catergory&action=list"><i class='app-menu__icon bx bx-user-voice'></i><span
+            class="app-menu__label">Quản lý danh mục</span></a></li>
+      <li><a class="app-menu__item" href="./index.php?page=product&action=list"><i
             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
       </li>
       <li><a class="app-menu__item" href="./index.php?page=bill&action=list"><i class='app-menu__icon bx bx-task'></i><span
@@ -189,76 +69,163 @@
             đặt hệ thống</span></a></li>
     </ul>
   </aside>
-  <main class="app-content">
-    <div class="app-title">
-      <ul class="app-breadcrumb breadcrumb">
-        <li class="breadcrumb-item">Danh sách bài viết</li>
-        <li class="breadcrumb-item"><a href="#">Thêm bài viết</a></li>
-      </ul>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="tile">
-          <h3 class="tile-title">Tạo bài viết mới</h3>
-          <div class="tile-body">
-            
-
-          <form class="row" method="POST" enctype="multipart/form-data"  action="./controller/catergory_controller.php">
-              <input type="text" name="action" value="add" hidden>
-              <div class="form-group col-md-3">
-                <label class="control-label">Mã bài viết</label>
-                <input class="form-control" type="text" name="catergory_name">
-              </div>
-              <form class="row" method="POST" enctype="multipart/form-data"  action="./controller/catergory_controller.php">
-              <input type="text" name="action" value="add" hidden>
-              <div class="form-group col-md-3">
-                <label class="control-label">Tên bài viết</label>
-                <input class="form-control" type="text" name="catergory_name">
-              </div>
-              <form class="row" method="POST" enctype="multipart/form-data"  action="./controller/catergory_controller.php">
-              <input type="text" name="action" value="add" hidden>
-              <div class="form-group col-md-3">
-                <label class="control-label">Nội dung</label>
-                <input class="form-control" type="text" name="catergory_name">
-              </div>
-
-             
-              <div class="form-group col-md-12"></div>
-              <button class="btn btn-save" type="submit">Lưu lại</button>
-              <a class="btn btn-cancel" href="table-data-product.html">Hủy bỏ</a>
+    <main class="app-content">
+        <div class="app-title">
+            <ul class="app-breadcrumb breadcrumb side">
+                <li class="breadcrumb-item active"><a href="#"><b>Danh sách bình luận</b></a></li>
+            </ul>
+            <div id="clock"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tile">
+                    <div class="tile-body">
+                        <div class="row element-button">
+                            <div class="col-sm-2">
+              
+                              <a class="btn btn-add btn-sm" href="./index.php?page=TA_cmt&action=add" title="Thêm"><i class="fas fa-plus"></i>
+                                Tạo bình luận mớit</a>
+                           
+                            <div class="col-sm-2">
+                              <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
+                                  class="fas fa-trash-alt"></i> Xóa tất cả </a>
+                            </div>
+                          </div>
+                        <table class="table table-hover table-bordered" id="sampleTable">
+                            <thead>
+                                <tr>
+                                    <th width="10"><input type="checkbox" id="all"></th>
+                                    <th>Nội dung bình luận</th>
+                                    <th>Mã người viết</th>
+                                    <th>Mã bài viết</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php 
+                                    $comment_list = get_comment_list();
+                                
+                                    foreach($comment_list as $comment){
+                                 
+                                    
+                                ?>                                                      
+                                <tr>
+                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                    
+                          
+                                    <td><?php echo $comment['content']?></td>
+                                    <td><?php echo $comment['user_id']?></td>
+                                    <td><?php echo $comment['post_id']?></td>
+                                    
+                                   
+                                   
+                                    <td>
+                                      <form action="./controller/TAcomment_controller.php" method="POST"> 
+                                        <input type="text" value="<?php echo $comment['id']?>" name="id" hidden>
+                                        <input type="text" value="delete" name="action"hidden>
+                                        <button class="btn btn-primary btn-sm trash" type="submit" title="Xóa"
+                                                 onclick="myFunction(this)"><i class="fas fa-trash-alt"></i>
+                                             </button>
+                                        </form>
+                                        <a href="./index.php?page=TA_cmt&action=edit<?php echo $comment['id']?>"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                      data-target="#ModalUP"><i class="fas fa-edit"></i></button></a>
+                                   
+                                    </td>
+                                </tr>
+                                <?php }?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            </div>
-          </form> 
-  </main>
+        </div>
+    </main>
 
 
 
-
-  <script src="js/jquery-3.2.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/plugins/pace.min.js"></script>
-  <script>
-    const inpFile = document.getElementById("inpFile");
-    const loadFile = document.getElementById("loadFile");
-    const previewContainer = document.getElementById("imagePreview");
-    const previewImage = previewContainer.querySelector(".image-preview__image");
-    const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
-    inpFile.addEventListener("change", function () {
-      const file = this.files[0];
-      if (file) {
-        const reader = new FileReader();
-        previewDefaultText.style.display = "none";
-        previewImage.style.display = "block";
-        reader.addEventListener("load", function () {
-          previewImage.setAttribute("src", this.result);
-        });
-        reader.readAsDataURL(file);
+    <!-- Essential javascripts for application to work-->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="src/jquery.table2excel.js"></script>
+    <script src="js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <!-- Data table plugin-->
+    <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $('#sampleTable').DataTable();
+        //Thời Gian
+    function time() {
+      var today = new Date();
+      var weekday = new Array(7);
+      weekday[0] = "Chủ Nhật";
+      weekday[1] = "Thứ Hai";
+      weekday[2] = "Thứ Ba";
+      weekday[3] = "Thứ Tư";
+      weekday[4] = "Thứ Năm";
+      weekday[5] = "Thứ Sáu";
+      weekday[6] = "Thứ Bảy";
+      var day = weekday[today.getDay()];
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      nowTime = h + " giờ " + m + " phút " + s + " giây";
+      if (dd < 10) {
+        dd = '0' + dd
       }
-    });
+      if (mm < 10) {
+        mm = '0' + mm
+      }
+      today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+      tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+        '</span>';
+      document.getElementById("clock").innerHTML = tmp;
+      clocktime = setTimeout("time()", "1000", "Javascript");
 
-  </script>
+      function checkTime(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+      }
+    }
+    </script>
+    <script>
+        function deleteRow(r) {
+            var i = r.parentNode.parentNode.rowIndex;
+            document.getElementById("myTable").deleteRow(i);
+        }
+        jQuery(function () {
+            jQuery(".trash").click(function () {
+                swal({
+                    title: "Cảnh báo",
+                    text: "Bạn có chắc chắn là muốn bình luận này?",
+                    buttons: ["Hủy bỏ", "Đồng ý"],
+                })
+                    .then((willDelete) => {
+                        if (willDelete) {
+                            swal("Đã xóa thành công.!", {
+
+                            });
+                        }
+                    });
+            });
+        });
+        oTable = $('#sampleTable').dataTable();
+        $('#all').click(function (e) {
+            $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
+            e.stopImmediatePropagation();
+        });
+    </script>
 </body>
 
 </html>

@@ -88,8 +88,10 @@
 
                         <ul class="products__warpper">
                             <?php 
-                                $product_list = get_product_list();
-                                foreach($product_list as $product){
+                            $pro =  isset($_GET['pro']) ? $_GET['pro'] : 1;
+                            $offset = ((int)$pro ) * 12;
+                                $product_list =$conn->query("select * from product limit 12 offset " . $offset);
+                                foreach( $product_list as $product){
                                 $image_path = get_image_path($product['image_path']);
                             ?>
                                 <li class="products__item">
@@ -107,11 +109,19 @@
                         </ul>
 
                         <ul class="products__pagenation">
-                            <li class="products__pagenation-item"><a href="" class="products__pagination-link">1</a></li>
+                            <!-- <li class="products__pagenation-item"><a href="" class="products__pagination-link">1</a></li>
                             <li class="products__pagenation-item"><a href="" class="products__pagination-link">2</a></li>
                             <li class="products__pagenation-item"><a href="" class="products__pagination-link">3</a></li>
-                            <li class="products__pagenation-item"><a href="" class="products__pagination-link">-></a></li>
+                            <li class="products__pagenation-item"><a href="" class="products__pagination-link">-></a></li> -->
+                            <?php
+                        $stmt = $conn->query("select * from product");
+                        for ($i = 1; $i < ceil( $stmt->rowCount() / 12); $i++){
+                        // echo '<a id="linkNum" href="?page=' . $i . '">' . $i . '</a>';
+                        echo '<li class="products__pagenation-item"><a class="products__pagination-link" href="./index.php?page=shop&pro=' . $i . '">' . $i . '</a></li>';
+                        }
+                        ?>
                         </ul>
+                        
                     </div>
                 </div>
             </div>

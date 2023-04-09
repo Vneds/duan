@@ -20,8 +20,8 @@
         case 'post':
             include_once 'controller/post_controller.php';
             break;
-        case 'comment':
-            include_once 'controller/comment_controller.php';
+        case 'TA_cmt':
+            include_once 'controller/TAcomment_controller.php';
             break;
 
         default:
