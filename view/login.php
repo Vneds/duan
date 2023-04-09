@@ -85,7 +85,10 @@
                         <div class="container-login100-form-btn">
                             <input type="submit" name="login" value="Đăng nhập">
                         </div>
-                        <div class="text-right p-t-12"> 
+                        <div class="text-right p-t-12">
+                            <a class="txt2" href="./index.php?page=index" style="margin-right: 60px;">
+                                    Trang chủ
+                            </a>
                             <a class="txt2" href="./index.php?page=signup">
                                Đăng ký
                             </a>
@@ -94,7 +97,6 @@
                                 Bạn quên mật khẩu?
                             </a>
                         </div>
-                        
                     </form>
                     <?php
             // if(isset($_POST["login"])&&($_POST["login"])){

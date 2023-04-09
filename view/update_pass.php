@@ -1,22 +1,29 @@
 <?php
     session_start();
     if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+        $_SESSION['pass_error']='';
         global $conn;
         $id = $_POST['id'];
         $pass = $_POST['pass'];
+        $pass_new = $_POST['pass_new'];
         $stmt = $conn->prepare("SELECT * FROM user WHERE id = ?" );
         $stmt->execute([$id]);
         $kq = $stmt->fetch();
-        echo $pass;
         if(password_verify($pass,$kq['pass_word'])){ 
-            $sql = "UPDATE user SET pass_word=? WHERE id=?";
-            $stmt_2 = $conn->prepare($sql);
-            $pass_new = password_hash($_POST['pass_new'], PASSWORD_BCRYPT);
-            $stmt_2->execute([$pass_new,$_GET['id']]);
-            header('location: ./index.php?page=user&id='.$_GET['id'].'');
+            if($pass_new != $pass){
+                $sql = "UPDATE user SET pass_word=? WHERE id=?";
+                $stmt_2 = $conn->prepare($sql);
+                $new_pass = password_hash($pass_new, PASSWORD_BCRYPT);
+                $stmt_2->execute([$new_pass,$_GET['id']]);
+                header('location: ./index.php?page=user&id='.$_GET['id'].'');
+                }
+            else {
+                $_SESSION['pass_error'] = 'Mật khẩu trùng nhau';
+                die();
+            }
         }
         else {
-            $pass_error= 'mật khẩu đã sai';
+            $_SESSION['pass_error'] = 'Mật khẩu cũ đã sai';
             header('location: ./index.php?page=update_pass&id='.$_GET['id'].'');
             die();
         }
@@ -62,8 +69,8 @@
                     <label for="userName">Mật khẩu cũ</label>
                     <input type="password" name='pass' class="form-control" id="user_name">
                     <?php 
-                        if (isset($_GET['pass_error'])) : ?>
-                            <div class="error"><?php echo $_GET['pass_error']?></div>
+                        if (isset($_SESSION['pass_error'])) : ?>
+                            <div class="error"><?php echo $_SESSION['pass_error']?></div>
                     <?php endif?>
                 </div>
                 <div class="form-group">
