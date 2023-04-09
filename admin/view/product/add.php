@@ -149,10 +149,11 @@
   <!-- Sidebar menu-->
   <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
   <aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/hay.jpg" width="50px"
+    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="<?php echo '../view/img/user/'.$_SESSION['user']['img']?>" width="50px"
         alt="User Image">
       <div>
-      <p class="app-sidebar__user-name"><b>Admin</b></p>
+        <p class="app-sidebar__user-name"><b><?php echo $_SESSION['user']['user_name']?></b></p>
+        <!-- <p class="app-sidebar__user-name"><b></b></p> -->
         <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
       </div>
     </div>
