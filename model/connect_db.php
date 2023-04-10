@@ -1,7 +1,8 @@
 
 <?php
 
-    $host= 'localhost:3307';
+    $host= 'localhost';
+
     $dbName = 'duan1';
     $userName = 'root';
     $password = '123456';
